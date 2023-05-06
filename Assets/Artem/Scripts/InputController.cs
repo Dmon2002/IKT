@@ -5,13 +5,18 @@ using UnityEngine;
 
 public class InputController : MonoBehaviour
 {
+    [SerializeField] private float moveThreshold = 0.1f;
     public float moveSpeed = 5f; // Movement speed of the player
 
     private Rigidbody2D rb; // Rigidbody component reference
+    private Player _player;
+
+    
 
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>(); // Get the Rigidbody2D component attached to the GameObject
+        rb = GetComponent<Rigidbody2D>();
+        _player = GetComponent<Player>();
     }
 
     void FixedUpdate()
@@ -25,5 +30,14 @@ public class InputController : MonoBehaviour
 
         // Apply the movement to the Rigidbody component
         rb.velocity = movement;
+
+        if (Mathf.Abs(moveHorizontal) > moveThreshold || Mathf.Abs(moveVertical) > moveThreshold)
+        {
+            _player.IsMoveing = true;
+        }
+        else
+        {
+            _player.IsMoveing = false;
+        }
     }
 }

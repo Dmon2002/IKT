@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class InputController : MonoBehaviour
 {
+    [SerializeField] private Joystick joystick;
     [SerializeField] private float moveThreshold = 0.1f;
 
     private Rigidbody2D rb; // Rigidbody component reference
@@ -24,6 +25,14 @@ public class InputController : MonoBehaviour
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
 
+        if (joystick.Horizontal != 0 && moveHorizontal==0)
+        {
+            moveHorizontal = joystick.Horizontal;
+        }
+        if (joystick.Vertical != 0 && moveVertical == 0)
+        {
+            moveVertical = joystick.Vertical;
+        }
         // Create a movement vector based on the input and movement speed
         Vector2 movement = new Vector2(moveHorizontal, moveVertical) * _player.MoveSpeed;
 

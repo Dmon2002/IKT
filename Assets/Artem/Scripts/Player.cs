@@ -12,12 +12,20 @@ public class Player : AliveObject
     private bool _isMoving;
     public bool IsMoving
     {
-        get { return _isMoving; }
-        set { _isMoving = value; }
+        get {return _isMoving;}
+        set {
+            anim.SetBool("IsRunning", _isMoving);
+            _isMoving = value; 
+        }
     }
 
+    private Animator anim;
 
-    
+    private void Awake()
+    {
+        anim = gameObject.GetComponent<Animator>();
+    }
+
     private void Update()
     {
 

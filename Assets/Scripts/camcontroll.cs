@@ -31,6 +31,13 @@ public class camcontroll : MonoBehaviour {
 
 		}
 
+
+		if(currentY< playerTransform.position.y)
+        {
+			currentY = playerTransform.position.y;
+
+		}
+
 		Vector3 target = new Vector3()
 		{
 			x = startX,

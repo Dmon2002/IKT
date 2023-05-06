@@ -1,8 +1,7 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Collider2D))]
 public class MeleeWeapon : Weapon
 {
     [SerializeField] private float colliderTime = 0.1f;

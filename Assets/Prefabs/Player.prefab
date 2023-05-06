@@ -74,7 +74,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1095241733
+  m_SortingLayerID: 1009819297
   m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 579495482, guid: de51d34ac42effd429cfbcdf2880fdae, type: 3}
@@ -121,6 +121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd939ebde9f174746b58c932e39d5a46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  joystick: {fileID: 0}
   moveThreshold: 0.1
 --- !u!114 &8261367464240448398
 MonoBehaviour:

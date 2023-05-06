@@ -135,13 +135,4 @@ public class Player : AliveObject
         yield return new WaitForSeconds(duration);
         Weapon.Damage = _defaultWeaponDamage;
     }
-
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, Weapon.Distance);
-    }
-
-
 }

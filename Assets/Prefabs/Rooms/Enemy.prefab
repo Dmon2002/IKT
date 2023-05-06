@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2586486664148075115
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3147314108969768377}
+  m_Layer: 0
+  m_Name: EnemySpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3147314108969768377
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2586486664148075115}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1714734575845118015}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3034382765300094478
 GameObject:
   m_ObjectHideFlags: 0
@@ -13,7 +44,7 @@ GameObject:
   - component: {fileID: 8533644980568122836}
   - component: {fileID: 7544230231004639923}
   m_Layer: 0
-  m_Name: BreakingRoom
+  m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33,6 +64,7 @@ Transform:
   m_Children:
   - {fileID: 5495441311687515911}
   - {fileID: 7528302478655333399}
+  - {fileID: 1714734575845118015}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -94,6 +126,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 5757110300479305625}
+        m_TargetAssemblyTypeName: RoomSpawner, Assembly-CSharp
+        m_MethodName: Spawn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   FogRevealEnd:
     m_PersistentCalls:
       m_Calls: []
@@ -130,9 +174,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7528302478655333399}
   - component: {fileID: 4673542984737727806}
-  - component: {fileID: 2450367197078284258}
-  - component: {fileID: 841114077856188602}
-  - component: {fileID: 1883112781393132528}
   m_Layer: 0
   m_Name: Floor
   m_TagString: Untagged
@@ -207,66 +248,54 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!60 &2450367197078284258
-PolygonCollider2D:
+--- !u!1 &4599667927232982513
+GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3509070504581977995}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.0034068, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.35731596, y: 0.20380084}
-      - {x: 0.0321616, y: 0.35750887}
-      - {x: -0.3077589, y: 0.21334368}
-      - {x: -0.33218113, y: -0.21908574}
-      - {x: -0.00042371452, y: -0.36280093}
-      - {x: 0.36652356, y: -0.1807407}
---- !u!114 &841114077856188602
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1714734575845118015}
+  - component: {fileID: 5757110300479305625}
+  m_Layer: 0
+  m_Name: Spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1714734575845118015
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4599667927232982513}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 3147314108969768377}
+  m_Father: {fileID: 3034382765300094476}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5757110300479305625
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3509070504581977995}
+  m_GameObject: {fileID: 4599667927232982513}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9960a81f8379c14da2e74b3192c7a97, type: 3}
+  m_Script: {fileID: 11500000, guid: c4f6ae9eca8e7e146aa8673072e83460, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  breakingAnimation: {fileID: 1883112781393132528}
---- !u!111 &1883112781393132528
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3509070504581977995}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 178911addd68c66428673db68785012b, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: 178911addd68c66428673db68785012b, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 0
-  m_AnimatePhysics: 0
-  m_CullingType: 0
+  spawnables:
+  - point: {fileID: 3147314108969768377}
+    prefab: {fileID: 5020222774221923781, guid: 5eec923f3675c66429cf16710cbea081, type: 3}
 --- !u!1 &6311724035886259282
 GameObject:
   m_ObjectHideFlags: 0
@@ -278,7 +307,7 @@ GameObject:
   - component: {fileID: 5495441311687515911}
   - component: {fileID: 996097081514252321}
   - component: {fileID: 4580213565744681811}
-  - component: {fileID: 6383209702948489886}
+  - component: {fileID: 4320712607210582247}
   m_Layer: 0
   m_Name: Fog
   m_TagString: Untagged
@@ -369,7 +398,7 @@ Animation:
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
   m_CullingType: 0
---- !u!114 &6383209702948489886
+--- !u!114 &4320712607210582247
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -1,20 +1,8 @@
 using System;
 using UnityEngine;
 
-public class EventManager : MonoBehaviour
+public class EventManager : Manager<EventManager>
 {
-    private static EventManager instance;
-    public static EventManager Instance
-    {
-        get
-        {
-            if (instance == null)
-            {
-                instance = FindObjectOfType<EventManager>();
-            }
-            return instance;
-        }
-    }
 
     public event Action<int> gameOver;
     public event Action<int> scoreChanged;

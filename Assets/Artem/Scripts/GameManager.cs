@@ -1,11 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameManager : Manager<GameManager>
 {
-    [HideInInspector]
-    public Player Player;
+    [SerializeField] private GameObject _playerPrefab;
+    [SerializeField] private Vector2Int _startingPosition;
+    private GameObject _player;
+    
+    public GameObject Player
+    {
+        get
+        {
+            if (_player == null)
+            {
+                _player = SpawnPlayer();
+            }
+            return _player;
+        }
+    }
 
     private static GameManager instance;
     public static GameManager Instance
@@ -20,8 +31,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void Start()
+    private GameObject SpawnPlayer()
     {
-        Player = FindObjectOfType<Player>();
+        return Instantiate(_player, LevelManager.Instance.ConvertToPosition(_startingPosition), Quaternion.identity);
     }
 }

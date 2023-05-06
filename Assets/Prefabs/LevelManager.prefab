@@ -437,7 +437,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0d499caf7cdac14cbb455c0736268cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _roomPrefab: {fileID: 3034382765300094478, guid: 807cab5262e69d04ea4265492e470c8e, type: 3}
   _floorTilemap: {fileID: 1812989219219687883}
   _roomContainer: {fileID: 1812989218144700509}
   _enemyManager: {fileID: 0}
@@ -465,6 +464,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 155831871214424145}
+  - component: {fileID: 8418323981533065116}
   m_Layer: 0
   m_Name: LevelGenerator
   m_TagString: Untagged
@@ -487,3 +487,18 @@ Transform:
   m_Father: {fileID: 1812989217890134703}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8418323981533065116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5464986335655368844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd13426e5be178348a191ceba92b3345, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _roomPrefabs:
+  - {fileID: 3034382765300094478, guid: 807cab5262e69d04ea4265492e470c8e, type: 3}
+  - {fileID: 3034382765300094478, guid: c4b9b990e8bef6e41a15ff56f4bb0da1, type: 3}

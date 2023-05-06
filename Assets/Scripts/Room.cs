@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using UnityEditor.Build;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -8,6 +10,8 @@ public class Room : MonoBehaviour
     public UnityEvent FogRevealEnd;
     private Vector2Int _coords;
 
+    private RoomSpawner _spawner;
+
     [SerializeField] private Animation _fogRevealAnimation;
     [SerializeField] private GameObject _fogTile;
 
@@ -16,6 +20,11 @@ public class Room : MonoBehaviour
     public bool FogRevealed => _fogRevealed;
 
     public Vector2Int Coords => _coords;
+
+    private void Awake()
+    {
+        _spawner = GetComponent<RoomSpawner>();
+    }
 
     public void SetCoords(Vector2Int coords)
     {
@@ -41,10 +50,5 @@ public class Room : MonoBehaviour
     public void OnFogAnimationEnd()
     {
         FogRevealEnd.Invoke();
-    }
-
-    public void Test()
-    {
-        Debug.Log("test sdfasdf");
     }
 }

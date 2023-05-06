@@ -1,8 +1,5 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using UnityEditor.Animations;
 using UnityEngine;
 
 public abstract class AliveObject : MonoBehaviour
@@ -11,16 +8,13 @@ public abstract class AliveObject : MonoBehaviour
     [SerializeField] private Weapon _weapon;
     [SerializeField] private float _maxhp;
     [SerializeField] private float _moveSpeed;
+    [SerializeField] private bool _isFlying;
 
     private float _hp;
     
     private HashSet<Vector2Int> _roomsIn = new ();
 
-    public void AddRoom(Vector2Int roomPos) => _roomsIn.Add(roomPos);
-
-    public void RemoveRoom(Vector2Int roomPos) => _roomsIn.Remove(roomPos);
-
-    public bool ContainsRoom(Vector2Int roomPos) => _roomsIn.Contains(roomPos);
+    public bool IsFlying => _isFlying;
 
     public Weapon Weapon => _weapon;
     public float MoveSpeed => _moveSpeed;
@@ -68,5 +62,10 @@ public abstract class AliveObject : MonoBehaviour
             HP += healPower;
         }
         
+    }
+
+    public void Die()
+    {
+        HP = 0;
     }
 }

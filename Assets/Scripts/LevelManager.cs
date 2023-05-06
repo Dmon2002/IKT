@@ -3,45 +3,35 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class LevelManager : MonoBehaviour
+public class LevelManager : Manager<LevelManager>
 {
     [SerializeField] private Vector2Int leftDownStartingTile;
     [SerializeField] private int levelWidth;
     [SerializeField] private int levelHeight;
 
-    private Tilemap levelTilemap;
-    private LevelHolder levelHolder;
+    private Tilemap _levelTilemap;
+    private LevelHolder _levelHolder;
+    private LevelGenerator _levelGenerator;
 
-    private static LevelManager _instance;
-
-    public static LevelManager Instance
-    {
-        get
-        {
-            if (_instance == null)
-            {
-                _instance = FindObjectOfType<LevelManager>();
-            }
-            return _instance;
-        }
-    }
-
-    public Room GetRoom(Vector2Int roomPos) => levelHolder.GetRoom(roomPos);
+    public Room GetRoom(Vector2Int roomPos) => _levelHolder.GetRoom(roomPos);
 
     private void Awake()
     {
-        levelHolder = GetComponentInChildren<LevelHolder>();
-        levelTilemap = GetComponentInChildren<Tilemap>();
+        _levelGenerator = GetComponentInChildren<LevelGenerator>();
+        _levelHolder = GetComponentInChildren<LevelHolder>();
+        _levelTilemap = GetComponentInChildren<Tilemap>();
     }
 
     private void Start()
     {
-        levelHolder.SetUpRooms(leftDownStartingTile, levelWidth, levelHeight);
+        var rooms = _levelGenerator.Generate(leftDownStartingTile, levelWidth, levelHeight);
+        _levelHolder.SetUpRooms(leftDownStartingTile, levelWidth, levelHeight, rooms);
+        _levelHolder.SetUpBorders(leftDownStartingTile, levelWidth, levelHeight);
     }
 
     public void RevealFog(Vector2Int roomCoords)
     {
-        levelHolder.GetRoom(roomCoords).RevealFog();
+        _levelHolder.GetRoom(roomCoords).RevealFog();
     }
 
     public void RevealFog(Room room)
@@ -76,7 +66,7 @@ public class LevelManager : MonoBehaviour
                 Debug.LogError("Incorrect switch case");
                 return null;
         }
-        return levelHolder.GetRoom(roomPos + offset);
+        return _levelHolder.GetRoom(roomPos + offset);
     }
 
     public List<Room> getAllNeighbours(Vector2Int roomPos)
@@ -97,7 +87,7 @@ public class LevelManager : MonoBehaviour
     {
         Room minRoom = null;
         float minValue = float.PositiveInfinity;
-        foreach (var room in levelHolder.Rooms)
+        foreach (var room in _levelHolder.Rooms)
         {
             float dist = GetRoomDistance(room, position);
             if (dist < minValue)
@@ -108,6 +98,8 @@ public class LevelManager : MonoBehaviour
         }
         return minRoom;
     }
+
+    public Vector3 ConvertToPosition(Vector2Int intPos) => _levelTilemap.GetCellCenterWorld((Vector3Int)intPos);
 }
 
 public enum NeighbourSide

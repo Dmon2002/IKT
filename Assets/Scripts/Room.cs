@@ -15,6 +15,10 @@ public class Room : MonoBehaviour
     [SerializeField] private Animation _fogRevealAnimation;
     [SerializeField] private GameObject _fogTile;
 
+    private List<AliveObject> _aliveObjects = new ();
+
+    public IEnumerable<AliveObject> AliveObjects => _aliveObjects;
+
     private bool _fogRevealed;
 
     public bool FogRevealed => _fogRevealed;
@@ -51,4 +55,21 @@ public class Room : MonoBehaviour
     {
         FogRevealEnd.Invoke();
     }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.TryGetComponent<AliveObject>(out var alive))
+        {
+            _aliveObjects.Add(alive);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.TryGetComponent<AliveObject>(out var alive))
+        {
+            _aliveObjects.Remove(alive);
+        }
+    }
+
 }

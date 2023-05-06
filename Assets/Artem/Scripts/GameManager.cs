@@ -18,21 +18,13 @@ public class GameManager : Manager<GameManager>
         }
     }
 
-    private static GameManager instance;
-    public static GameManager Instance
+    private void Start()
     {
-        get
-        {
-            if (instance == null)
-            {
-                instance = FindObjectOfType<GameManager>();
-            }
-            return instance;
-        }
+        _player = SpawnPlayer();
     }
 
     private GameObject SpawnPlayer()
     {
-        return Instantiate(_player, LevelManager.Instance.ConvertToPosition(_startingPosition), Quaternion.identity);
+        return Instantiate(_playerPrefab, LevelManager.Instance.ConvertToPosition(_startingPosition), Quaternion.identity);
     }
 }

@@ -60,12 +60,12 @@ GameObject:
   m_Component:
   - component: {fileID: 2074995584019426969}
   - component: {fileID: 2074995584019426968}
-  - component: {fileID: 2074995584019426971}
   - component: {fileID: 2074995584019426964}
   - component: {fileID: 2074995584019426967}
   - component: {fileID: 2074995584019426966}
   - component: {fileID: 2074995584019426965}
   - component: {fileID: 2074995584019426962}
+  - component: {fileID: 7058246549577349086}
   m_Layer: 0
   m_Name: MeleeEnemy
   m_TagString: Untagged
@@ -141,21 +141,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2074995584019426971
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2074995584019426970}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39f50c7adbf4ef140b160440a88c9899, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _weapon: {fileID: 2074995582649828537}
-  _maxhp: 3
-  _moveSpeed: 0
 --- !u!114 &2074995584019426964
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -277,3 +262,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &7058246549577349086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2074995584019426970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f712292404f71d40a17e694aaedc877, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _weapon: {fileID: 2074995582649828537}
+  _maxhp: 5
+  _moveSpeed: 2
+  _isFlying: 0

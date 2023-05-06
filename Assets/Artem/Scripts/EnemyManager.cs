@@ -9,7 +9,7 @@ public class EnemyManager: MonoBehaviour
     {
         foreach (var enemy in ActiveEnemies)
         {
-            enemy.enemyDied += OnEnemyDied;
+            enemy.EnemyDied += OnEnemyDied;
         }
     }
     public static EnemyManager Instance

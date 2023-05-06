@@ -46,7 +46,6 @@ public abstract class AliveObject : MonoBehaviour
             throw new ArgumentOutOfRangeException(nameof(damage));
         }
         HP-=damage;
-        Debug.Log(HP);
     }
 
     public void Heal(float healPower)

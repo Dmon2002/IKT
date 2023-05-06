@@ -1,8 +1,11 @@
+using System.Collections;
 using UnityEngine;
 
 public class Bomb : MonoBehaviour
 {
     [SerializeField] private LayerMask raycaseLayers;
+    [SerializeField] private float explodeDelay;
+    [SerializeField] private float explodeDamage;
 
     private Transform _player;
     
@@ -25,7 +28,30 @@ public class Bomb : MonoBehaviour
 
     public void Agre()
     {
+        StartCoroutine(Explode());
+    }
+
+    public IEnumerator Explode()
+    {
         var room = LevelManager.Instance.GetNearestRoom(transform.position);
+        var neighbours = LevelManager.Instance.getAllNeighbours(room.Coords);
+        yield return new WaitForSeconds(explodeDelay);
+        foreach (var alive in room.AliveObjects)
+        {
+            alive.ApplyDamage(explodeDamage);
+        }
+        foreach (var neighbour in neighbours)
+        {
+            if (neighbour is null)
+            {
+                continue;
+            }
+            foreach (var alive in neighbour.AliveObjects)
+            {
+                alive.ApplyDamage(explodeDamage);
+            }
+        }
         
     }
+
 }

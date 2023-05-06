@@ -1,10 +1,9 @@
 using System;
 using UnityEngine;
 
-public abstract class Enemy : AliveObject
+public class Enemy : AliveObject
 {
-    // Start is called before the first frame update
-    public event Action<Enemy> enemyDied;
+    public event Action<Enemy> EnemyDied;
 
     protected override void OnEnable()
     {
@@ -20,7 +19,7 @@ public abstract class Enemy : AliveObject
     private void OnDisable()
     {
         died -= OnDied;
-        enemyDied?.Invoke(this);
+        EnemyDied?.Invoke(this);
     }
 
     private void OnDied()
@@ -31,16 +30,9 @@ public abstract class Enemy : AliveObject
     private void OnTriggerEnter2D(Collider2D collision)
     {
         var potentialWeapon = collision.GetComponent<Weapon>();
-        Debug.Log("trigger");
         if (potentialWeapon is Weapon && potentialWeapon.owner == WeaponOwner.Player)
         {
             ApplyDamage(potentialWeapon.Damage);
         }
     }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        Debug.Log("triggerexit");
-    }
-
-
 }

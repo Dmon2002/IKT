@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 8533644980568122836}
   - component: {fileID: 7544230231004639923}
   m_Layer: 0
-  m_Name: Room
+  m_Name: Bomb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -293,7 +293,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4f6ae9eca8e7e146aa8673072e83460, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnables: []
+  spawnables:
+  - point: {fileID: 3147314108969768377}
+    prefab: {fileID: 2061364415916667674, guid: 848da6418b591eb4a8d921c176a981a2, type: 3}
 --- !u!1 &6311724035886259282
 GameObject:
   m_ObjectHideFlags: 0

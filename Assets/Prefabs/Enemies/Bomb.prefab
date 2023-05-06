@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2061364415916667673}
   - component: {fileID: 2061364415916667679}
-  - component: {fileID: 2061364415916667672}
+  - component: {fileID: 6255530067467995971}
   m_Layer: 0
   m_Name: Bomb
   m_TagString: Untagged
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2061364415916667672
+--- !u!114 &6255530067467995971
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,10 +94,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2061364415916667674}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39f50c7adbf4ef140b160440a88c9899, type: 3}
+  m_Script: {fileID: 11500000, guid: 2b984fd4131d1c44ca14fc86a949e295, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _weapon: {fileID: 0}
-  _maxhp: 3
-  _moveSpeed: 0
-  _isFlying: 0
+  raycaseLayers:
+    serializedVersion: 2
+    m_Bits: 8
+  explodeDelay: 1.5
+  explodeDamage: 2

@@ -245,7 +245,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &4599667927232982513
@@ -368,8 +368,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1252117761
-  m_SortingLayer: 3
+  m_SortingLayerID: -911262885
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300110, guid: da9d6752771285a40a1b383e61336090, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -411,3 +411,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   room: {fileID: 8533644980568122836}
+  speed: 1
+  IsDie: 0

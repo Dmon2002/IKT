@@ -7,7 +7,7 @@ public class FogAnimationEvent : MonoBehaviour
     [SerializeField] private Room room;
 
     private SpriteRenderer spriteRenderer;
-    [SerializeField] private float speed=1;
+    [SerializeField] private float speed=2;
 
     public bool IsDie = false;
 
@@ -48,6 +48,7 @@ public class FogAnimationEvent : MonoBehaviour
         {
             yield return new WaitForFixedUpdate();
             spriteRenderer.color = new Color(1,1,1, spriteRenderer.color.a-1/speed * Time.deltaTime);
+            transform.localScale -=Vector3.one*Time.deltaTime/speed/5;
             transform.position += (transform.position - playerTr.position).normalized*speed*Time.deltaTime;
         }
     }

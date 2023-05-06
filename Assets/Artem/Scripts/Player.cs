@@ -74,10 +74,11 @@ public class Player : AliveObject
             Debug.Log("Collision with an instance of Enemy class");
         }
     }
-
+    /*
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, Weapon.Distance);
     }
+    */
 }

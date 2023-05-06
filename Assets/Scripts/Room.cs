@@ -24,7 +24,7 @@ public class Room : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent<PlayerEntity>(out var player))
+        if (collision.TryGetComponent<Player>(out var player))
         {
             PlayerEnter.Invoke();
         }

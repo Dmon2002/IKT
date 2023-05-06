@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8533644980568122836}
   - component: {fileID: 7544230231004639923}
   m_Layer: 0
-  m_Name: Room
+  m_Name: BreakingRoom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -96,19 +96,7 @@ MonoBehaviour:
         m_CallState: 2
   FogRevealEnd:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8533644980568122836}
-        m_TargetAssemblyTypeName: Room, Assembly-CSharp
-        m_MethodName: Test
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   _fogRevealAnimation: {fileID: 4580213565744681811}
   _fogTile: {fileID: 6311724035886259282}
 --- !u!50 &7544230231004639923
@@ -142,6 +130,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7528302478655333399}
   - component: {fileID: 4673542984737727806}
+  - component: {fileID: 2450367197078284258}
+  - component: {fileID: 841114077856188602}
+  - component: {fileID: 1883112781393132528}
   m_Layer: 0
   m_Name: Floor
   m_TagString: Untagged
@@ -216,6 +207,66 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!60 &2450367197078284258
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3509070504581977995}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.35731596, y: 0.20380084}
+      - {x: 0.0321616, y: 0.35750887}
+      - {x: -0.3077589, y: 0.21334368}
+      - {x: -0.33218113, y: -0.21908574}
+      - {x: -0.00042371452, y: -0.36280093}
+      - {x: 0.36652356, y: -0.1807407}
+--- !u!114 &841114077856188602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3509070504581977995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9960a81f8379c14da2e74b3192c7a97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  breakingAnimation: {fileID: 1883112781393132528}
+--- !u!111 &1883112781393132528
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3509070504581977995}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 178911addd68c66428673db68785012b, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 178911addd68c66428673db68785012b, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &6311724035886259282
 GameObject:
   m_ObjectHideFlags: 0
@@ -227,7 +278,7 @@ GameObject:
   - component: {fileID: 5495441311687515911}
   - component: {fileID: 996097081514252321}
   - component: {fileID: 4580213565744681811}
-  - component: {fileID: 4320712607210582247}
+  - component: {fileID: 6383209702948489886}
   m_Layer: 0
   m_Name: Fog
   m_TagString: Untagged
@@ -318,7 +369,7 @@ Animation:
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
   m_CullingType: 0
---- !u!114 &4320712607210582247
+--- !u!114 &6383209702948489886
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

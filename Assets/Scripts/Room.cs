@@ -4,10 +4,12 @@ using UnityEngine.Events;
 [RequireComponent(typeof(Collider2D))]
 public class Room : MonoBehaviour
 {
-    public UnityEvent OnPlayerEnter;
+    public UnityEvent PlayerEnter;
+    public UnityEvent FogRevealEnd;
     private Vector2Int _coords;
 
-    [SerializeField] private GameObject _fog;
+    [SerializeField] private Animation _fogRevealAnimation;
+    [SerializeField] private GameObject _fogTile;
 
     private bool _fogRevealed;
 
@@ -20,21 +22,29 @@ public class Room : MonoBehaviour
         _coords = coords;
     }
 
-    private void Start()
-    {
-        OnPlayerEnter.AddListener(RevealFog);
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.TryGetComponent<PlayerEntity>(out var player))
         {
-            OnPlayerEnter.Invoke();
+            PlayerEnter.Invoke();
         }
     }
 
     public void RevealFog()
     {
-        _fog.SetActive(false);
+        if (_fogRevealed)
+            return;
+        _fogTile.GetComponent<Animation>()?.Play();
+        _fogRevealed = true;
+    }
+
+    public void OnFogAnimationEnd()
+    {
+        FogRevealEnd.Invoke();
+    }
+
+    public void Test()
+    {
+        Debug.Log("test sdfasdf");
     }
 }

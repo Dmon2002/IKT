@@ -5,8 +5,7 @@ using UnityEngine.Tilemaps;
 
 public class LevelHolder : MonoBehaviour
 {
-    [SerializeField] private GameObject _roomColliderPrefab;
-    [SerializeField] private TileBase _fogTile;
+    [SerializeField] private GameObject _roomPrefab;
     [SerializeField] private Tilemap _floorTilemap;
     [SerializeField] private Transform _roomContainer;
 
@@ -19,27 +18,18 @@ public class LevelHolder : MonoBehaviour
 
     public IEnumerable<Room> Rooms => _rooms.Values;
 
-    private void Start()
+    public void SetUpRooms(Vector2Int leftUpStartingTile, int width, int height)
     {
-        SetUpRooms();
-    }
-
-    private void SetUpRooms()
-    {
-        Tile tile = _floorTilemap.GetTile(Vector3Int.one) as Tile;
-        BoundsInt bounds = _floorTilemap.cellBounds;
-        for (int x = bounds.xMin; x < bounds.xMax; x++)
+        for (int x = leftUpStartingTile.x; x < leftUpStartingTile.x + width; x++)
         {
-            for (int y = bounds.yMin; y < bounds.yMax; y++)
+            for (int y = leftUpStartingTile.y; y < leftUpStartingTile.y + height; y++)
             {
                 Vector3Int tileIntPos = new Vector3Int(x, y, 0);
-                if (_floorTilemap.GetTile(tileIntPos) == null)
-                    continue;
                 Vector3 tilePosition = _floorTilemap.GetCellCenterWorld(tileIntPos);
-                var room = Instantiate(_roomColliderPrefab, tilePosition, Quaternion.identity, _roomContainer)
+                var room = Instantiate(_roomPrefab, tilePosition, Quaternion.identity, _roomContainer)
                     .GetComponent<Room>();
                 room.SetCoords((Vector2Int)tileIntPos);
-                room.OnPlayerEnter.AddListener(() => OnPlayerEnterRoom.Invoke(room));
+                room.PlayerEnter.AddListener(() => OnPlayerEnterRoom.Invoke(room));
                 _rooms[(Vector2Int)tileIntPos] = room;
             }
         }

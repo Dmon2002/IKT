@@ -7,12 +7,11 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: EnemyMagic
+  m_Name: Standart
   m_Shader: {fileID: 4800000, guid: 79ee6cefbc672a44e97359d4d14ea301, type: 3}
   m_ValidKeywords:
   - ATLAS_ON
   - OUTBASEPIXELPERF_ON
-  - OUTBASE_ON
   - OUTDIST_ON
   m_InvalidKeywords:
   - _GLOWAFFECTLIGHT_ON
@@ -130,7 +129,7 @@ Material:
     - _GhostTransparency: 0
     - _GlitchAmount: 3
     - _GlitchSize: 1
-    - _Glow: 1
+    - _Glow: 0.5
     - _GlowAffectLight: 1
     - _GlowGlobal: 1
     - _GradBlend: 1
@@ -162,10 +161,10 @@ Material:
     - _InnerOutlineGlow: 4
     - _InnerOutlineThickness: 1
     - _LitAmount: 1
-    - _MaxXUV: 0.95328206
-    - _MaxYUV: 0.95347464
-    - _MinXUV: 0.25487876
-    - _MinYUV: 0.032979976
+    - _MaxXUV: 0.2526154
+    - _MaxYUV: 0.88549155
+    - _MinXUV: 0.02676923
+    - _MinYUV: 0.19304556
     - _MotionBlurAngle: 0.1
     - _MotionBlurDist: 1.25
     - _MyDstMode: 10
@@ -177,11 +176,11 @@ Material:
     - _OnlyInnerOutline: 0
     - _OnlyOutline: 0
     - _OutlineAlpha: 1
-    - _OutlineDistortAmount: 1.76
-    - _OutlineDistortTexXSpeed: 3
-    - _OutlineDistortTexYSpeed: 2
+    - _OutlineDistortAmount: 0.17
+    - _OutlineDistortTexXSpeed: 0.1
+    - _OutlineDistortTexYSpeed: 0.1
     - _OutlineGlow: 1
-    - _OutlinePixelWidth: 59
+    - _OutlinePixelWidth: 14.63
     - _OutlineTexXSpeed: 0
     - _OutlineTexYSpeed: 0
     - _OutlineWidth: 0.151
@@ -204,7 +203,7 @@ Material:
     - _ShakeUvX: 1.5
     - _ShakeUvY: 1
     - _ShineGlow: 1
-    - _ShineLocation: 0.5
+    - _ShineLocation: 0.42
     - _ShineRotate: 0
     - _ShineWidth: 0.1
     - _TextureScrollXSpeed: 1
@@ -243,7 +242,7 @@ Material:
     - _HitEffectColor: {r: 1, g: 1, b: 1, a: 1}
     - _HologramStripeColor: {r: 0, g: 1, b: 1, a: 1}
     - _InnerOutlineColor: {r: 1, g: 0, b: 0, a: 1}
-    - _OutlineColor: {r: 0.47450984, g: 0.43529415, b: 0.7137255, a: 1}
+    - _OutlineColor: {r: 1, g: 0.86827034, b: 0.023584902, a: 1}
     - _OverlayColor: {r: 1, g: 1, b: 1, a: 1}
     - _ShadowColor: {r: 0, g: 0, b: 0, a: 1}
     - _ShineColor: {r: 1, g: 1, b: 1, a: 1}

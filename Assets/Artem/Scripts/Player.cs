@@ -34,7 +34,7 @@ public class Player : AliveObject
             _reloadTimeRemaining -= Time.deltaTime;
         }
         _targetEnemy = GetNearestEnemy();
-        Debug.Log(_targetEnemy);
+        //SDebug.Log(_targetEnemy);
         AttackEnemy();
 
     }

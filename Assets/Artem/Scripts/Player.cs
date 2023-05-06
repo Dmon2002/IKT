@@ -14,6 +14,8 @@ public class Player : AliveObject
 
     [SerializeField] private float _immortalTime=2f;
 
+    private float _defaultWeaponDamage;
+
 
     public bool IsMoving
     {
@@ -28,9 +30,11 @@ public class Player : AliveObject
     {
         base.OnEnable();
 
+
         if (Weapon != null)
         {
             Weapon.owner = WeaponOwner.Player;
+            _defaultWeaponDamage= Weapon.Damage;
         }
 
         
@@ -109,11 +113,7 @@ public class Player : AliveObject
         Weapon.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, Weapon.Distance);
-    }
+   
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -132,4 +132,25 @@ public class Player : AliveObject
         yield return new WaitForSeconds(_immortalTime);
         _isImmortal = false;
     }
+
+    public void BuffWeapon(float multiplication, float duration)
+    {
+        StartCoroutine(ChangeDamage(multiplication, duration));
+    }
+
+    IEnumerator ChangeDamage(float multiplication, float duration)
+    {
+       Weapon.Damage=Weapon.Damage*multiplication;
+        yield return new WaitForSeconds(duration);
+        Weapon.Damage = _defaultWeaponDamage;
+    }
+
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, Weapon.Distance);
+    }
+
+
 }

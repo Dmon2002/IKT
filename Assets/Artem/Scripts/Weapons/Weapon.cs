@@ -15,7 +15,11 @@ public abstract class Weapon : MonoBehaviour
 
     public WeaponOwner owner;
 
-    public float Damage => _damage;
+    public float Damage
+    {
+        get { return _damage; }
+        set { _damage = value; }
+    }
     public string Name => _name;
 
     public float Distance => _distance;

@@ -41,6 +41,7 @@ public abstract class AliveObject : MonoBehaviour
     protected virtual void OnEnable()
     {
         _hp = _maxhp;
+        
     }
 
     public void ApplyDamage(float damage)

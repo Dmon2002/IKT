@@ -17,18 +17,29 @@ public class Player : AliveObject
     }
 
 
-    
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+
+        if (Weapon != null)
+        {
+            Weapon.owner = WeaponOwner.Player;
+        }
+
+        
+    }
+
+
     private void Update()
     {
-
-        if (_reloadTimeRemaining> 0)
-        {
+        if (_reloadTimeRemaining > 0)
             _reloadTimeRemaining -= Time.deltaTime;
-        }
-        _targetEnemy = GetNearestEnemy();
-        Debug.Log(_targetEnemy);
-        AttackEnemy();
+    }
 
+    private void FixedUpdate()
+    {
+        _targetEnemy = GetNearestEnemy();
+        TryAttackEnemy();
     }
 
 
@@ -40,12 +51,12 @@ public class Player : AliveObject
         {
             currentTargetDistance = Vector3.Distance(transform.position, _targetEnemy.transform.position);
         }
-       
+
         foreach (var enemy in EnemyManager.Instance.ActiveEnemies)
         {
             float potentialDistance = Vector3.Distance(transform.position, enemy.transform.position);
 
-            if (potentialDistance < Weapon.Distance && potentialDistance<currentTargetDistance)
+            if (potentialDistance < Weapon.Distance && potentialDistance < currentTargetDistance)
             {
                 currentTargetDistance = potentialDistance;
                 nearestEnemy = enemy;
@@ -54,18 +65,25 @@ public class Player : AliveObject
         return nearestEnemy;
     }
 
-    private void AttackEnemy()
+    private void TryAttackEnemy()
     {
-        if (IsMoving) return;
         if (_targetEnemy == null) return;
         if (Weapon == null) return;
+
+        RotateWeapon();
+
+        if (IsMoving) return; // ��� ����� ��������
+
         if (_reloadTimeRemaining > 0) return;
-
-        _targetEnemy.ApplyDamage(Weapon.Damage);
-        _reloadTimeRemaining = Weapon.ReloadTime;
-
+        
+        AttackEnemy();
     }
 
+    private void AttackEnemy()
+    {
+        Weapon.Hit();
+        _reloadTimeRemaining = Weapon.ReloadTime;
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -74,11 +92,27 @@ public class Player : AliveObject
             Debug.Log("Collision with an instance of Enemy class");
         }
     }
-    /*
+
+    private void RotateWeapon()
+    {
+        Vector2 direction = _targetEnemy.transform.position - transform.position;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        Weapon.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+    }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, Weapon.Distance);
     }
-    */
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Bullet potentialBullet = collision.GetComponent<Bullet>();
+        if (potentialBullet is Bullet)
+        {
+            ApplyDamage(potentialBullet.Damage);
+            Debug.Log("auch");
+        }
+    }
 }

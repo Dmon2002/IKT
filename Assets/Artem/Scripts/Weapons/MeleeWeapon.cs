@@ -1,18 +1,30 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class MeleeWeapon : Weapon
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private float colliderTime = 0.1f;
+    private Collider2D _collider;
+
+    private void Start()
     {
-        
+        _collider = GetComponent<Collider2D>();
+        _collider.enabled = false;
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void Hit()
     {
-        
+        _collider.enabled = true;
+        transform.position = transform.position + new Vector3(0, 0.001f, 0);
+        StartCoroutine(DisableCollider(colliderTime));
+    }
+
+    private IEnumerator DisableCollider(float colliderTime)
+    {
+        yield return new WaitForSeconds(colliderTime);
+        _collider.enabled = false;
+        transform.position = transform.position + new Vector3(0, -0.001f, 0);
     }
 }

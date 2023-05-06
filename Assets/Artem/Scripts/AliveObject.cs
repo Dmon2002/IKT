@@ -33,6 +33,7 @@ public abstract class AliveObject : MonoBehaviour
     protected virtual void OnEnable()
     {
         _hp = _maxhp;
+        
     }
     protected virtual void OnDisable()
     {

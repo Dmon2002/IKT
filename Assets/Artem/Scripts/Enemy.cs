@@ -12,6 +12,11 @@ public abstract class Enemy : AliveObject
     {
         base.OnEnable();
         died += OnDied;
+
+        if (Weapon != null)
+        {
+            Weapon.owner = WeaponOwner.Enemy;
+        }
     }
 
     void Start()
@@ -29,6 +34,20 @@ public abstract class Enemy : AliveObject
         enemyDied?.Invoke(this);
         Destroy(gameObject);
     }
-    
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        var potentialWeapon = collision.gameObject.GetComponent<Weapon>();
+        Debug.Log("trigger");
+        if (potentialWeapon is Weapon && potentialWeapon.owner == WeaponOwner.Player)
+        {
+            ApplyDamage(potentialWeapon.Damage);
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        Debug.Log("triggerexit");
+    }
+
 
 }

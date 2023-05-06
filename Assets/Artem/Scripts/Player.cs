@@ -25,6 +25,8 @@ public class Player : AliveObject
         {
             Weapon.owner = WeaponOwner.Player;
         }
+
+        
     }
 
 
@@ -102,5 +104,15 @@ public class Player : AliveObject
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, Weapon.Distance);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Bullet potentialBullet = collision.GetComponent<Bullet>();
+        if (potentialBullet is Bullet)
+        {
+            ApplyDamage(potentialBullet.Damage);
+            Debug.Log("auch");
+        }
     }
 }

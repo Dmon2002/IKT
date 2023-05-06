@@ -37,7 +37,7 @@ public abstract class Enemy : AliveObject
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        var potentialWeapon = collision.gameObject.GetComponent<Weapon>();
+        var potentialWeapon = collision.GetComponent<Weapon>();
         Debug.Log("trigger");
         if (potentialWeapon is Weapon && potentialWeapon.owner == WeaponOwner.Player)
         {

@@ -9,9 +9,12 @@ public abstract class Weapon : MonoBehaviour
     [SerializeField] private float _damage;
     [SerializeField] private string _name;
     [SerializeField] private float _distance;
+    [SerializeField] private float _reloadTime = 2;
 
     public float Damage => _damage;
     public string Name => _name;
 
     public float Distance => _distance;
+
+    public float ReloadTime => _reloadTime;
 }

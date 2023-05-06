@@ -15,6 +15,29 @@ public abstract class AliveObject : MonoBehaviour
     public Weapon Weapon => _weapon;
     public float MoveSpeed => _moveSpeed;
 
+    public float HP
+    {
+        get { return _hp; }
+        set { _hp = value;
+            if (_hp<=0)
+            {
+                died?.Invoke();
+            }
+        }
+    }
+
+    public Action died;
+
+
+
+    protected virtual void OnEnable()
+    {
+        _hp = _maxhp;
+    }
+    protected virtual void OnDisable()
+    {
+
+    }
 
     public void ApplyDamage(float damage)
     {
@@ -22,7 +45,7 @@ public abstract class AliveObject : MonoBehaviour
         {
             throw new ArgumentOutOfRangeException(nameof(damage));
         }
-        _hp-=damage;
+        HP-=damage;
     }
 
     public void Heal(float healPower)
@@ -33,14 +56,18 @@ public abstract class AliveObject : MonoBehaviour
         }
         if (_hp+healPower>_maxhp)
         {
-            _hp = _maxhp;
+            HP = _maxhp;
         }
         else
         {
-            _hp += healPower;
+            HP += healPower;
         }
         
     }
 
+    
+
+    
+    
 
 }

@@ -6,7 +6,6 @@ using UnityEngine;
 public class InputController : MonoBehaviour
 {
     [SerializeField] private float moveThreshold = 0.1f;
-    public float moveSpeed = 5f; // Movement speed of the player
 
     private Rigidbody2D rb; // Rigidbody component reference
     private Player _player;
@@ -26,18 +25,18 @@ public class InputController : MonoBehaviour
         float moveVertical = Input.GetAxis("Vertical");
 
         // Create a movement vector based on the input and movement speed
-        Vector2 movement = new Vector2(moveHorizontal, moveVertical) * moveSpeed;
+        Vector2 movement = new Vector2(moveHorizontal, moveVertical) * _player.MoveSpeed;
 
         // Apply the movement to the Rigidbody component
         rb.velocity = movement;
 
         if (Mathf.Abs(moveHorizontal) > moveThreshold || Mathf.Abs(moveVertical) > moveThreshold)
         {
-            _player.IsMoveing = true;
+            _player.IsMoving = true;
         }
         else
         {
-            _player.IsMoveing = false;
+            _player.IsMoving = false;
         }
     }
 }

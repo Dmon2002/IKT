@@ -1,6 +1,5 @@
+using System;
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : AliveObject
@@ -10,11 +9,19 @@ public class Player : AliveObject
     private float _reloadTimeRemaining = 0;
 
     private bool _isMoving;
+
+    private bool _isImmortal = false;
+
+    [SerializeField] private float _immortalTime=2f;
+
+
     public bool IsMoving
     {
         get { return _isMoving; }
         set { _isMoving = value; }
     }
+
+
 
 
     protected override void OnEnable()
@@ -87,9 +94,11 @@ public class Player : AliveObject
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.GetComponent<Enemy>() is Enemy)
+        Enemy potentialEnemy = collision.gameObject.GetComponent<Enemy>();
+        if (potentialEnemy is Enemy && _isImmortal==false)
         {
-            Debug.Log("Collision with an instance of Enemy class");
+            StartCoroutine(MakeImmortal());
+            ApplyDamage(potentialEnemy.Weapon.Damage);
         }
     }
 
@@ -108,11 +117,19 @@ public class Player : AliveObject
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        
         Bullet potentialBullet = collision.GetComponent<Bullet>();
-        if (potentialBullet is Bullet)
+        if (potentialBullet is Bullet && _isImmortal==false)
         {
             ApplyDamage(potentialBullet.Damage);
-            Debug.Log("auch");
+            StartCoroutine(MakeImmortal());
         }
+    }
+
+    private IEnumerator MakeImmortal()
+    {
+        _isImmortal = true;
+        yield return new WaitForSeconds(_immortalTime);
+        _isImmortal = false;
     }
 }

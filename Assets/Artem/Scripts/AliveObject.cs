@@ -9,6 +9,7 @@ public abstract class AliveObject : MonoBehaviour
     [SerializeField] private float _maxhp;
     [SerializeField] private float _moveSpeed;
 
+
     private float _hp;
     
 
@@ -47,6 +48,7 @@ public abstract class AliveObject : MonoBehaviour
             throw new ArgumentOutOfRangeException(nameof(damage));
         }
         HP-=damage;
+
     }
 
     public void Heal(float healPower)

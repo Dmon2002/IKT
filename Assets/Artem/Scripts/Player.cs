@@ -16,11 +16,18 @@ public class Player : AliveObject
 
     private float _defaultWeaponDamage;
 
+    private Animator anim= null;
 
     public bool IsMoving
     {
         get { return _isMoving; }
-        set { _isMoving = value; }
+        set { _isMoving = value; 
+               if(anim == null)
+               {
+               anim = GetComponent<Animator>();
+               }
+            anim.SetBool("IsRunning", value);
+        }
     }
 
     protected override void OnEnable()

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.TerrainUtils;
 using UnityEngine.Tilemaps;
 
 public class LevelHolder : MonoBehaviour
@@ -11,7 +12,7 @@ public class LevelHolder : MonoBehaviour
 
     private Dictionary<Vector2Int, Room> _rooms = new();
 
-    public Room getRoom(Vector2Int coord) => _rooms[coord];
+    public Room GetRoom(Vector2Int coord) => _rooms.ContainsKey(coord) ? _rooms[coord] : null;
 
 
     public UnityEvent<Room> OnPlayerEnterRoom;

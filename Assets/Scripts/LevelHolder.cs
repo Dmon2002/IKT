@@ -14,7 +14,6 @@ public class LevelHolder : MonoBehaviour
 
     public Room GetRoom(Vector2Int coord) => _rooms.ContainsKey(coord) ? _rooms[coord] : null;
 
-
     public UnityEvent<Room> OnPlayerEnterRoom;
 
     public IEnumerable<Room> Rooms => _rooms.Values;

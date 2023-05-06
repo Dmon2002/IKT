@@ -113,10 +113,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerEnter:
     m_PersistentCalls:
+      m_Calls: []
+  FogRevealEnd:
+    m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 8533644980568122836}
         m_TargetAssemblyTypeName: Room, Assembly-CSharp
-        m_MethodName: RevealFog
+        m_MethodName: Test
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -126,22 +129,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 5757110300479305625}
-        m_TargetAssemblyTypeName: RoomSpawner, Assembly-CSharp
-        m_MethodName: Spawn
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  FogRevealEnd:
-    m_PersistentCalls:
-      m_Calls: []
-  _fogRevealAnimation: {fileID: 4580213565744681811}
+  _fogRevealAnimation: {fileID: 0}
   _fogTile: {fileID: 6311724035886259282}
 --- !u!50 &7544230231004639923
 Rigidbody2D:
@@ -216,7 +204,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: be4b8eae9c3e3244aa7351b762dd6089, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -237,12 +225,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -535346110, guid: 6bb711a16f6007c428d149bc6d581859, type: 3}
+  m_Sprite: {fileID: -916949915, guid: 336b0e5f0493f5c46b9ba18111db03a7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.0033333, y: 1.0066912}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -304,7 +292,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5495441311687515911}
   - component: {fileID: 996097081514252321}
-  - component: {fileID: 4580213565744681811}
   - component: {fileID: 4320712607210582247}
   m_Layer: 0
   m_Name: Fog
@@ -321,8 +308,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6311724035886259282}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.33, y: 1.33, z: 1.33}
+  m_LocalPosition: {x: -0.026, y: 0.009, z: 0}
+  m_LocalScale: {x: 1.4, y: 1.4, z: 1.4}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 3034382765300094476}
@@ -348,7 +335,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: be4b8eae9c3e3244aa7351b762dd6089, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -369,7 +356,7 @@ SpriteRenderer:
   m_SortingLayerID: -1252117761
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300110, guid: da9d6752771285a40a1b383e61336090, type: 3}
+  m_Sprite: {fileID: 1497393865, guid: eee24c8c19eb8624e8d6fe5b1b5e53b9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -380,22 +367,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!111 &4580213565744681811
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6311724035886259282}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: be4dccfc28259c64a8a60d61346a59ba, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: be4dccfc28259c64a8a60d61346a59ba, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 0
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!114 &4320712607210582247
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -409,3 +380,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   room: {fileID: 8533644980568122836}
+  speed: 1
+  IsDie: 0

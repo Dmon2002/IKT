@@ -21,7 +21,7 @@ public class Room : MonoBehaviour
 
     private bool _fogRevealed;
 
-    public bool FogRevealed => _fogRevealed;
+    //public bool FogRevealed => _fogRevealed;
 
     public Vector2Int Coords => _coords;
 
@@ -40,17 +40,23 @@ public class Room : MonoBehaviour
         if (collision.TryGetComponent<Player>(out var player))
         {
             PlayerEnter.Invoke();
+            _fogTile.GetComponent<FogAnimationEvent>().FogAnimationStart(collision.transform);
         }
     }
-
+    
     public void RevealFog()
-    {
+    {/*
         if (_fogRevealed)
+        {
             return;
-        _fogTile.GetComponent<Animation>()?.Play();
-        _fogRevealed = true;
-    }
+        }
+        */
 
+       // _fogTile.GetComponent<Animation>()?.Play();
+       // _fogRevealed = true;
+       // _fogTile.GetComponent<FogAnimationEvent>().FogAnimationStart(collision.transform);
+    }
+    
     public void OnFogAnimationEnd()
     {
         FogRevealEnd.Invoke();

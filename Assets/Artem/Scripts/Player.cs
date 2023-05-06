@@ -23,23 +23,16 @@ public class Player : AliveObject
         set { _isMoving = value; }
     }
 
-
-
-
     protected override void OnEnable()
     {
         base.OnEnable();
-
-
         if (Weapon != null)
         {
             Weapon.owner = WeaponOwner.Player;
             _defaultWeaponDamage= Weapon.Damage;
         }
 
-        
     }
-
 
     private void Update()
     {
@@ -83,7 +76,7 @@ public class Player : AliveObject
 
         RotateWeapon();
 
-        if (IsMoving) return; // ��� ����� ��������
+        if (IsMoving) return;
 
         if (_reloadTimeRemaining > 0) return;
         
@@ -112,8 +105,6 @@ public class Player : AliveObject
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         Weapon.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
     }
-
-   
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

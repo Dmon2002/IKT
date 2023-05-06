@@ -81,19 +81,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerEnter:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8533644980568122836}
-        m_TargetAssemblyTypeName: Room, Assembly-CSharp
-        m_MethodName: RevealFog
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   FogRevealEnd:
     m_PersistentCalls:
       m_Calls: []
@@ -133,6 +121,7 @@ GameObject:
   - component: {fileID: 2450367197078284258}
   - component: {fileID: 841114077856188602}
   - component: {fileID: 1883112781393132528}
+  - component: {fileID: 879248754553602463}
   m_Layer: 0
   m_Name: Floor
   m_TagString: Untagged
@@ -175,7 +164,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: be4b8eae9c3e3244aa7351b762dd6089, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -196,12 +185,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -535346110, guid: 6bb711a16f6007c428d149bc6d581859, type: 3}
+  m_Sprite: {fileID: -916949915, guid: 336b0e5f0493f5c46b9ba18111db03a7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 3.01, y: 3.020074}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -224,8 +213,8 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.0034068, y: 1}
-    newSize: {x: 1, y: 1}
+    oldSize: {x: 1.0033333, y: 1.0066912}
+    newSize: {x: 3.01, y: 3.020074}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -268,6 +257,22 @@ Animation:
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
   m_CullingType: 0
+--- !u!114 &879248754553602463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3509070504581977995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee158225ee1e59f4791627785501d950, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shaderTypes: 3
+  normalStrength: 5
+  normalSmoothing: 1
+  computingNormal: 0
 --- !u!1 &6311724035886259282
 GameObject:
   m_ObjectHideFlags: 0
@@ -295,8 +300,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6311724035886259282}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.33, y: 1.33, z: 1.33}
+  m_LocalPosition: {x: -0.03, y: 0.02, z: 0}
+  m_LocalScale: {x: 1.4, y: 1.4, z: 1.4}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 3034382765300094476}
@@ -322,7 +327,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: be4b8eae9c3e3244aa7351b762dd6089, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -343,7 +348,7 @@ SpriteRenderer:
   m_SortingLayerID: -1252117761
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300110, guid: da9d6752771285a40a1b383e61336090, type: 3}
+  m_Sprite: {fileID: 1497393865, guid: eee24c8c19eb8624e8d6fe5b1b5e53b9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -383,3 +388,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   room: {fileID: 8533644980568122836}
+  speed: 1
+  IsDie: 0

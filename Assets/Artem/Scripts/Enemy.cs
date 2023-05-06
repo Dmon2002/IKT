@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,14 @@ using UnityEngine;
 public abstract class Enemy : AliveObject
 {
     // Start is called before the first frame update
+    public event Action<Enemy> enemyDied;
+
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+        died += OnDied;
+    }
+
     void Start()
     {
         
@@ -15,4 +24,11 @@ public abstract class Enemy : AliveObject
     {
         
     }
+    private void OnDied()
+    {
+        enemyDied?.Invoke(this);
+        Destroy(gameObject);
+    }
+    
+
 }

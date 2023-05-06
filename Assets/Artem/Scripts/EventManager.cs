@@ -10,7 +10,7 @@ public class EventManager : MonoBehaviour
         {
             if (instance == null)
             {
-                instance = new EventManager();
+                instance = FindObjectOfType<EventManager>();
             }
             return instance;
         }

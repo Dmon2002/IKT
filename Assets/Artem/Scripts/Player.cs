@@ -7,43 +7,63 @@ public class Player : AliveObject
 {
     private Enemy _targetEnemy;
 
+    private float _reloadTimeRemaining = 0;
+
     private bool _isMoving;
-    public bool IsMoveing
+    public bool IsMoving
     {
         get { return _isMoving; }
         set { _isMoving = value; }
     }
 
+
+    
     private void Update()
     {
-        _targetEnemy = GetNearestEnemy();
-        if(_targetEnemy!=null)
+
+        if (_reloadTimeRemaining> 0)
         {
-            AttackEnemy(_targetEnemy);
+            _reloadTimeRemaining -= Time.deltaTime;
         }
+        _targetEnemy = GetNearestEnemy();
+        Debug.Log(_targetEnemy);
+        AttackEnemy();
+
     }
 
 
     private Enemy GetNearestEnemy()
     {
         Enemy nearestEnemy = null;
-        float distance = Mathf.Infinity;
+        float currentTargetDistance = Mathf.Infinity;
+        if (_targetEnemy != null)
+        {
+            currentTargetDistance = Vector3.Distance(transform.position, _targetEnemy.transform.position);
+        }
+       
         foreach (var enemy in EnemyManager.Instance.ActiveEnemies)
         {
-            float currentDistance = Vector3.Distance(transform.position, enemy.transform.position);
+            float potentialDistance = Vector3.Distance(transform.position, enemy.transform.position);
 
-            if (currentDistance < Weapon.Distance)
+            if (potentialDistance < Weapon.Distance && potentialDistance<currentTargetDistance)
             {
-                distance = currentDistance;
+                currentTargetDistance = potentialDistance;
                 nearestEnemy = enemy;
             }
         }
         return nearestEnemy;
     }
 
-    private void AttackEnemy(Enemy enemy)
+    private void AttackEnemy()
     {
-        enemy.ApplyDamage(Weapon.Damage);
+        if (IsMoving) return;
+        if (_targetEnemy == null) return;
+        if (Weapon == null) return;
+        if (_reloadTimeRemaining > 0) return;
+
+        _targetEnemy.ApplyDamage(Weapon.Damage);
+        _reloadTimeRemaining = Weapon.ReloadTime;
+
     }
 
 
@@ -55,4 +75,9 @@ public class Player : AliveObject
         }
     }
 
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, Weapon.Distance);
+    }
 }

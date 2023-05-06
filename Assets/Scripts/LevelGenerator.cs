@@ -4,15 +4,7 @@ using UnityEngine;
 
 public class LevelGenerator : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private Room _roomPrefabs;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 }

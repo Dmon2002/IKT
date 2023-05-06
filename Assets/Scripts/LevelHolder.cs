@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.TerrainUtils;
 using UnityEngine.Tilemaps;
 
 public class LevelHolder : MonoBehaviour
@@ -9,6 +8,8 @@ public class LevelHolder : MonoBehaviour
     [SerializeField] private GameObject _roomPrefab;
     [SerializeField] private Tilemap _floorTilemap;
     [SerializeField] private Transform _roomContainer;
+
+    [SerializeField] private EnemyManager _enemyManager;
 
     private Dictionary<Vector2Int, Room> _rooms = new();
 

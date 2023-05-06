@@ -1,7 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 public abstract class Enemy : AliveObject
 {
@@ -14,20 +11,15 @@ public abstract class Enemy : AliveObject
         died += OnDied;
     }
 
-    void Start()
+    private void OnDisable()
     {
-        
+        died -= OnDied;
+        enemyDied?.Invoke(this);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     private void OnDied()
     {
-        enemyDied?.Invoke(this);
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
     
 

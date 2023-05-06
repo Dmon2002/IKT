@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -24,6 +25,8 @@ public class LevelManager : MonoBehaviour
             return _instance;
         }
     }
+
+    public Room GetRoom(Vector2Int roomPos) => levelHolder.GetRoom(roomPos);
 
     private void Awake()
     {
@@ -86,6 +89,24 @@ public class LevelManager : MonoBehaviour
             getNeighbour(roomPos, NeighbourSide.RightUp),
             getNeighbour(roomPos, NeighbourSide.RightDown)
         };
+    }
+
+    private float GetRoomDistance(Room room, Vector3 position) => Vector2.Distance(room.transform.position, position);
+
+    public Room GetNearestRoom(Vector3 position)
+    {
+        Room minRoom = null;
+        float minValue = float.PositiveInfinity;
+        foreach (var room in levelHolder.Rooms)
+        {
+            float dist = GetRoomDistance(room, position);
+            if (dist < minValue)
+            {
+                minRoom = room;
+                minValue = dist;
+            }
+        }
+        return minRoom;
     }
 }
 

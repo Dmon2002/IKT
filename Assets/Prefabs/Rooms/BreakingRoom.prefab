@@ -84,9 +84,22 @@ MonoBehaviour:
       m_Calls: []
   FogRevealEnd:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 841114077856188602}
+        m_TargetAssemblyTypeName: BreakingFloor, Assembly-CSharp
+        m_MethodName: Reveal
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _fogRevealAnimation: {fileID: 4580213565744681811}
   _fogTile: {fileID: 6311724035886259282}
+  _fogRevealed: 0
 --- !u!50 &7544230231004639923
 Rigidbody2D:
   serializedVersion: 4
@@ -182,8 +195,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -341839439
-  m_SortingLayer: 2
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -916949915, guid: 336b0e5f0493f5c46b9ba18111db03a7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -346,7 +359,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -911262885
-  m_SortingLayer: 7
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 1497393865, guid: eee24c8c19eb8624e8d6fe5b1b5e53b9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

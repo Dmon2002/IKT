@@ -427,7 +427,6 @@ GameObject:
   m_Component:
   - component: {fileID: 551697900}
   - component: {fileID: 551697899}
-  - component: {fileID: 551697898}
   m_Layer: 0
   m_Name: EnemyMagic (1)
   m_TagString: Untagged
@@ -435,18 +434,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &551697898
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 551697897}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39f50c7adbf4ef140b160440a88c9899, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!212 &551697899
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1099,22 +1086,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1812989217890134700, guid: 1ddaa492a030fe24e9ef32660227088c, type: 3}
-      propertyPath: levelWidth
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1812989217890134700, guid: 1ddaa492a030fe24e9ef32660227088c, type: 3}
-      propertyPath: levelHeight
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 1812989217890134700, guid: 1ddaa492a030fe24e9ef32660227088c, type: 3}
-      propertyPath: leftDownStartingTile.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1812989217890134700, guid: 1ddaa492a030fe24e9ef32660227088c, type: 3}
-      propertyPath: leftDownStartingTile.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1812989217890134702, guid: 1ddaa492a030fe24e9ef32660227088c, type: 3}
       propertyPath: m_Name
       value: LevelManager
@@ -1172,42 +1143,28 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3034382765300094478, guid: 6010d2c12813c0342a0e2e9c12378d73, type: 3}
     - target: {fileID: 1812989219711457405, guid: 1ddaa492a030fe24e9ef32660227088c, type: 3}
+      propertyPath: _startingTiles
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1812989219711457405, guid: 1ddaa492a030fe24e9ef32660227088c, type: 3}
       propertyPath: _borderContainer
       value: 
       objectReference: {fileID: 1159560265}
+    - target: {fileID: 1812989219711457405, guid: 1ddaa492a030fe24e9ef32660227088c, type: 3}
+      propertyPath: _tileCleanPrefab
+      value: 
+      objectReference: {fileID: 3034382765300094478, guid: b9af4991455d95a4abc7d24327f57e9e, type: 3}
+    - target: {fileID: 1812989219711457405, guid: 1ddaa492a030fe24e9ef32660227088c, type: 3}
+      propertyPath: _tileBorderPrefab
+      value: 
+      objectReference: {fileID: 3034382765300094478, guid: 6010d2c12813c0342a0e2e9c12378d73, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ddaa492a030fe24e9ef32660227088c, type: 3}
---- !u!1 &1159560264
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1159560265}
-  m_Layer: 0
-  m_Name: BorderContainer
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1159560265
+--- !u!4 &1159560265 stripped
 Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 4130948314998180216, guid: 1ddaa492a030fe24e9ef32660227088c, type: 3}
+  m_PrefabInstance: {fileID: 1016189640}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1159560264}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1307467002}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1175765900
 GameObject:
   m_ObjectHideFlags: 0
@@ -1253,11 +1210,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &1307467002 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1812989219711457404, guid: 1ddaa492a030fe24e9ef32660227088c, type: 3}
-  m_PrefabInstance: {fileID: 1016189640}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1511323330
 GameObject:
   m_ObjectHideFlags: 0
@@ -1269,11 +1221,11 @@ GameObject:
   - component: {fileID: 1511323338}
   - component: {fileID: 1511323331}
   - component: {fileID: 1511323337}
-  - component: {fileID: 1511323336}
   - component: {fileID: 1511323335}
   - component: {fileID: 1511323334}
   - component: {fileID: 1511323333}
   - component: {fileID: 1511323332}
+  - component: {fileID: 1511323339}
   m_Layer: 4
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1308,7 +1260,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 3
+  orthographic size: 9.65
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1460,18 +1412,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 20, y: 5}
   m_EdgeRadius: 0
---- !u!114 &1511323336
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1511323330}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b17eaf954db36d4c9b2e10d3b68abc2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!81 &1511323337
 AudioListener:
   m_ObjectHideFlags: 0
@@ -1495,6 +1435,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1511323339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1511323330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf08a72852ac4a749ab2e8762ec8413a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerTransform: {fileID: 2068687226}
+  moveSpeed: 3
+  StartPos: {x: 0.7, y: 1}
+  EndPos: 500
 --- !u!224 &1520509945 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8135886326569738822, guid: 56fae09712773584fb63896d473a98ee, type: 3}

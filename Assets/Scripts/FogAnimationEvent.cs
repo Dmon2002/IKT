@@ -7,6 +7,7 @@ public class FogAnimationEvent : MonoBehaviour
     [SerializeField] private Room room;
 
     private SpriteRenderer spriteRenderer;
+    [SerializeField] private float speed=2;
 
     public bool IsDie = false;
 
@@ -14,6 +15,7 @@ public class FogAnimationEvent : MonoBehaviour
     {
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
     }
+
     public void OnAnimationEnd()
     {
         room.OnFogAnimationEnd();
@@ -41,15 +43,15 @@ public class FogAnimationEvent : MonoBehaviour
             StartCoroutine(Move(playerTr));
         }
     }
-        private IEnumerator Move(Transform playerTr)
+    private IEnumerator Move(Transform playerTr)
     {
-        while (spriteRenderer.color.a>0)
+        while (spriteRenderer.color.a > 0)
         {
             yield return new WaitForFixedUpdate();
-            spriteRenderer.color = new Color(1,1,1, spriteRenderer.color.a -  Time.deltaTime*2);
-            transform.localScale -=Vector3.one*Time.deltaTime;
-            transform.position += (transform.position - playerTr.position).normalized*Time.deltaTime*2;
+            spriteRenderer.color = new Color(1,1,1, spriteRenderer.color.a-1/speed * Time.deltaTime);
+            transform.localScale -=Vector3.one*Time.deltaTime/speed/5;
+            transform.position += (transform.position - playerTr.position).normalized*speed*Time.deltaTime;
         }
-       // print("Марат мне не верит");
+        room.OnFogAnimationEnd();
     }
 }

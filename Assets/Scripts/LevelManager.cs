@@ -11,32 +11,19 @@ public class LevelManager : Manager<LevelManager>
 
     private Tilemap _levelTilemap;
     private LevelHolder _levelHolder;
-    private LevelGenerator _levelGenerator;
 
     public Room GetRoom(Vector2Int roomPos) => _levelHolder.GetRoom(roomPos);
 
     private void Awake()
     {
-        _levelGenerator = GetComponentInChildren<LevelGenerator>();
         _levelHolder = GetComponentInChildren<LevelHolder>();
         _levelTilemap = GetComponentInChildren<Tilemap>();
     }
 
     private void Start()
     {
-        var rooms = _levelGenerator.Generate(leftDownStartingTile, levelWidth, levelHeight);
-        _levelHolder.SetUpRooms(leftDownStartingTile, levelWidth, levelHeight, rooms);
+        _levelHolder.SetUpRooms(leftDownStartingTile, levelWidth, levelHeight);
         _levelHolder.SetUpBorders(leftDownStartingTile, levelWidth, levelHeight);
-    }
-
-    public void RevealFog(Vector2Int roomCoords)
-    {
-        _levelHolder.GetRoom(roomCoords).RevealFog();
-    }
-
-    public void RevealFog(Room room)
-    {
-        RevealFog(room.Coords);
     }
 
     public Room getNeighbour(Vector2Int roomPos, NeighbourSide side)

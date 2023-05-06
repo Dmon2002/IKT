@@ -15,6 +15,7 @@ public class FogAnimationEvent : MonoBehaviour
     {
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
     }
+
     public void OnAnimationEnd()
     {
         room.OnFogAnimationEnd();
@@ -42,14 +43,15 @@ public class FogAnimationEvent : MonoBehaviour
             StartCoroutine(Move(playerTr));
         }
     }
-        private IEnumerator Move(Transform playerTr)
+    private IEnumerator Move(Transform playerTr)
     {
-        while (spriteRenderer.color.a!=0)
+        while (spriteRenderer.color.a > 0)
         {
             yield return new WaitForFixedUpdate();
             spriteRenderer.color = new Color(1,1,1, spriteRenderer.color.a-1/speed * Time.deltaTime);
             transform.localScale -=Vector3.one*Time.deltaTime/speed/5;
             transform.position += (transform.position - playerTr.position).normalized*speed*Time.deltaTime;
         }
+        room.OnFogAnimationEnd();
     }
 }

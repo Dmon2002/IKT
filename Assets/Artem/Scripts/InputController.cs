@@ -21,11 +21,17 @@ public class InputController : MonoBehaviour
 
     void FixedUpdate()
     {
-        // Get the horizontal and vertical inputs (e.g. WASD, arrow keys)
+        Move();
+    }
+
+    public void Move()
+    {
+        if (!_player.CanMove)
+            return;
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
 
-        if (joystick.Horizontal != 0 && moveHorizontal==0)
+        if (joystick.Horizontal != 0 && moveHorizontal == 0)
         {
             moveHorizontal = joystick.Horizontal;
         }
@@ -33,10 +39,8 @@ public class InputController : MonoBehaviour
         {
             moveVertical = joystick.Vertical;
         }
-        // Create a movement vector based on the input and movement speed
         Vector2 movement = new Vector2(moveHorizontal, moveVertical) * _player.MoveSpeed;
 
-        // Apply the movement to the Rigidbody component
         rb.velocity = movement;
 
         if (Mathf.Abs(moveHorizontal) > moveThreshold || Mathf.Abs(moveVertical) > moveThreshold)

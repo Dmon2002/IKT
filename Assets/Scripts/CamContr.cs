@@ -10,13 +10,9 @@ public class CamContr : MonoBehaviour {
 
 	void Start () {
 		transform.position = StartPos;
-
 	}
 
 	void Update () {
-
-
-
 		Vector3 target = new Vector3()
 		{
 			x = StartPos.x,

@@ -7,14 +7,25 @@ public class Bullet : MonoBehaviour
     // Start is called before the first frame update
     private float _damage;
     private float _speed;
+
+    [SerializeField] private float _lifeTime = 8f;
     public float Damage => _damage;
     public float Speed => _speed;
+
+
 
 
     public void Initialize(float damage, float speed)
     {
         _damage = damage;
         _speed = speed;
+    }
+
+    private void Update()
+    {
+        _lifeTime -= Time.deltaTime;
+        if (_lifeTime<=0)
+            Destroy(gameObject);
     }
 
     public void Fire(Vector3 direction)

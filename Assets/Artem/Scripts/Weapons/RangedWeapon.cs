@@ -25,6 +25,7 @@ public class RangedWeapon : Weapon
     // Update is called once per frame
     void Update()
     {
+        if (_reloadTimeRemaining > 0)
         _reloadTimeRemaining-=Time.deltaTime;
         
     }

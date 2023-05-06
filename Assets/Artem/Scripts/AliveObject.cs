@@ -10,6 +10,7 @@ public abstract class AliveObject : MonoBehaviour
     [SerializeField] private float _moveSpeed;
     [SerializeField] private bool _isFlying;
 
+
     private float _hp;
     
     private HashSet<Vector2Int> _roomsIn = new ();
@@ -45,6 +46,7 @@ public abstract class AliveObject : MonoBehaviour
             throw new ArgumentOutOfRangeException(nameof(damage));
         }
         HP-=damage;
+        Debug.Log(HP);
     }
 
     public void Heal(float healPower)

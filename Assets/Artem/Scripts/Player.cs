@@ -171,6 +171,7 @@ public class Player : AliveObject
     
     public void OnDied()
     {
+
         SceneManager.LoadScene(0);
     }
 }

@@ -53,7 +53,11 @@ public class Room : MonoBehaviour
 
     public void OnFogAnimationEnd()
     {
-        FogRevealEnd.Invoke();
+        if (GameManager.Instance.scoreManager != null)
+        {
+            FogRevealEnd.Invoke();
+            GameManager.Instance.scoreManager.PlusScore();
+        }
     }
 
     public void AddAliveToRoom(AliveObject obj)

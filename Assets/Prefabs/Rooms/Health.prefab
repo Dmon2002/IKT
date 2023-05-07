@@ -111,7 +111,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46a7daff69ca7a64dae53407032ded2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerEnter:
+  FogRevealStart:
+    m_PersistentCalls:
+      m_Calls: []
+  FogRevealEnd:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 5214121031724638531}
@@ -126,12 +129,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  FogRevealEnd:
-    m_PersistentCalls:
-      m_Calls: []
-  _fogRevealAnimation: {fileID: 0}
   _fogTile: {fileID: 2248955704753432598}
   _fogRevealed: 0
+  _fogDelay: 0
 --- !u!50 &4575795961926685568
 Rigidbody2D:
   serializedVersion: 4
@@ -382,6 +382,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4f6ae9eca8e7e146aa8673072e83460, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  room: {fileID: 0}
   spawnables:
   - point: {fileID: 2102103151387597938}
     prefab: {fileID: 144414254013418969, guid: 73f4a6e99df2c8a468786ecde0b02c03, type: 3}

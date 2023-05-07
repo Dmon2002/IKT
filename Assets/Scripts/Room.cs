@@ -12,7 +12,7 @@ public class Room : MonoBehaviour
 
     private RoomSpawner _spawner;
 
-    [SerializeField] private Animation _fogRevealAnimation;
+    //[SerializeField] private Animation _fogRevealAnimation;
     [SerializeField] private GameObject _fogTile;
     [SerializeField] private bool _fogRevealed;
     [SerializeField] private float _fogDelay;

@@ -129,7 +129,6 @@ MonoBehaviour:
   FogRevealEnd:
     m_PersistentCalls:
       m_Calls: []
-  _fogRevealAnimation: {fileID: 4580213565744681811}
   _fogTile: {fileID: 6311724035886259282}
   _fogRevealed: 0
   _fogDelay: 0
@@ -206,7 +205,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: be4b8eae9c3e3244aa7351b762dd6089, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -341,7 +340,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: be4b8eae9c3e3244aa7351b762dd6089, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

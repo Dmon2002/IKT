@@ -31,11 +31,13 @@ public class Enemy : AliveObject
         {
             Weapon.owner = WeaponOwner.Enemy;
         }
+        GameObject.FindObjectOfType<EnemyManager>().ActiveEnemies.Add(this);
     }
 
     private void OnDisable()
     {
         died -= OnDied;
+        
         EnemyDied?.Invoke(this);
     }
 

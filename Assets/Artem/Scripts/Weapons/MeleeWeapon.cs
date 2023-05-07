@@ -7,6 +7,7 @@ public class MeleeWeapon : Weapon
     [SerializeField] private float colliderTime = 0.1f;
     private Collider2D _collider;
 
+    [SerializeField] Animator anim;
     private void Start()
     {
         _collider = GetComponent<Collider2D>();
@@ -15,6 +16,10 @@ public class MeleeWeapon : Weapon
 
     public override void Hit()
     {
+        if (anim != null)
+        {
+            anim.SetTrigger("Attack");
+        }
         _collider.enabled = true;
         transform.position = transform.position + new Vector3(0, 0.001f, 0);
         StartCoroutine(DisableCollider(colliderTime));

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 74808e248d62c6b44b766dd568f1e1e6
+guid: b6d8bfb09ce074841a33e088270dd280
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 900
+  spritePixelsToUnits: 700
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -81,12 +81,12 @@ TextureImporter:
     buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: 12
+    textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
-    overridden: 1
+    overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -105,25 +105,109 @@ TextureImporter:
     buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: -1
+    textureFormat: 12
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
-    overridden: 0
+    overridden: 1
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: IMG_7598_0
+      name: IMG_7609_0
       rect:
         serializedVersion: 2
-        x: 808
-        y: 423
-        width: 523
-        height: 679
+        x: 33
+        y: 318
+        width: 652
+        height: 1070
+      alignment: 9
+      pivot: {x: 0.61673737, y: 0.5161057}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 62b3c7bf2ebff4349aa5e6810bb29a3f
+      internalID: -1405273215
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IMG_7609_5
+      rect:
+        serializedVersion: 2
+        x: 710
+        y: 320
+        width: 645
+        height: 1062
+      alignment: 9
+      pivot: {x: 0.5823804, y: 0.49729556}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c93766ebef5dc74e91e71aef098ca6a
+      internalID: 1651267523
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IMG_7609_6
+      rect:
+        serializedVersion: 2
+        x: 1374
+        y: 343
+        width: 622
+        height: 1041
+      alignment: 9
+      pivot: {x: 0.6015884, y: 0.51931345}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d136bddd4de0d024289abe678250a586
+      internalID: 784497255
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IMG_7609_7
+      rect:
+        serializedVersion: 2
+        x: 2002
+        y: 320
+        width: 660
+        height: 1062
+      alignment: 9
+      pivot: {x: 0.57180434, y: 0.50811356}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 667d8853535362a4c9bdb119564c3c4b
+      internalID: -890455678
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IMG_7609_8
+      rect:
+        serializedVersion: 2
+        x: 1638
+        y: 319
+        width: 4
+        height: 4
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -131,8 +215,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9f0206b260bbb6247974ae958f87dc3d
-      internalID: 1355560552
+      spriteID: 39f43930492453248a1f7108b450271f
+      internalID: -1072418392
       vertices: []
       indices: 
       edges: []
@@ -148,7 +232,15 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      IMG_7598_0: 1355560552
+      IMG_7609_0: -1405273215
+      IMG_7609_1: -1544567203
+      IMG_7609_2: 1633636313
+      IMG_7609_3: 1795340549
+      IMG_7609_4: -313201402
+      IMG_7609_5: 1651267523
+      IMG_7609_6: 784497255
+      IMG_7609_7: -890455678
+      IMG_7609_8: -1072418392
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

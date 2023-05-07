@@ -75,12 +75,20 @@ public class Player : AliveObject
 
         foreach (var enemy in EnemyManager.Instance.ActiveEnemies)
         {
-            float potentialDistance = Vector3.Distance(transform.position, enemy.transform.position);
-
-            if (potentialDistance < Weapon.Distance && potentialDistance < currentTargetDistance)
+            if (!enemy.gameObject.activeSelf)
             {
-                currentTargetDistance = potentialDistance;
-                nearestEnemy = enemy;
+                print("Remove");
+                EnemyManager.Instance.ActiveEnemies.Remove(enemy);
+            }
+            else
+            {
+                float potentialDistance = Vector3.Distance(transform.position, enemy.transform.position);
+
+                if (potentialDistance < Weapon.Distance && potentialDistance < currentTargetDistance)
+                {
+                    currentTargetDistance = potentialDistance;
+                    nearestEnemy = enemy;
+                }
             }
         }
         return nearestEnemy;
@@ -88,6 +96,7 @@ public class Player : AliveObject
 
     private void TryAttackEnemy()
     {
+       // print(_targetEnemy);
         if (_targetEnemy == null) return;
         if (Weapon == null) return;
 

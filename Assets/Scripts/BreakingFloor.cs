@@ -1,7 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
 
 [RequireComponent (typeof(Collider2D))]
 public class BreakingFloor : MonoBehaviour

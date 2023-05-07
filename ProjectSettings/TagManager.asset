@@ -41,6 +41,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: BGFog
+    uniqueID: 1027911653
+    locked: 0
+  - name: Floor
+    uniqueID: 3953127857
+    locked: 0
   - name: Bonus
     uniqueID: 625125949
     locked: 0

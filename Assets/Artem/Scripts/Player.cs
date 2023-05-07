@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Player : AliveObject
 {
-    private bool _canMove = true;
-
     private Enemy _targetEnemy;
 
     private float _reloadTimeRemaining = 0;
@@ -18,13 +16,19 @@ public class Player : AliveObject
 
     private float _defaultWeaponDamage;
 
+    private Animator anim= null;
+
     public bool IsMoving
     {
         get { return _isMoving; }
-        set { _isMoving = value; }
+        set { _isMoving = value; 
+               if(anim == null)
+               {
+               anim = GetComponent<Animator>();
+               }
+            anim.SetBool("IsRunning", value);
+        }
     }
-
-    public bool CanMove => _canMove;
 
     protected override void OnEnable()
     {
@@ -143,11 +147,5 @@ public class Player : AliveObject
        Weapon.Damage=Weapon.Damage*multiplication;
         yield return new WaitForSeconds(duration);
         Weapon.Damage = _defaultWeaponDamage;
-    }
-
-    private void ShowDieMessage()
-    {
-        Debug.Log("You Dead");
-        _canMove = false;
     }
 }

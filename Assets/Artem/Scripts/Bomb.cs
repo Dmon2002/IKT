@@ -12,22 +12,6 @@ public class Bomb : MonoBehaviour
     private void Start()
     {
         _player = GameManager.Instance.Player.transform;
-    }
-
-    private void Update()
-    {
-        TryAgre();
-    }
-
-    private void TryAgre()
-    {
-        if (Physics2D.Raycast(transform.position, transform.position - _player.position, float.PositiveInfinity, raycaseLayers))
-            return;
-        Agre();
-    }
-
-    public void Agre()
-    {
         StartCoroutine(Explode());
     }
 
@@ -46,12 +30,9 @@ public class Bomb : MonoBehaviour
             {
                 continue;
             }
-            foreach (var alive in neighbour.InRoom)
-            {
-                alive.ApplyDamage(explodeDamage);
-            }
+            neighbour.RevealFog(neighbour.transform.position - transform.position);
         }
-        
+        gameObject.SetActive(false);
     }
 
 }

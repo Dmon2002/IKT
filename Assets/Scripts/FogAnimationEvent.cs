@@ -23,34 +23,30 @@ public class FogAnimationEvent : MonoBehaviour
 
 
     private bool CheckStart = false;
-    public void FogAnimationStart(Transform playerTr)
+    public void FogAnimationStart(Vector2 direction)
     {
         if (!CheckStart)
         {
-            StartCoroutine(StartMove(playerTr));
+            StartMove(direction);
             CheckStart = true;
         }
     }
-    private IEnumerator StartMove(Transform playerTr)
+    private void StartMove(Vector2 direction)
     {
         if (!IsDie)
         {
-            while (playerTr == null || spriteRenderer == null)
-            {
-                yield return new WaitForFixedUpdate();
-            }
             IsDie = true;
-            StartCoroutine(Move(playerTr));
+            StartCoroutine(Move(direction));
         }
     }
-    private IEnumerator Move(Transform playerTr)
+    private IEnumerator Move(Vector2 direction)
     {
         while (spriteRenderer.color.a > 0)
         {
             yield return new WaitForFixedUpdate();
-            spriteRenderer.color = new Color(1,1,1, spriteRenderer.color.a-1/speed * Time.deltaTime);
-            transform.localScale -=Vector3.one*Time.deltaTime/speed/5;
-            transform.position += (transform.position - playerTr.position).normalized*speed*Time.deltaTime;
+            spriteRenderer.color = new Color(1, 1, 1, spriteRenderer.color.a - 1 / speed * Time.deltaTime);
+            transform.localScale -= Vector3.one*Time.deltaTime / (speed * 5);
+            transform.position += (Vector3)direction.normalized * speed * Time.deltaTime;
         }
         room.OnFogAnimationEnd();
     }

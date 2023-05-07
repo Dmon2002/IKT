@@ -32,13 +32,13 @@ public class LevelManager : Manager<LevelManager>
         switch (side)
         {
             case NeighbourSide.LeftUp:
-                offset = new Vector2Int(-1, 1);
-                break;
-            case NeighbourSide.RightUp:
                 offset = new Vector2Int(0, 1);
                 break;
+            case NeighbourSide.RightUp:
+                offset = new Vector2Int(1, 1);
+                break;
             case NeighbourSide.LeftDown:
-                offset = new Vector2Int(-1, -1);
+                offset = new Vector2Int(0, -1);
                 break;
             case NeighbourSide.RightDown:
                 offset = new Vector2Int(0, -1);
@@ -58,14 +58,26 @@ public class LevelManager : Manager<LevelManager>
 
     public List<Room> getAllNeighbours(Vector2Int roomPos)
     {
-        return new List<Room>() {
-            getNeighbour(roomPos, NeighbourSide.Left),
-            getNeighbour(roomPos, NeighbourSide.Right),
-            getNeighbour(roomPos, NeighbourSide.LeftUp),
-            getNeighbour(roomPos, NeighbourSide.LeftDown),
-            getNeighbour(roomPos, NeighbourSide.RightUp),
-            getNeighbour(roomPos, NeighbourSide.RightDown)
-        };
+        var neighbours = new List<Room>();
+        Room room = getNeighbour(roomPos, NeighbourSide.Left);
+        if (room != null)
+            neighbours.Add(room);
+        room = getNeighbour(roomPos, NeighbourSide.Right);
+        if (room != null)
+            neighbours.Add(room);
+        room = getNeighbour(roomPos, NeighbourSide.LeftUp);
+        if (room != null)
+            neighbours.Add(room);
+        room = getNeighbour(roomPos, NeighbourSide.LeftDown);
+        if (room != null)
+            neighbours.Add(room);
+        room = getNeighbour(roomPos, NeighbourSide.RightUp);
+        if (room != null)
+            neighbours.Add(room);
+        room = getNeighbour(roomPos, NeighbourSide.RightDown);
+        if (room != null)
+            neighbours.Add(room);
+        return neighbours;
     }
 
     private float GetRoomDistance(Room room, Vector3 position) => Vector2.Distance(room.transform.position, position);
@@ -86,7 +98,31 @@ public class LevelManager : Manager<LevelManager>
         return minRoom;
     }
 
+    public Room GetNearestHideRoom(Vector3 position)
+    {
+        Room minRoom = null;
+        float minValue = float.PositiveInfinity;
+        foreach (var room in _levelHolder.Rooms)
+        {
+            if (room.FogRevealed)
+                continue;
+            float dist = GetRoomDistance(room, position);
+            if (dist < minValue)
+            {
+                minRoom = room;
+                minValue = dist;
+            }
+        }
+        return minRoom;
+    }
+
     public Vector3 ConvertToPosition(Vector2Int intPos) => _levelTilemap.GetCellCenterWorld((Vector3Int)intPos);
+
+    public void RevealFog(Vector2Int roomPos, Vector3 direction)
+    {
+        var room = _levelHolder.GetRoom(roomPos);
+        room.RevealFog(direction);
+    }
 }
 
 public enum NeighbourSide

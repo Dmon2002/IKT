@@ -37,7 +37,7 @@ public class Player : AliveObject
     protected override void OnEnable()
     {
         base.OnEnable();
-        died += ShowDieMessage;
+        //died += ShowDieMessage;
         if (Weapon != null)
         {
             Weapon.owner = WeaponOwner.Player;
@@ -48,7 +48,7 @@ public class Player : AliveObject
 
     private void OnDisable()
     {
-        died -= ShowDieMessage;
+        //died -= ShowDieMessage;
     }
 
     private void Update()
@@ -111,6 +111,8 @@ public class Player : AliveObject
         Enemy potentialEnemy = collision.gameObject.GetComponent<Enemy>();
         if (potentialEnemy is Enemy && _isImmortal==false)
         {
+            if (potentialEnemy.Weapon == null)
+                return;
             StartCoroutine(MakeImmortal());
             ApplyDamage(potentialEnemy.Weapon.Damage);
         }

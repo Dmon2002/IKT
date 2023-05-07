@@ -1,12 +1,12 @@
+using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Build;
 using UnityEngine;
 using UnityEngine.Events;
 
 [RequireComponent(typeof(Collider2D))]
 public class Room : MonoBehaviour
 {
-    public UnityEvent PlayerEnter;
+    public UnityEvent FogRevealStart;
     public UnityEvent FogRevealEnd;
     private Vector2Int _coords;
 
@@ -15,12 +15,15 @@ public class Room : MonoBehaviour
     [SerializeField] private Animation _fogRevealAnimation;
     [SerializeField] private GameObject _fogTile;
     [SerializeField] private bool _fogRevealed;
+    [SerializeField] private float _fogDelay;
 
     private List<AliveObject> _inRoom = new();
 
     public IEnumerable<AliveObject> InRoom => _inRoom;
 
     public Vector2Int Coords => _coords;
+
+    public bool FogRevealed => _fogRevealed;
 
     public void OnFogRevealEnd()
     {
@@ -37,11 +40,14 @@ public class Room : MonoBehaviour
         _coords = coords;
     }
     
-    public void RevealFog(Transform target)
+    public void RevealFog(Vector2 direction)
     {
         if (_fogRevealed)
             return;
-        _fogTile.GetComponent<FogAnimationEvent>()?.FogAnimationStart(target);
+        _fogRevealed = true;
+        FogRevealStart.Invoke();
+        _fogTile.GetComponent<FogAnimationEvent>()?.FogAnimationStart(direction);
+        StartCoroutine(FogRevealDelayCoroutine());
 
     }
 
@@ -57,13 +63,13 @@ public class Room : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent<Player>(out var player))
-        {
-            PlayerEnter.Invoke();
-            RevealFog(player.transform);
-        }
         if (collision.TryGetComponent<AliveObject>(out var alive))
         {
+            if (!collision.TryGetComponent<Player>(out var _))
+                Debug.Log("");
+            if (!alive.CanReveal)
+                return;
+            RevealFog(transform.position - alive.transform.position);
             if (_inRoom.Contains(alive))
                 return;
             _inRoom.Add(alive);
@@ -76,6 +82,12 @@ public class Room : MonoBehaviour
         {
             _inRoom.Remove(alive);
         }
+    }
+
+    private IEnumerator FogRevealDelayCoroutine()
+    {
+        yield return new WaitForSeconds(_fogDelay);
+        FogRevealEnd.Invoke();
     }
 
 }

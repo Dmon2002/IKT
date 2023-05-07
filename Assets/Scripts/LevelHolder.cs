@@ -47,7 +47,7 @@ public class LevelHolder : MonoBehaviour
                     Debug.Log("asd");
                 }
                 room.SetCoords((Vector2Int)tileIntPos);
-                room.PlayerEnter.AddListener(() => OnPlayerEnterRoom.Invoke(room));
+                room.FogRevealStart.AddListener(() => OnPlayerEnterRoom.Invoke(room));
                 _rooms[(Vector2Int)tileIntPos] = room;
             }
         }

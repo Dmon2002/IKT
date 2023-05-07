@@ -100,5 +100,5 @@ MonoBehaviour:
   raycaseLayers:
     serializedVersion: 2
     m_Bits: 8
-  explodeDelay: 1.5
+  explodeDelay: 2
   explodeDamage: 2

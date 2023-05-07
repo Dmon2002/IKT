@@ -139,7 +139,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _weapon: {fileID: 5020222774981418402}
-  _maxhp: 3
+  _maxhp: 5
   _moveSpeed: 0
   _isFlying: 0
   _canReveal: 0

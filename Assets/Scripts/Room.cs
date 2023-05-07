@@ -66,7 +66,7 @@ public class Room : MonoBehaviour
         if (collision.TryGetComponent<AliveObject>(out var alive))
         {
             if (!collision.TryGetComponent<Player>(out var _))
-                Debug.Log("");
+               // Debug.Log("");
             if (!alive.CanReveal)
                 return;
             RevealFog(transform.position - alive.transform.position);

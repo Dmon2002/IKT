@@ -62,7 +62,15 @@ public class Enemy : AliveObject
         var potentialWeapon = collision.GetComponent<Weapon>();
         if (potentialWeapon is Weapon && potentialWeapon.owner == WeaponOwner.Player)
         {
-            ApplyDamage(potentialWeapon.Damage);
+            if (potentialWeapon.IsCritical)
+            {
+                ApplyDamage(potentialWeapon.Damage*2);
+            }
+            else
+            {
+                ApplyDamage(potentialWeapon.Damage);
+            }
+           
         }
     }
 }

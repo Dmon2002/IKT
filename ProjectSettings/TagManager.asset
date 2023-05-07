@@ -56,9 +56,9 @@ TagManager:
   - name: Enemy
     uniqueID: 3152940723
     locked: 0
-  - name: UI
-    uniqueID: 437750265
-    locked: 0
   - name: Fog
     uniqueID: 3383704411
+    locked: 0
+  - name: UI
+    uniqueID: 437750265
     locked: 0

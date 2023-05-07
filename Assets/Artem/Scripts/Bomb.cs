@@ -36,7 +36,7 @@ public class Bomb : MonoBehaviour
         var room = LevelManager.Instance.GetNearestRoom(transform.position);
         var neighbours = LevelManager.Instance.getAllNeighbours(room.Coords);
         yield return new WaitForSeconds(explodeDelay);
-        foreach (var alive in room.AliveObjects)
+        foreach (var alive in room.InRoom)
         {
             alive.ApplyDamage(explodeDamage);
         }
@@ -46,7 +46,7 @@ public class Bomb : MonoBehaviour
             {
                 continue;
             }
-            foreach (var alive in neighbour.AliveObjects)
+            foreach (var alive in neighbour.InRoom)
             {
                 alive.ApplyDamage(explodeDamage);
             }

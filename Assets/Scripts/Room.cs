@@ -16,10 +16,9 @@ public class Room : MonoBehaviour
     [SerializeField] private GameObject _fogTile;
     [SerializeField] private bool _fogRevealed;
 
+    private List<AliveObject> _inRoom = new();
 
-    private List<AliveObject> _aliveObjects = new ();
-
-    public IEnumerable<AliveObject> AliveObjects => _aliveObjects;
+    public IEnumerable<AliveObject> InRoom => _inRoom;
 
     public Vector2Int Coords => _coords;
 
@@ -37,15 +36,6 @@ public class Room : MonoBehaviour
     {
         _coords = coords;
     }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.TryGetComponent<Player>(out var player))
-        {
-            PlayerEnter.Invoke();
-            RevealFog(player.transform);
-        }
-    }
     
     public void RevealFog(Transform target)
     {
@@ -60,11 +50,23 @@ public class Room : MonoBehaviour
         FogRevealEnd.Invoke();
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
+    public void AddAliveToRoom(AliveObject obj)
     {
+        _inRoom.Add(obj);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.TryGetComponent<Player>(out var player))
+        {
+            PlayerEnter.Invoke();
+            RevealFog(player.transform);
+        }
         if (collision.TryGetComponent<AliveObject>(out var alive))
         {
-            _aliveObjects.Add(alive);
+            if (_inRoom.Contains(alive))
+                return;
+            _inRoom.Add(alive);
         }
     }
 
@@ -72,7 +74,7 @@ public class Room : MonoBehaviour
     {
         if (collision.TryGetComponent<AliveObject>(out var alive))
         {
-            _aliveObjects.Remove(alive);
+            _inRoom.Remove(alive);
         }
     }
 

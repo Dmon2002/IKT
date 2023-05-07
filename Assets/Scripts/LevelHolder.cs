@@ -42,6 +42,10 @@ public class LevelHolder : MonoBehaviour
                 Vector3 tilePosition = _floorTilemap.GetCellCenterWorld(tileIntPos);
                 var room = Instantiate(tile, tilePosition, Quaternion.identity, _roomContainer)
                     .GetComponent<Room>();
+                if (room == null)
+                {
+                    Debug.Log("asd");
+                }
                 room.SetCoords((Vector2Int)tileIntPos);
                 room.PlayerEnter.AddListener(() => OnPlayerEnterRoom.Invoke(room));
                 _rooms[(Vector2Int)tileIntPos] = room;

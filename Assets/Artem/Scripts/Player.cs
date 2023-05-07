@@ -37,12 +37,18 @@ public class Player : AliveObject
     protected override void OnEnable()
     {
         base.OnEnable();
+        died += ShowDieMessage;
         if (Weapon != null)
         {
             Weapon.owner = WeaponOwner.Player;
             _defaultWeaponDamage= Weapon.Damage;
         }
 
+    }
+
+    private void OnDisable()
+    {
+        died -= ShowDieMessage;
     }
 
     private void Update()

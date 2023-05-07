@@ -18,7 +18,7 @@ public class InputController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         _player = GetComponent<Player>();
-
+        StartCoroutine(StepCheck());
         /*if (!Application.isMobilePlatform)
         {
             joystick.gameObject.SetActive(false);
@@ -49,10 +49,25 @@ public class InputController : MonoBehaviour
         if (Mathf.Abs(moveHorizontal) > moveThreshold || Mathf.Abs(moveVertical) > moveThreshold)
         {
             _player.IsMoving = true;
+           
         }
         else
         {
             _player.IsMoving = false;
         }
+    }
+
+    private IEnumerator StepCheck()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(0.3f);
+            if (_player.IsMoving)
+            {
+                print("444");
+                AudioManager.instance.PlayStep();
+            }
+        }
+
     }
 }

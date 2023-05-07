@@ -52,6 +52,7 @@ public abstract class AliveObject : MonoBehaviour
 
     public void ApplyDamage(float damage)
     {
+        AudioManager.instance.PlayHit();
         if (damage<0)
         {
             throw new ArgumentOutOfRangeException(nameof(damage));
@@ -74,12 +75,13 @@ public abstract class AliveObject : MonoBehaviour
         {
             HP += healPower;
         }
-        
+        AudioManager.instance.PlayHpBonus();
     }
 
     public void Die()
     {
         HP = 0;
+
     }
 
 

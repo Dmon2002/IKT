@@ -24,6 +24,7 @@ public class SwordUI : MonoBehaviour
     }
     public void SetCritical()
     {
+        AudioManager.instance.PlayDamageBuff();
         StopAllCoroutines();
         StartCoroutine(Timer());
     }

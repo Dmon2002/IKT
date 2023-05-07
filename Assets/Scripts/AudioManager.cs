@@ -70,6 +70,7 @@ public class AudioManager : MonoBehaviour
 
     public void PlayStep()
     {
+        //print("Plaaaay");
         stepSound.Play();
     }
 

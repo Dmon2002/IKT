@@ -6,7 +6,7 @@ public class CamContr : MonoBehaviour {
 	public Transform playerTransform;
 	public float moveSpeed;
 	public Vector2 StartPos;
-
+	public float DownPos;
 	void Start () {
 		transform.position = StartPos;
 	}
@@ -15,7 +15,7 @@ public class CamContr : MonoBehaviour {
 		Vector3 target = new Vector3()
 		{
 			x = StartPos.x,
-			y = playerTransform.position.y,
+			y = playerTransform.position.y- DownPos,
 			z = -10,
 		};
 

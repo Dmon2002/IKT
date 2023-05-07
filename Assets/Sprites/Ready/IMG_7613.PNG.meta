@@ -1,0 +1,258 @@
+fileFormatVersion: 2
+guid: ae96a6388c998af428d2b6ff57ab0316
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 500
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: 12
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 1
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: IMG_7613_0
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 360
+        width: 1101
+        height: 1209
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a19139b8d0650245b8054e312fc2eca
+      internalID: -199441011
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IMG_7613_1
+      rect:
+        serializedVersion: 2
+        x: 1255
+        y: 434
+        width: 1056
+        height: 1194
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4cbe269677cc24644a64ffa6923380c3
+      internalID: -601796338
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IMG_7613_2
+      rect:
+        serializedVersion: 2
+        x: 2750
+        y: 879
+        width: 199
+        height: 211
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 034d602d46da695429c9c1aa57f5282a
+      internalID: -632470037
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      IMG_7613_0: -199441011
+      IMG_7613_1: -601796338
+      IMG_7613_10: 1379344604
+      IMG_7613_11: -1005009095
+      IMG_7613_12: -1178618412
+      IMG_7613_13: 1970249062
+      IMG_7613_14: -2003937809
+      IMG_7613_15: -1991954393
+      IMG_7613_16: 1409345107
+      IMG_7613_17: -1661840194
+      IMG_7613_18: 1561959568
+      IMG_7613_19: 778219019
+      IMG_7613_2: -632470037
+      IMG_7613_20: -1383062053
+      IMG_7613_21: 418037079
+      IMG_7613_22: 1714493556
+      IMG_7613_23: 58877813
+      IMG_7613_24: -2111348732
+      IMG_7613_25: 964231085
+      IMG_7613_26: -176193025
+      IMG_7613_27: 687030868
+      IMG_7613_28: -874583126
+      IMG_7613_29: 1919245638
+      IMG_7613_3: 1324806510
+      IMG_7613_30: -1831810244
+      IMG_7613_31: 1817453802
+      IMG_7613_32: -1790326175
+      IMG_7613_33: -353720764
+      IMG_7613_34: 42097466
+      IMG_7613_35: -1267904140
+      IMG_7613_36: -1976741895
+      IMG_7613_37: 100555241
+      IMG_7613_38: 1738021062
+      IMG_7613_39: 575613976
+      IMG_7613_4: 408903591
+      IMG_7613_40: -1124818309
+      IMG_7613_41: 664257192
+      IMG_7613_42: 243107752
+      IMG_7613_43: -1354084061
+      IMG_7613_44: 106443495
+      IMG_7613_45: 786457809
+      IMG_7613_46: -1218954154
+      IMG_7613_47: -190495750
+      IMG_7613_48: -1021555483
+      IMG_7613_49: 552159588
+      IMG_7613_5: -1009596927
+      IMG_7613_50: 428930196
+      IMG_7613_51: -2061587758
+      IMG_7613_52: -1902617559
+      IMG_7613_53: -377562857
+      IMG_7613_54: 314728586
+      IMG_7613_55: -101771518
+      IMG_7613_56: 993946416
+      IMG_7613_57: -1821994621
+      IMG_7613_58: 1042067844
+      IMG_7613_59: -2064599078
+      IMG_7613_6: 1710775974
+      IMG_7613_7: 85761229
+      IMG_7613_8: -331383312
+      IMG_7613_9: 1599827166
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

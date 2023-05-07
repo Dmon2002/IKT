@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5020222774221923778}
   - component: {fileID: 5020222774221923779}
   - component: {fileID: 5508994914307308160}
+  - component: {fileID: 9078453303412492215}
   m_Layer: 0
   m_Name: RangeEnemy
   m_TagString: Untagged
@@ -56,7 +57,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: be4b8eae9c3e3244aa7351b762dd6089, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -77,8 +78,8 @@ SpriteRenderer:
   m_SortingLayerID: -1142026573
   m_SortingLayer: 5
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.17626214, g: 1, b: 0, a: 1}
+  m_Sprite: {fileID: -199441011, guid: ae96a6388c998af428d2b6ff57ab0316, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -101,9 +102,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.020466188, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.31125635
 --- !u!50 &5020222774221923779
 Rigidbody2D:
   serializedVersion: 4
@@ -143,6 +144,27 @@ MonoBehaviour:
   _isFlying: 0
   _canReveal: 0
   agreDelay: 1
+--- !u!95 &9078453303412492215
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5020222774221923781}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 03dc2ce49dd9df24688fda6fd2c0a276, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &5020222774981418403
 GameObject:
   m_ObjectHideFlags: 0
@@ -191,5 +213,6 @@ MonoBehaviour:
   _distance: 0
   _reloadTime: 2
   owner: 1
+  IsCritical: 0
   _bulletSpeed: 2.4
   _bulletPrefab: {fileID: 1421124005025569302, guid: a26df7b0819f9434a9d0a1f8ea438d21, type: 3}

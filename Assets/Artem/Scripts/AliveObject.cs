@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
 
 public abstract class AliveObject : MonoBehaviour
 {
@@ -22,6 +23,13 @@ public abstract class AliveObject : MonoBehaviour
 
     public Weapon Weapon => _weapon;
     public float MoveSpeed => _moveSpeed;
+
+    private SpriteRenderer spriteRenderer;
+
+   /* private void Start()
+    {
+        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+    }*/
 
     public float HP
     {
@@ -49,6 +57,7 @@ public abstract class AliveObject : MonoBehaviour
             throw new ArgumentOutOfRangeException(nameof(damage));
         }
         HP-=damage;
+        StartCoroutine(RedAnim());
     }
 
     public void Heal(float healPower)
@@ -72,4 +81,29 @@ public abstract class AliveObject : MonoBehaviour
     {
         HP = 0;
     }
+
+
+    
+    private IEnumerator RedAnim()
+    {
+        print(spriteRenderer);
+        if (spriteRenderer == null)
+        {
+            spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        }
+        if (spriteRenderer != null)
+        {
+            while (spriteRenderer.color.g > 0)
+            {
+                yield return new WaitForFixedUpdate();
+                spriteRenderer.color = new Color(1, spriteRenderer.color.g-4f*Time.deltaTime, spriteRenderer.color.b - 4f * Time.deltaTime, 1);
+            }
+            while (spriteRenderer.color.g < 1)
+            {
+                yield return new WaitForFixedUpdate();
+                spriteRenderer.color = new Color(1, spriteRenderer.color.g + 4f * Time.deltaTime, spriteRenderer.color.b + 4f * Time.deltaTime, 1);
+            }
+        }
+    }
+    
 }

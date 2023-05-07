@@ -8,7 +8,7 @@ public abstract class Weapon : MonoBehaviour
     [SerializeField] private float _distance;
     [SerializeField] private float _reloadTime = 2;
     public WeaponOwner owner;
-
+    public bool IsCritical = false;
     public float Damage
     {
         get { return _damage; }

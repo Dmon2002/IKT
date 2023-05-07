@@ -308,7 +308,7 @@ MonoBehaviour:
   _moveSpeed: 0.2
   _isFlying: 0
   _canReveal: 0
-  agreDelay: 2
+  agreDelay: 1
 --- !u!95 &254885173367550193
 Animator:
   serializedVersion: 5

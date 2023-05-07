@@ -50,7 +50,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _weapon: {fileID: 0}
   _maxhp: 7
-  _moveSpeed: 0.4
+  _moveSpeed: 0.6
   _isFlying: 0
   _canReveal: 1
   agreDelay: 0.5

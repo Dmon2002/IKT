@@ -441,25 +441,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _floorTilemap: {fileID: 1812989219219687883}
   _roomContainer: {fileID: 1812989218144700509}
-  _borderContainer: {fileID: 0}
-  _tileBorderPrefab: {fileID: 0}
-  _startingTiles: 0
-  _tileCleanPrefab: {fileID: 0}
+  _borderContainer: {fileID: 4130948314998180216}
+  _tileBorderPrefab: {fileID: 3034382765300094478, guid: 6010d2c12813c0342a0e2e9c12378d73, type: 3}
+  _startingTiles: 3
+  _tileCleanPrefab: {fileID: 3034382765300094478, guid: b9af4991455d95a4abc7d24327f57e9e, type: 3}
+  _cameraOffset: 50
+  leftUpStartingTile: {x: 0, y: 0}
+  width: 4
   OnPlayerEnterRoom:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1812989217890134700}
-        m_TargetAssemblyTypeName: LevelManager, Assembly-CSharp
-        m_MethodName: RevealFog
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &2811596423042867257
 GameObject:
   m_ObjectHideFlags: 0

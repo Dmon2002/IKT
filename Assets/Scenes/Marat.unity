@@ -911,6 +911,7 @@ MonoBehaviour:
   _isFlying: 0
   _canReveal: 1
   _immortalTime: 2
+  WeaponTr: {fileID: 0}
 --- !u!114 &350232467
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1180,11 +1181,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 544649964}
   m_CullTransparentMesh: 1
---- !u!4 &563801365 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4130948314998180216, guid: 1ddaa492a030fe24e9ef32660227088c, type: 3}
-  m_PrefabInstance: {fileID: 835654834}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &613871538
 GameObject:
   m_ObjectHideFlags: 0
@@ -1620,10 +1616,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1812989219711457405, guid: 1ddaa492a030fe24e9ef32660227088c, type: 3}
-      propertyPath: width
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1812989219711457405, guid: 1ddaa492a030fe24e9ef32660227088c, type: 3}
       propertyPath: _roomPrefab
       value: 
       objectReference: {fileID: 3034382765300094478, guid: c4b9b990e8bef6e41a15ff56f4bb0da1, type: 3}
@@ -1631,30 +1623,6 @@ PrefabInstance:
       propertyPath: _tileBorder
       value: 
       objectReference: {fileID: 3034382765300094478, guid: 6010d2c12813c0342a0e2e9c12378d73, type: 3}
-    - target: {fileID: 1812989219711457405, guid: 1ddaa492a030fe24e9ef32660227088c, type: 3}
-      propertyPath: _cameraOffset
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 1812989219711457405, guid: 1ddaa492a030fe24e9ef32660227088c, type: 3}
-      propertyPath: _startingTiles
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1812989219711457405, guid: 1ddaa492a030fe24e9ef32660227088c, type: 3}
-      propertyPath: _borderContainer
-      value: 
-      objectReference: {fileID: 563801365}
-    - target: {fileID: 1812989219711457405, guid: 1ddaa492a030fe24e9ef32660227088c, type: 3}
-      propertyPath: _tileCleanPrefab
-      value: 
-      objectReference: {fileID: 3034382765300094478, guid: b9af4991455d95a4abc7d24327f57e9e, type: 3}
-    - target: {fileID: 1812989219711457405, guid: 1ddaa492a030fe24e9ef32660227088c, type: 3}
-      propertyPath: _tileBorderPrefab
-      value: 
-      objectReference: {fileID: 3034382765300094478, guid: 6010d2c12813c0342a0e2e9c12378d73, type: 3}
-    - target: {fileID: 1812989219711457405, guid: 1ddaa492a030fe24e9ef32660227088c, type: 3}
-      propertyPath: OnPlayerEnterRoom.m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2811596423042867257, guid: 1ddaa492a030fe24e9ef32660227088c, type: 3}
       propertyPath: m_Name
       value: Layer-0
@@ -7681,7 +7649,6 @@ MonoBehaviour:
   playerTransform: {fileID: 350232470}
   moveSpeed: 2
   StartPos: {x: 0.49, y: 1}
-  EndPos: 500
 --- !u!114 &1773379438
 MonoBehaviour:
   m_ObjectHideFlags: 0

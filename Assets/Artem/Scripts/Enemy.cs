@@ -1,10 +1,11 @@
 using Pathfinding;
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class Enemy : AliveObject
 {
-    [SerializeField] private LayerMask raycastLayers;
+    [SerializeField] private float agreDelay;
     private Transform _player;
 
     public event Action<Enemy> EnemyDied;
@@ -18,6 +19,7 @@ public class Enemy : AliveObject
     private void Start()
     {
         _player = GameManager.Instance.Player.transform;
+        StartCoroutine(AgreDelayCoroutine());
     }
 
     protected override void OnEnable()
@@ -37,19 +39,13 @@ public class Enemy : AliveObject
         EnemyDied?.Invoke(this);
     }
 
-    private void Update()
+    private IEnumerator AgreDelayCoroutine()
     {
-        TryAgre();
-    }
-
-    private void TryAgre()
-    {
-        if (Physics2D.Raycast(transform.position, transform.position - _player.position, float.PositiveInfinity, raycastLayers))
-            return;
+        yield return new WaitForSeconds(agreDelay);
         Agre();
     }
 
-    public void Agre()
+    public virtual void Agre()
     {
         _destinationSetter.target = _player;
     }

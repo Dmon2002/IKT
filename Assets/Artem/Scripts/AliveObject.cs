@@ -9,8 +9,12 @@ public abstract class AliveObject : MonoBehaviour
     [SerializeField] private float _maxhp;
     [SerializeField] private float _moveSpeed;
     [SerializeField] private bool _isFlying;
+    [SerializeField] private bool _canReveal;
 
     private float _hp;
+
+    public bool CanReveal => _canReveal;
+
     
     private HashSet<Vector2Int> _roomsIn = new ();
 

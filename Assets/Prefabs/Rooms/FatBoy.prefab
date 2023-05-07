@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 8533644980568122836}
   - component: {fileID: 7544230231004639923}
   m_Layer: 0
-  m_Name: Bomb
+  m_Name: FatBoy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -227,15 +227,15 @@ SpriteRenderer:
   m_SortingLayerID: -341839439
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: -535346110, guid: 6bb711a16f6007c428d149bc6d581859, type: 3}
+  m_Sprite: {fileID: -916949915, guid: 336b0e5f0493f5c46b9ba18111db03a7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.0033333, y: 1.0066912}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &4599667927232982513
@@ -283,10 +283,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4f6ae9eca8e7e146aa8673072e83460, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  room: {fileID: 0}
+  room: {fileID: 8533644980568122836}
   spawnables:
   - point: {fileID: 3147314108969768377}
-    prefab: {fileID: 2061364415916667674, guid: 848da6418b591eb4a8d921c176a981a2, type: 3}
+    prefab: {fileID: 6953891421406593408, guid: 028b65149c705de4aa59fcc83cd0aa21, type: 3}
 --- !u!1 &6311724035886259282
 GameObject:
   m_ObjectHideFlags: 0
@@ -402,5 +402,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   room: {fileID: 8533644980568122836}
-  speed: 1
+  speed: 2
   IsDie: 0

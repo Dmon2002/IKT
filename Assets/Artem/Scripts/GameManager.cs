@@ -19,6 +19,11 @@ public class GameManager : Manager<GameManager>
         }
     }
 
+    private void Awake()
+    {
+        Time.timeScale = 1;
+    }
+
     private void Start()
     {
         Player.transform.position = LevelManager.Instance.ConvertToPosition(_startingPosition);

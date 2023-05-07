@@ -50,6 +50,7 @@ MonoBehaviour:
   _reloadTime: 2
   owner: 1
   colliderTime: 0.1
+  anim: {fileID: 0}
 --- !u!61 &8799991134244281052
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -302,7 +303,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _weapon: {fileID: 3517046986804289240}
-  _maxhp: 5
+  _maxhp: 2
   _moveSpeed: 0.2
   _isFlying: 0
   _canReveal: 0

@@ -23,7 +23,7 @@ public class RangedWeapon : Weapon
     private void Update()
     {
         if (_reloadTimeRemaining > 0)
-        _reloadTimeRemaining-=Time.deltaTime;
+            _reloadTimeRemaining-=Time.deltaTime;
         
     }
 

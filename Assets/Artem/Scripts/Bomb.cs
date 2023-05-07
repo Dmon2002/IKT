@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Bomb : MonoBehaviour
@@ -6,6 +7,7 @@ public class Bomb : MonoBehaviour
     [SerializeField] private LayerMask raycaseLayers;
     [SerializeField] private float explodeDelay;
     [SerializeField] private float explodeDamage;
+    [SerializeField] private GameObject explosionPrefab;
 
     private Transform _player;
     
@@ -19,8 +21,11 @@ public class Bomb : MonoBehaviour
     {
         var room = LevelManager.Instance.GetNearestRoom(transform.position);
         var neighbours = LevelManager.Instance.getAllNeighbours(room.Coords);
+        Debug.Log(neighbours.Count);
         yield return new WaitForSeconds(explodeDelay);
-        foreach (var alive in room.InRoom)
+        SpawnExplosion(room);
+        var buffer = new List<AliveObject>(room.InRoom);
+        foreach (var alive in buffer)
         {
             alive.ApplyDamage(explodeDamage);
         }
@@ -30,9 +35,25 @@ public class Bomb : MonoBehaviour
             {
                 continue;
             }
-            neighbour.RevealFog(neighbour.transform.position - transform.position);
+            if (neighbour.FogRevealed)
+            {
+                SpawnExplosion(neighbour);
+                buffer = new List<AliveObject>(neighbour.InRoom);
+                foreach (var alive in buffer)
+                {
+                    alive.ApplyDamage(explodeDamage);
+                }
+            }
+            else
+            {
+                neighbour.RevealFog(neighbour.transform.position - transform.position);
+            }
         }
-        gameObject.SetActive(false);
+        Destroy(gameObject);
     }
 
+    private void SpawnExplosion(Room room)
+    {
+        Instantiate(explosionPrefab, room.transform.position, Quaternion.identity);
+    }
 }

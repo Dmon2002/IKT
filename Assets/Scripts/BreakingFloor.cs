@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static UnityEditor.PlayerSettings;
@@ -8,8 +9,9 @@ public class BreakingFloor : MonoBehaviour
     [SerializeField] private Animation breakingAnimation;
     [SerializeField] private float fallDistance;
     [SerializeField] private float breakDistance;
+    [SerializeField] private float deadlyTime;
     [SerializeField] private Room room;
-
+    [SerializeField] private GameObject col;
 
     private bool _revealed;
     private BreakState _breakState;
@@ -44,6 +46,14 @@ public class BreakingFloor : MonoBehaviour
         if (_breakState == BreakState.Broke || !_revealed)
             return;
         _breakState = BreakState.Broke;
+        StartCoroutine(DeadlyTimer());
+    }
+
+    private IEnumerator DeadlyTimer()
+    {
+        yield return new WaitForSeconds(deadlyTime);
+        _breakState = BreakState.CompletelyBroke;
+        col.SetActive(true);
     }
 
     public void Reveal()
@@ -55,7 +65,8 @@ public class BreakingFloor : MonoBehaviour
     {
         Not,
         Breaking,
-        Broke
+        Broke,
+        CompletelyBroke
     }
 
     private void OnDrawGizmos()

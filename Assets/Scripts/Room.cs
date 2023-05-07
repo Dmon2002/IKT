@@ -65,8 +65,6 @@ public class Room : MonoBehaviour
     {
         if (collision.TryGetComponent<AliveObject>(out var alive))
         {
-            if (!collision.TryGetComponent<Player>(out var _))
-                Debug.Log("");
             if (!alive.CanReveal)
                 return;
             RevealFog(transform.position - alive.transform.position);
@@ -89,5 +87,4 @@ public class Room : MonoBehaviour
         yield return new WaitForSeconds(_fogDelay);
         FogRevealEnd.Invoke();
     }
-
 }

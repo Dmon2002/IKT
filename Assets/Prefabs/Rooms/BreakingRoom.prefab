@@ -1,5 +1,68 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &741418287588005225
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4726575560900593951}
+  - component: {fileID: 8391373893469422522}
+  m_Layer: 7
+  m_Name: Collider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &4726575560900593951
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 741418287588005225}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.001, y: -0.003, z: -0.018780842}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3034382765300094476}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!60 &8391373893469422522
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 741418287588005225}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.50331974, y: 0.25374967}
+      - {x: 0.0014238358, y: 0.4996711}
+      - {x: -0.49725395, y: 0.25346544}
+      - {x: -0.4978928, y: -0.25057572}
+      - {x: 0.0034185648, y: -0.49727857}
+      - {x: 0.5048437, y: -0.2537428}
 --- !u!1 &3034382765300094478
 GameObject:
   m_ObjectHideFlags: 0
@@ -33,6 +96,7 @@ Transform:
   m_Children:
   - {fileID: 5495441311687515911}
   - {fileID: 7528302478655333399}
+  - {fileID: 4726575560900593951}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -97,7 +161,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  _fogRevealAnimation: {fileID: 4580213565744681811}
   _fogTile: {fileID: 6311724035886259282}
   _fogRevealed: 0
   _fogDelay: 0
@@ -257,7 +320,9 @@ MonoBehaviour:
   breakingAnimation: {fileID: 1883112781393132528}
   fallDistance: 0.38
   breakDistance: 0.49
+  deadlyTime: 0.5
   room: {fileID: 8533644980568122836}
+  col: {fileID: 741418287588005225}
 --- !u!111 &1883112781393132528
 Animation:
   m_ObjectHideFlags: 0
@@ -322,7 +387,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5495441311687515911
 Transform:
   m_ObjectHideFlags: 0

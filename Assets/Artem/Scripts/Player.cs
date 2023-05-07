@@ -16,6 +16,7 @@ public class Player : AliveObject
     private bool _isImmortal = false;
 
     [SerializeField] private float _immortalTime=2f;
+    [SerializeField] private GameObject deadScreen;
 
     private float _defaultWeaponDamage;
 
@@ -171,7 +172,8 @@ public class Player : AliveObject
     
     public void OnDied()
     {
-
-        SceneManager.LoadScene(0);
+        AudioManager.instance.PlayPlayerDead();
+        deadScreen.SetActive(true);
+        Time.timeScale = 0;
     }
 }

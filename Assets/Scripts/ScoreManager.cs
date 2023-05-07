@@ -6,7 +6,12 @@ using TMPro;
 public class ScoreManager : MonoBehaviour
 {
     public TMPro.TMP_Text text;
+    public TMPro.TMP_Text otherText;
+
     private float score;
+
+    public float Score => score;
+
     private void Start()
     {
         /*
@@ -17,11 +22,14 @@ public class ScoreManager : MonoBehaviour
         */
         score = 0;
         text.text = score.ToString();
+        otherText.text = score.ToString();
     }
 
     public void PlusScore()
     {
         score ++;
         text.text = score.ToString();
+        otherText.text = score.ToString();
+
     }
 }

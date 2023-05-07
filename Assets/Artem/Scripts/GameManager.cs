@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : Manager<GameManager>
 {
@@ -21,5 +22,10 @@ public class GameManager : Manager<GameManager>
     private void Start()
     {
         Player.transform.position = LevelManager.Instance.ConvertToPosition(_startingPosition);
+    }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene(0);
     }
 }

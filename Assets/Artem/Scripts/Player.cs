@@ -112,7 +112,7 @@ public class Player : AliveObject
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Enemy potentialEnemy = collision.gameObject.GetComponent<Enemy>();
-        if (potentialEnemy is Enemy && _isImmortal==false)
+        if (potentialEnemy is Enemy && _isImmortal == false)
         {
             if (potentialEnemy.Weapon == null)
                 return;
@@ -130,9 +130,9 @@ public class Player : AliveObject
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        
+
         Bullet potentialBullet = collision.GetComponent<Bullet>();
-        if (potentialBullet is Bullet && _isImmortal==false)
+        if (potentialBullet is Bullet && _isImmortal == false)
         {
             ApplyDamage(potentialBullet.Damage);
             StartCoroutine(MakeImmortal());

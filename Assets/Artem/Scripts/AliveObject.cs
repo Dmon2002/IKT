@@ -52,6 +52,10 @@ public abstract class AliveObject : MonoBehaviour
 
     public void ApplyDamage(float damage)
     {
+        if (TryGetComponent<Player>(out var _))
+        {
+            Debug.Log("Apply");
+        }
         if (damage<0)
         {
             throw new ArgumentOutOfRangeException(nameof(damage));

@@ -6,7 +6,6 @@ public class CamContr : MonoBehaviour {
 	public Transform playerTransform;
 	public float moveSpeed;
 	public Vector2 StartPos;
-	public float EndPos;
 
 	void Start () {
 		transform.position = StartPos;
@@ -20,12 +19,7 @@ public class CamContr : MonoBehaviour {
 			z = -10,
 		};
 
-        if (target.y > EndPos)
-        {
-			target = new Vector3(StartPos.y, EndPos, -10);
-
-		}
-		else if (target.y < StartPos.y)
+		if (target.y < StartPos.y)
 		{
 			target = new Vector3(StartPos.x, StartPos.y, -10);
 
@@ -33,8 +27,7 @@ public class CamContr : MonoBehaviour {
 
 		Vector3 pos= Vector3.Lerp(a: transform.position,b: target, t: moveSpeed * Time.deltaTime);
 		transform.position = pos;
-		
-		
+		StartPos = new Vector2(StartPos.x,pos.y);
 
 	}
 }

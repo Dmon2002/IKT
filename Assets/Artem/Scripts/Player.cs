@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : AliveObject
 {
@@ -20,6 +21,9 @@ public class Player : AliveObject
 
     private Animator anim= null;
 
+    [SerializeField]
+    private Transform WeaponTr;
+
     public bool IsMoving
     {
         get { return _isMoving; }
@@ -37,12 +41,18 @@ public class Player : AliveObject
     protected override void OnEnable()
     {
         base.OnEnable();
+        died += OnDied;
         if (Weapon != null)
         {
             Weapon.owner = WeaponOwner.Player;
             _defaultWeaponDamage= Weapon.Damage;
         }
 
+    }
+
+    private void OnDisable()
+    {
+        died -= OnDied;
     }
 
     private void Update()
@@ -53,6 +63,7 @@ public class Player : AliveObject
 
     private void FixedUpdate()
     {
+        WeaponTr.position = transform.position;
         _targetEnemy = GetNearestEnemy();
         TryAttackEnemy();
     }
@@ -95,8 +106,6 @@ public class Player : AliveObject
         if (Weapon == null) return;
 
         RotateWeapon();
-
-        if (IsMoving) return;
 
         if (_reloadTimeRemaining > 0) return;
         
@@ -156,5 +165,12 @@ public class Player : AliveObject
        Weapon.Damage=Weapon.Damage*multiplication;
         yield return new WaitForSeconds(duration);
         Weapon.Damage = _defaultWeaponDamage;
+    }
+
+
+    
+    public void OnDied()
+    {
+        SceneManager.LoadScene(0);
     }
 }

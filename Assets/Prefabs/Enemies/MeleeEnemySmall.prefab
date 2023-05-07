@@ -94,9 +94,9 @@ GameObject:
   - component: {fileID: 3517046987083068660}
   - component: {fileID: 3517046987083068659}
   - component: {fileID: 5618028550862269887}
-  - component: {fileID: 254885173367550193}
+  - component: {fileID: 4240314706722795081}
   m_Layer: 0
-  m_Name: MeleeEnemy
+  m_Name: MeleeEnemySmall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -159,7 +159,7 @@ SpriteRenderer:
   m_SortingLayerID: -1142026573
   m_SortingLayer: 5
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1405273215, guid: b6d8bfb09ce074841a33e088270dd280, type: 3}
+  m_Sprite: {fileID: -661310198, guid: 71a6b4b2d58491d4fa52e444d16f5727, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -304,12 +304,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _weapon: {fileID: 3517046986804289240}
-  _maxhp: 3
+  _maxhp: 2
   _moveSpeed: 0.2
   _isFlying: 0
   _canReveal: 0
   agreDelay: 2
---- !u!95 &254885173367550193
+--- !u!95 &4240314706722795081
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
@@ -319,7 +319,7 @@ Animator:
   m_GameObject: {fileID: 3517046987083068667}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: bbaddf4d76e57374597b535eba05f55a, type: 2}
+  m_Controller: {fileID: 9100000, guid: 066cb20d9ba0ac04186751e2e44cd770, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

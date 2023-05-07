@@ -23,6 +23,7 @@ public class Bomb : MonoBehaviour
         var neighbours = LevelManager.Instance.getAllNeighbours(room.Coords);
         Debug.Log(neighbours.Count);
         yield return new WaitForSeconds(explodeDelay);
+        AudioManager.instance.PlayBombExplosion();
         SpawnExplosion(room);
         var buffer = new List<AliveObject>(room.InRoom);
         foreach (var alive in buffer)
@@ -54,6 +55,7 @@ public class Bomb : MonoBehaviour
 
     private void SpawnExplosion(Room room)
     {
+
         Instantiate(explosionPrefab, room.transform.position, Quaternion.identity);
     }
 }

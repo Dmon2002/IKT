@@ -15,22 +15,24 @@ public class RoomSpawner : MonoBehaviour
         }
     }
 
-    private Vector2Int _coords;
-
+    [SerializeField] private Room room;
     [SerializeField] List<SpawnPoint> spawnables;
 
     private bool spawned;
 
-    public void SetCoords(Vector2Int coords)
-    {
-        _coords = coords;
-    }
-
     public void Spawn()
     {
+        var objs = new List<GameObject>();
         if (spawned)
             return;
         spawned = true;
         spawnables.ForEach(x => x.Spawn());
+        objs.ForEach(x =>
+        {
+            if (TryGetComponent<AliveObject>(out var alive))
+            {
+                room.AddAliveToRoom(alive);
+            }
+        });
     }
 }

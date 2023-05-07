@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Player : AliveObject
 {
+    private bool _canMove = true;
+
     private Enemy _targetEnemy;
 
     private float _reloadTimeRemaining = 0;
@@ -29,6 +31,8 @@ public class Player : AliveObject
             anim.SetBool("IsRunning", value);
         }
     }
+
+    public bool CanMove => _canMove;
 
     protected override void OnEnable()
     {

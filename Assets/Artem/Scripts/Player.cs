@@ -172,8 +172,9 @@ public class Player : AliveObject
     
     public void OnDied()
     {
-        AudioManager.instance.PlayPlayerDead();
-        deadScreen.SetActive(true);
+        AudioManager.instance.PlayPlayerDead();      
         Time.timeScale = 0;
+        GameObject.FindObjectOfType<SavesController>().LoseLevel();
+        deadScreen.SetActive(true);
     }
 }

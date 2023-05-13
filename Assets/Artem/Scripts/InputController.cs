@@ -64,7 +64,7 @@ public class InputController : MonoBehaviour
             yield return new WaitForSeconds(0.3f);
             if (_player.IsMoving)
             {
-                print("444");
+                //print("444");
                 AudioManager.instance.PlayStep();
             }
         }

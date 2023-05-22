@@ -27,7 +27,7 @@ public class ScoreManager : MonoBehaviour
         score = 0;
         text.text = score.ToString();
         otherText.text = score.ToString();
-        maxText.text = savesController.GetInt("score").ToString();
+        maxText.text = savesController.Get("score").ToString();
     }
 
     public void PlusScore()
@@ -36,12 +36,12 @@ public class ScoreManager : MonoBehaviour
         score ++;
         text.text = score.ToString();
         otherText.text = score.ToString();
-        if (score > savesController.GetInt("score"))
+        if (score > savesController.Get("score"))
         {
-            savesController.SetInt("score", score);
+            savesController.Set("score", score);
             
         }
-        maxText.text = savesController.GetInt("score").ToString();
-        print(savesController.GetInt("score"));
+        maxText.text = savesController.Get("score").ToString();
+        print(savesController.Get("score"));
     }
 }

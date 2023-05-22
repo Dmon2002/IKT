@@ -108,30 +108,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 3034382765300094478}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46a7daff69ca7a64dae53407032ded2e, type: 3}
+  m_Script: {fileID: 11500000, guid: 8c4cc5b02d1a48346a55231fc9733fd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FogRevealStart:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5757110300479305625}
-        m_TargetAssemblyTypeName: RoomSpawner, Assembly-CSharp
-        m_MethodName: Spawn
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  FogRevealEnd:
-    m_PersistentCalls:
-      m_Calls: []
-  _fogTile: {fileID: 6311724035886259282}
-  _fogRevealed: 0
-  _fogDelay: 0
+  _fogTile: {fileID: 4580213565744681811}
+  _fogRevealDuration: 1
 --- !u!50 &7544230231004639923
 Rigidbody2D:
   serializedVersion: 4
@@ -400,6 +381,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3c84b8f6e7f7064ab3dc91f879a730b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  room: {fileID: 8533644980568122836}
-  speed: 2
-  IsDie: 0

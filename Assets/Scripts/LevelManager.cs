@@ -1,110 +1,116 @@
+using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 public class LevelManager : Manager<LevelManager>
 {
-    [SerializeField] private Vector2Int leftDownStartingTile;
-    [SerializeField] private int levelWidth;
-    [SerializeField] private int levelHeight;
+    [SerializeField] private float _roomDetectionRadius;
+    [SerializeField] private Vector2Int _playerStartingCoord;
+    [SerializeField] private Player _playerPrefab;
 
-    private Tilemap _levelTilemap;
     private LevelHolder _levelHolder;
+    private Player _player;
 
-    public Room GetRoom(Vector2Int roomPos) => _levelHolder.GetRoom(roomPos);
+    public Player Player
+    {
+        get
+        {
+            if (_player == null)
+                _player = SpawnPlayer();
+            return _player;
+        }
+    }
 
     private void Awake()
     {
         _levelHolder = GetComponentInChildren<LevelHolder>();
-        _levelTilemap = GetComponentInChildren<Tilemap>();
+        if (_player == null) 
+            _player = SpawnPlayer();
     }
 
     private void Start()
     {
-        _levelHolder.SetUpRooms(leftDownStartingTile, levelWidth, levelHeight);
-        _levelHolder.SetUpBorders(leftDownStartingTile, levelWidth, levelHeight);
+        _levelHolder.SetUpRooms();
+        _levelHolder.SetUpBorders();
     }
 
-    public Room getNeighbour(Vector2Int roomPos, NeighbourSide side)
+    public Vector3 ConvertToWorldPosition(Vector2Int intPos) => _levelHolder.ConvertToWorldPosition(intPos);
+
+    public Room GetNeighbour(Vector2Int roomPos, NeighbourSide side)
     {
-        Vector2Int offset;
         switch (side)
         {
-            case NeighbourSide.LeftUp:
-                offset = new Vector2Int(0, 1);
-                break;
-            case NeighbourSide.RightUp:
-                offset = new Vector2Int(1, 1);
-                break;
-            case NeighbourSide.LeftDown:
-                offset = new Vector2Int(0, -1);
-                break;
-            case NeighbourSide.RightDown:
-                offset = new Vector2Int(0, -1);
-                break;
             case NeighbourSide.Left:
-                offset = new Vector2Int(-1, 0);
-                break;
+                return _levelHolder.GetRoom(roomPos + new Vector2Int(-1, 0));
             case NeighbourSide.Right:
-                offset = new Vector2Int(1, 0);
-                break;
+                return _levelHolder.GetRoom(roomPos + new Vector2Int(1, 0));
+            case NeighbourSide.LeftDown:
+                return _levelHolder.GetRoom(roomPos + new Vector2Int((roomPos.y % 2 == 0) ? -1 : 0, -1));
+            case NeighbourSide.RightDown:
+                return _levelHolder.GetRoom(roomPos + new Vector2Int((roomPos.y % 2 != 0) ? 1 : 0, -1));
+            case NeighbourSide.LeftUp:
+                return _levelHolder.GetRoom(roomPos + new Vector2Int((roomPos.y % 2 == 0) ? -1 : 0, 1));
+            case NeighbourSide.RightUp:
+                return _levelHolder.GetRoom(roomPos + new Vector2Int((roomPos.y % 2 != 0) ? 1 : 0, 1));
             default:
                 Debug.LogError("Incorrect switch case");
                 return null;
         }
-        return _levelHolder.GetRoom(roomPos + offset);
     }
 
-    public List<Room> getAllNeighbours(Vector2Int roomPos)
+    public List<Room> GetAllNeighbours(Vector2Int roomPos)
     {
         var neighbours = new List<Room>();
-        Room room = getNeighbour(roomPos, NeighbourSide.Left);
+        Room room = GetNeighbour(roomPos, NeighbourSide.Left);
         if (room != null)
             neighbours.Add(room);
-        room = getNeighbour(roomPos, NeighbourSide.Right);
+        room = GetNeighbour(roomPos, NeighbourSide.Right);
         if (room != null)
             neighbours.Add(room);
-        room = getNeighbour(roomPos, NeighbourSide.LeftUp);
+        room = GetNeighbour(roomPos, NeighbourSide.LeftUp);
         if (room != null)
             neighbours.Add(room);
-        room = getNeighbour(roomPos, NeighbourSide.LeftDown);
+        room = GetNeighbour(roomPos, NeighbourSide.LeftDown);
         if (room != null)
             neighbours.Add(room);
-        room = getNeighbour(roomPos, NeighbourSide.RightUp);
+        room = GetNeighbour(roomPos, NeighbourSide.RightUp);
         if (room != null)
             neighbours.Add(room);
-        room = getNeighbour(roomPos, NeighbourSide.RightDown);
+        room = GetNeighbour(roomPos, NeighbourSide.RightDown);
         if (room != null)
             neighbours.Add(room);
         return neighbours;
     }
 
-    private float GetRoomDistance(Room room, Vector3 position) => Vector2.Distance(room.transform.position, position);
-
     public Room GetNearestRoom(Vector3 position)
     {
-        Room minRoom = null;
-        float minValue = float.PositiveInfinity;
-        foreach (var room in _levelHolder.Rooms)
+        Collider2D[] availableRooms = GetAllRoomsInArea(position);
+        if (availableRooms.Length == 0)
         {
-            float dist = GetRoomDistance(room, position);
-            if (dist < minValue)
+            throw new Exception("No rooms near by (maybe increasing _roomDetectionRadius will help)");
+        }
+        Collider2D closestRoom = null;
+        float minDistance = float.PositiveInfinity;
+        foreach(var col in availableRooms)
+        {
+            float dist = Vector2.Distance(col.transform.position, position);
+            if (minDistance > dist)
             {
-                minRoom = room;
-                minValue = dist;
+                closestRoom = col;
+                minDistance = dist;
             }
         }
-        return minRoom;
+        return closestRoom.GetComponent<Room>();
     }
 
-    public Room GetNearestHideRoom(Vector3 position)
+
+    public Room GetNearestRoom(Vector3 position, Predicate<Room> filter)
     {
         Room minRoom = null;
         float minValue = float.PositiveInfinity;
         foreach (var room in _levelHolder.Rooms)
         {
-            if (room.FogRevealed)
+            if (!filter(room))
                 continue;
             float dist = GetRoomDistance(room, position);
             if (dist < minValue)
@@ -116,12 +122,30 @@ public class LevelManager : Manager<LevelManager>
         return minRoom;
     }
 
-    public Vector3 ConvertToPosition(Vector2Int intPos) => _levelTilemap.GetCellCenterWorld((Vector3Int)intPos);
-
     public void RevealFog(Vector2Int roomPos, Vector3 direction)
     {
         var room = _levelHolder.GetRoom(roomPos);
         room.RevealFog(direction);
+    }
+
+    private Collider2D[] GetAllRoomsInArea(Vector3 position)
+    {
+        return Physics2D.OverlapCircleAll(position, _roomDetectionRadius);
+    }
+
+    private float GetRoomDistance(Room room, Vector3 position) => Vector2.Distance(room.transform.position, position);
+
+    private Player SpawnPlayer()
+    {
+        if (_levelHolder == null)
+            _levelHolder = GetComponentInChildren<LevelHolder>();
+        return Instantiate(_playerPrefab, _levelHolder.ConvertToWorldPosition(_playerStartingCoord), Quaternion.identity);
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, _roomDetectionRadius);
     }
 }
 

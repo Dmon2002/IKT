@@ -16,10 +16,10 @@ public class VKConnector : MonoBehaviour
         bridge.Send("VKWebAppShowWallPostBox", new Dictionary<string, string> { { "message", "Пожужжим" }, { "attachments", "photo183896350_457241037" } }, ResultAddPost);
     }
 
-    public void ShowLeaderBoard()
-    {
-        bridge.VKWebAppShowLeaderBoardBox((int)scoreManager.Score);
-    }
+    //public void ShowLeaderBoard()
+    //{
+    //    bridge.VKWebAppShowLeaderBoardBox((int)scoreManager.Score);
+    //}
 
     public void ResultAddPost(string json)
     {

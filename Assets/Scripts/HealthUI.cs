@@ -1,41 +1,39 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 public class HealthUI : MonoBehaviour
 {
-    [SerializeField]
-    private int StartHP;
-    [SerializeField]
-    private AliveObject playerHP;
-    private float currentHP=-1;
-    [SerializeField]
-    private List<Image> icons;
-    // Update is called once per frame
+    [SerializeField] private List<Image> _heartImages;
 
-    private void Start()
+    private Entity _player;
+
+    private void Awake()
     {
-        playerHP.HP = StartHP;
+        _player = LevelManager.Instance.Player;
     }
-    void FixedUpdate()
+
+    private void OnEnable()
     {
-        if (playerHP.HP != currentHP)
-        {
-            UpdateHP();
-        }
+        _player.HealthChanged += UpdateHP;
+    }
+
+    private void OnDisable()
+    {
+        _player.HealthChanged -= UpdateHP;
     }
 
     private void UpdateHP()
     {
-        for(int i=0;i< icons.Count; i++)
+        for (int i = 0; i < _heartImages.Count; i++)
         {
-            if (playerHP.HP > i)
+            if ((i + 1) / _heartImages.Count >= _player.Hp / _player.MaxHp)
             {
-                icons[i].color = new Color(1, 1, 1, 1);
-            }
+                _heartImages[i].gameObject.SetActive(false);
+            } 
             else
             {
-                icons[i].color = new Color(1, 1, 1, 0);
+                _heartImages[i].gameObject.SetActive(true);
             }
         }
     }

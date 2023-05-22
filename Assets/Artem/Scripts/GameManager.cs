@@ -6,20 +6,9 @@ public class GameManager : Manager<GameManager>
     private GameObject _player;
 
     public ScoreManager scoreManager;
-    public GameObject Player
-    {
-        get
-        {
-            if (_player == null)
-            {
-                _player = FindObjectOfType<Player>().gameObject;
-            }
-            return _player;
-        }
-    }
 
-    private void Start()
+    private void Awake()
     {
-        Player.transform.position = LevelManager.Instance.ConvertToPosition(_startingPosition);
+        Time.timeScale = 1;
     }
 }

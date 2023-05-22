@@ -1,5 +1,9 @@
 fileFormatVersion: 2
-guid: 0b456d2906c7beb4ea8764617343a7a6
+<<<<<<<< Updated upstream:Assets/VkBridge.meta
+guid: 99f6887d46463324bad6497e3d570407
+========
+guid: dd49d1f0fd9e00a4ca9ee3266ec921a4
+>>>>>>>> Stashed changes:Assets/Prefabs/Attacks.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

@@ -6,7 +6,16 @@ using TMPro;
 public class ScoreManager : MonoBehaviour
 {
     public TMPro.TMP_Text text;
-    private float score;
+    public TMPro.TMP_Text otherText;
+    public TMPro.TMP_Text maxText;
+
+    private int score;
+
+    public float Score => score;
+
+    [SerializeField]
+    private SavesController savesController;
+
     private void Start()
     {
         /*
@@ -17,11 +26,22 @@ public class ScoreManager : MonoBehaviour
         */
         score = 0;
         text.text = score.ToString();
+        otherText.text = score.ToString();
+        maxText.text = savesController.GetInt("score").ToString();
     }
 
     public void PlusScore()
     {
+        print("PlusScore");
         score ++;
         text.text = score.ToString();
+        otherText.text = score.ToString();
+        if (score > savesController.GetInt("score"))
+        {
+            savesController.SetInt("score", score);
+            
+        }
+        maxText.text = savesController.GetInt("score").ToString();
+        print(savesController.GetInt("score"));
     }
 }

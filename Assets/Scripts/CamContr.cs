@@ -8,7 +8,9 @@ public class CamContr : MonoBehaviour {
 	public Vector2 StartPos;
 	public float DownPos;
 	void Start () {
-		transform.position = StartPos;
+
+		transform.position = (Vector3)StartPos + new Vector3(0f, 0f, -10f);
+		
 	}
 
 	void Update () {

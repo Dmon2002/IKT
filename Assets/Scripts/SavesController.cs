@@ -7,6 +7,12 @@ public class SavesController : MonoBehaviour
     // В первую очередь подпишитесь на событие GP_SDK.OnReady;
     [SerializeField]
     private bool IsYandexBuild = true;
+
+    void Awake()
+    {
+        DontDestroyOnLoad(transform.gameObject);
+    }
+
     private void OnEnable()
     {
         if (IsYandexBuild)
@@ -41,24 +47,100 @@ public class SavesController : MonoBehaviour
         }
         else
         {
+
         }
 
     }
 
-    public void ChangeLanguage(string value)
+    public bool ChangeLanguage(string value)
     {
         if (IsYandexBuild)
         {
-
+            if (value == "ru" || value == "en")
+            {
+                YandexGame.savesData.language = value;
+                SaveProgress(); return true;
+            }
         }
         else
         {
-
+            if (value == "en")
+            {
+                GameScore.GS_Language.Change(GameScore.Language.en);
+                SaveProgress(); return true;
+            }
+            else if(value == "ru")
+            {
+                GameScore.GS_Language.Change(GameScore.Language.ru);
+                SaveProgress(); return true;
+            }
         }
-
+        return false;
     }
 
-    public int GetInt(string value)
+    public string GetCurrentLanguage()
+    {
+        if (IsYandexBuild)
+        {
+            return YandexGame.savesData.language;
+        }
+        else
+        {
+            return GameScore.GS_Language.Current();
+        }
+    }
+
+    public bool TryBuyUpdate(int id)
+    {
+        if (IsYandexBuild)
+        {
+            if (id == 0)
+            {
+                YandexGame.savesData.lvlStartHealth++;
+                return true;
+            }
+            else if (id == 1)
+            {
+                YandexGame.savesData.lvlSpeedExp++;
+                return true;
+            }
+            else if (id == 2)
+            {
+                YandexGame.savesData.lvlPlusChest++;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else
+        {
+            if (id == 0)
+            {
+                GameScore.GS_Player.Set("update0", GameScore.GS_Player.GetInt("update0")+1);
+                return true;
+            }
+            else if (id == 1)
+            {
+                GameScore.GS_Player.Set("update1", GameScore.GS_Player.GetInt("update1") + 1);
+                return true;
+            }
+            else if (id == 2)
+            {
+                GameScore.GS_Player.Set("update2", GameScore.GS_Player.GetInt("update2") + 1);
+                YandexGame.savesData.lvlPlusChest++;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        SaveProgress();
+    }
+
+    public int Get(string value)
     {
         if (IsYandexBuild)
         {
@@ -66,6 +148,59 @@ public class SavesController : MonoBehaviour
             {
                 return YandexGame.savesData.score;
             }
+            else if (value == "gold")
+            {
+                return YandexGame.savesData.gold;
+            }
+            else if (value == "hero0")
+            {
+                return 1;
+            }
+            else if (value == "hero1")
+            {
+                if (YandexGame.savesData.hero[1])
+                {
+                    return 1;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            else if (value == "hero2")
+            {
+                if (YandexGame.savesData.hero[2])
+                {
+                    return 1;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            else if (value == "hero3")
+            {
+                if (YandexGame.savesData.hero[3])
+                {
+                    return 1;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            else if (value == "update2")
+            {
+                return YandexGame.savesData.lvlPlusChest;
+            }
+            else if (value == "update1")
+            {
+                return YandexGame.savesData.lvlSpeedExp;
+            }
+            else if (value == "update0")
+            {
+                return YandexGame.savesData.lvlStartHealth;
+            }
             else
             {
                 return 0;
@@ -73,9 +208,20 @@ public class SavesController : MonoBehaviour
         }
         else
         {
-            if (GameScore.GS_Player.Has(value))
+            if (GameScore.GS_Player.Has(value) && !(value == "hero0" || value == "hero1" || value == "hero2" || value == "hero3"))
             {
                 return GameScore.GS_Player.GetInt(value);
+            }
+            else if (GameScore.GS_Player.Has(value) &&( value=="hero0" || value == "hero1" || value == "hero2" || value == "hero3"))
+            {
+                if(GameScore.GS_Player.GetBool(value))
+                {
+                    return 1;
+                }
+                else
+                {
+                    return 0;
+                }
             }
             else
             {
@@ -84,20 +230,32 @@ public class SavesController : MonoBehaviour
         }
 
     }
-    public void SetInt(string value, int valueInt)
+    public void SetScore(int valueInt)
     {
         if (IsYandexBuild)
         {
-            if (value == "score")
-            {
-                YandexGame.savesData.score = valueInt;
-            }
+            YandexGame.savesData.score = valueInt;
+            
         }
         else
         {
-            GameScore.GS_Player.Set(value, valueInt);
+            GameScore.GS_Player.Set("score", valueInt);
         }
-        
+        SaveProgress();
+    }
+
+    public void SetGold(int value)
+    {
+        if (IsYandexBuild)
+        {
+            YandexGame.savesData.gold = value;
+
+        }
+        else
+        {
+            GameScore.GS_Player.Set("gold", value);
+        }
+        SaveProgress();
     }
 
     public void ShowAdd()
@@ -122,12 +280,22 @@ public class SavesController : MonoBehaviour
 
     public void EndLevel()
     {
-
+        SaveProgress();
     }
     public void EndLocation()
     {
         ShowAdd();
+        if (IsYandexBuild)
+        {
+            YandexGame.savesData.location++;
+        }
+        else
+        {
+            GameScore.GS_Player.Set("location", GameScore.GS_Player.GetInt("location")+1);
+        }
+        SaveProgress();
     }
+
 
     public void LoseLevel()
     {

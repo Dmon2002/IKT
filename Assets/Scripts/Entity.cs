@@ -57,5 +57,6 @@ public abstract class Entity : MonoBehaviour
     public virtual void Die()
     {
         Died?.Invoke();
+        gameObject.SetActive(false);
     }
 }

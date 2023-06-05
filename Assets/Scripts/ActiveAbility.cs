@@ -4,22 +4,27 @@ using UnityEngine;
 
 public class ActiveAbility : MonoBehaviour
 {
+
     [SerializeField] private bool _spawnsAttack;
     [SerializeField] private Attack _attackPrefab;
+    [SerializeField] private bool _isDirectional;
+    [SerializeField] private AbilityDirectionDecision _directionDecision;
+    [SerializeField] private bool _activateOnStart;
     [SerializeField] private StatContainer _statContainer;
-    [SerializeField] private bool _isAutomatic;
-    [SerializeField] private bool _isActiveOnStart;
 
     private Entity _entity;
     private List<AbilityDecision> _decisions;
     private bool _isActive;
     private CooldownReload _abilityCooldownReload;
+    private Vector2 _direction;
 
     private IEnumerator _activatingCoroutine;
 
+    public bool IsActive => _isActive;
+
     public StatContainer StatContainer => _statContainer;
 
-    public virtual bool CanActivate
+    public bool CanActivate
     {
         get
         {
@@ -36,7 +41,7 @@ public class ActiveAbility : MonoBehaviour
         }
     }
 
-    private void Awake()
+    protected virtual void Awake()
     {
         _abilityCooldownReload = new CooldownReload(_statContainer.GetStatFloatValue(Stat.AbilityCooldownName), this);
         _decisions = new List<AbilityDecision>(GetComponentsInChildren<AbilityDecision>());
@@ -48,7 +53,7 @@ public class ActiveAbility : MonoBehaviour
 
     private void Start()
     {
-        if (_isActiveOnStart && _isAutomatic)
+        if (_activateOnStart)
         {
             StartActivating();
         }
@@ -63,8 +68,23 @@ public class ActiveAbility : MonoBehaviour
     {
         if (!CanActivate)
             return;
-        var attack = Instantiate(_attackPrefab, transform.position, Quaternion.identity);
+        if (_spawnsAttack)
+        {
+            Debug.Log("spawn");
+            var attack = Instantiate(_attackPrefab, transform.position, Quaternion.identity);
+            if (_isDirectional)
+            {
+                attack.SetDirection(_direction);
+            }
+        }
         _abilityCooldownReload.StartReloading();
+    }
+
+    public void SetDirection()
+    {
+        if (!_isDirectional)
+            return;
+        _direction = _directionDecision.DecideDirection();
     }
 
     public void StartActivating()
@@ -83,6 +103,10 @@ public class ActiveAbility : MonoBehaviour
     {
         while (_isActive)
         {
+            if (_isDirectional)
+            {
+                SetDirection();
+            }
             Activate();
             yield return null;
         }

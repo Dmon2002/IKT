@@ -183,7 +183,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5020222774981418401}
-  - component: {fileID: 2636899456175910279}
+  - component: {fileID: 5581590278213472521}
+  - component: {fileID: 9102148296030918467}
   m_Layer: 0
   m_Name: RangeWeapon
   m_TagString: Untagged
@@ -206,7 +207,7 @@ Transform:
   m_Father: {fileID: 5020222774221923776}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2636899456175910279
+--- !u!114 &5581590278213472521
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -215,6 +216,31 @@ MonoBehaviour:
   m_GameObject: {fileID: 5020222774981418403}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a06cb04d95cdf6a41b282fb0ffe649c1, type: 3}
+  m_Script: {fileID: 11500000, guid: 57f8fc342009ae140900ba31a53e368b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spawnsAttack: 1
+  _attackPrefab: {fileID: 7301049892378506290, guid: b0135237ff97800448a2ae965373d163, type: 3}
+  _isDirectional: 1
+  _directionDecision: {fileID: 9102148296030918467}
+  _activateOnStart: 1
+  _statContainer:
+    _stats:
+    - _config: {fileID: 11400000, guid: 4431389b71292c24b842d595f8eb6eae, type: 2}
+      _floatValue: 1
+      _intValue: 0
+      _boolValue: 0
+      _enumType: 0
+      _stringValue: 
+--- !u!114 &9102148296030918467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5020222774981418403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ba1ad127051d57469fa5d279f2b2f50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

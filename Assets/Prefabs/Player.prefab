@@ -163,6 +163,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _spawnsAttack: 1
   _attackPrefab: {fileID: 4096598606938868458, guid: 3e0a92a2737909e4498113b6d819e05b, type: 3}
+  _isDirectional: 1
+  _directionDecision: {fileID: 3079045542679481334}
+  _activateOnStart: 1
   _statContainer:
     _stats:
     - _config: {fileID: 11400000, guid: 4431389b71292c24b842d595f8eb6eae, type: 2}
@@ -177,8 +180,6 @@ MonoBehaviour:
       _boolValue: 0
       _enumType: 0
       _stringValue: 
-  _isAutomatic: 1
-  _isActiveOnStart: 1
 --- !u!114 &3079045542679481334
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -288,7 +289,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19e48ece7cb677144ac027eca4ab2afc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxhp: 20
+  _maxhp: 10
   _statContainer:
     _stats:
     - _config: {fileID: 11400000, guid: 9e20ac37c64efe040864574655beff2f, type: 2}

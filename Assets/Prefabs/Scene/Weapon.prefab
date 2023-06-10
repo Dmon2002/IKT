@@ -209,5 +209,5 @@ MonoBehaviour:
       _stringValue: 
   _lifetime: 1
   _effectStats: []
-  _dealsDamage: 0
-  _damage: 0
+  _dealsDamage: 1
+  _damage: 3

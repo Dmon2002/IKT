@@ -232,6 +232,12 @@ MonoBehaviour:
       _boolValue: 0
       _enumType: 0
       _stringValue: 
+    - _config: {fileID: 11400000, guid: e840e729028e9ac4ea1095f17dabd802, type: 2}
+      _floatValue: 1
+      _intValue: 1
+      _boolValue: 0
+      _enumType: 0
+      _stringValue: 
 --- !u!114 &9102148296030918467
 MonoBehaviour:
   m_ObjectHideFlags: 0

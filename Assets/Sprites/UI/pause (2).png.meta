@@ -441,34 +441,13 @@ TextureImporter:
         height: 1292
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 151, y: 144, z: 151, w: 145}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
       spriteID: 4329dbe05b044c243b6ceb78188f7f0d
       internalID: 1695484823
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: pause (2)_26
-      rect:
-        serializedVersion: 2
-        x: 1885
-        y: 587
-        width: 115
-        height: 1274
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2a54dd59b8863e641a8f1bc2bdef5965
-      internalID: 277747191
       vertices: []
       indices: 
       edges: []
@@ -564,37 +543,16 @@ TextureImporter:
         x: 106
         y: 363
         width: 1793
-        height: 231
+        height: 100
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 801, y: 0, z: 787, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
       spriteID: 7d13e9351bb33434caca3fbe2a33208f
       internalID: 1703697924
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: pause (2)_36
-      rect:
-        serializedVersion: 2
-        x: 1872
-        y: 574
-        width: 52
-        height: 42
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 33acfdc6cb43dab43bdd7ec1f67ec7b8
-      internalID: -1369121917
       vertices: []
       indices: 
       edges: []
@@ -609,7 +567,7 @@ TextureImporter:
         height: 100
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 802, y: 0, z: 781, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0

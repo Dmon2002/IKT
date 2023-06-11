@@ -22,10 +22,10 @@ public class CharacterSelector : MonoBehaviour
 
     private void SelectCharacter(int index)
     {
-        if (index>=0 && selectableCharacters.Count>index)
+        if (index >= 0 && selectableCharacters.Count > index)
         {
             _characterImage.sprite = selectableCharacters[index].sprite;
-            _characterName.text= selectableCharacters[index].name;
+            _characterName.text = selectableCharacters[index].name;
             _currentIndex = index;
         }
     }

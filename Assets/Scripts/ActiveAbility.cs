@@ -45,10 +45,10 @@ public class ActiveAbility : MonoBehaviour
     {
         _abilityCooldownReload = new CooldownReload(_statContainer.GetStatFloatValue(Stat.AbilityCooldownName), this);
         _decisions = new List<AbilityDecision>(GetComponentsInChildren<AbilityDecision>());
-        _decisions.ForEach(decision =>
+        foreach (var decision in _decisions)
         {
             decision.SetAbility(this);
-        });
+        }
     }
 
     private void Start()

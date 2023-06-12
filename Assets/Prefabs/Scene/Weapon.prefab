@@ -130,8 +130,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4628209679757359503}
-  - component: {fileID: 4628209679757359497}
   - component: {fileID: 4628209679757359502}
+  - component: {fileID: 4096598606938868458}
   m_Layer: 0
   m_Name: Weapon
   m_TagString: Untagged
@@ -155,25 +155,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
---- !u!114 &4628209679757359497
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4628209679757359500}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 535cfecbd964dad4cbfb24f26cf31aa8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _damage: 1
-  _distance: 3
-  _reloadTime: 1
-  owner: 0
-  IsCritical: 0
-  colliderTime: 0.2
-  anim: {fileID: 4628209679376275421}
 --- !u!60 &4628209679757359502
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -206,3 +187,27 @@ PolygonCollider2D:
       - {x: 2.8796759, y: -0.724967}
       - {x: 2.922691, y: -0.73489285}
       - {x: 3.0265288, y: -0.086310685}
+--- !u!114 &4096598606938868458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4628209679757359500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19abde525d163794ba2f313ec2dc5312, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _statContainer:
+    _stats:
+    - _config: {fileID: 11400000, guid: e840e729028e9ac4ea1095f17dabd802, type: 2}
+      _floatValue: 0
+      _intValue: 0
+      _boolValue: 0
+      _enumType: 0
+      _stringValue: 
+  _lifetime: 1
+  _effectStats: []
+  _dealsDamage: 1
+  _damage: 3

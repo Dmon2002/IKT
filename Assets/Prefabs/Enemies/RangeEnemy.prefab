@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 5020222774221923777}
   - component: {fileID: 5020222774221923778}
   - component: {fileID: 5020222774221923779}
-  - component: {fileID: 5508994914307308160}
   - component: {fileID: 9078453303412492215}
-  m_Layer: 0
+  - component: {fileID: 7011847501953159626}
+  m_Layer: 8
   m_Name: RangeEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -126,24 +126,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 7
---- !u!114 &5508994914307308160
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5020222774221923781}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b2034159e515d344a5cff77a7bccc5b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _weapon: {fileID: 5020222774981418402}
-  _maxhp: 5
-  _moveSpeed: 0
-  _isFlying: 0
-  _canReveal: 0
-  agreDelay: 1
 --- !u!95 &9078453303412492215
 Animator:
   serializedVersion: 5
@@ -165,6 +147,33 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &7011847501953159626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5020222774221923781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40edc4924b4fdaa4e97daeb8b1b11036, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxhp: 10
+  _statContainer:
+    _stats:
+    - _config: {fileID: 11400000, guid: e840e729028e9ac4ea1095f17dabd802, type: 2}
+      _floatValue: 0
+      _intValue: 1
+      _boolValue: 0
+      _enumType: 0
+      _stringValue: 
+    - _config: {fileID: 11400000, guid: 9e20ac37c64efe040864574655beff2f, type: 2}
+      _floatValue: 0
+      _intValue: 0
+      _boolValue: 0
+      _enumType: 0
+      _stringValue: 
 --- !u!1 &5020222774981418403
 GameObject:
   m_ObjectHideFlags: 0
@@ -174,7 +183,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5020222774981418401}
-  - component: {fileID: 5020222774981418402}
+  - component: {fileID: 5581590278213472521}
+  - component: {fileID: 9102148296030918467}
   m_Layer: 0
   m_Name: RangeWeapon
   m_TagString: Untagged
@@ -197,7 +207,7 @@ Transform:
   m_Father: {fileID: 5020222774221923776}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5020222774981418402
+--- !u!114 &5581590278213472521
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -206,13 +216,37 @@ MonoBehaviour:
   m_GameObject: {fileID: 5020222774981418403}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a06cb04d95cdf6a41b282fb0ffe649c1, type: 3}
+  m_Script: {fileID: 11500000, guid: 57f8fc342009ae140900ba31a53e368b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damage: 1
-  _distance: 0
-  _reloadTime: 2
-  owner: 1
-  IsCritical: 0
-  _bulletSpeed: 2.4
-  _bulletPrefab: {fileID: 1421124005025569302, guid: a26df7b0819f9434a9d0a1f8ea438d21, type: 3}
+  _spawnsAttack: 1
+  _attackPrefab: {fileID: 7301049892378506290, guid: b0135237ff97800448a2ae965373d163, type: 3}
+  _isDirectional: 1
+  _directionDecision: {fileID: 9102148296030918467}
+  _activateOnStart: 1
+  _statContainer:
+    _stats:
+    - _config: {fileID: 11400000, guid: 4431389b71292c24b842d595f8eb6eae, type: 2}
+      _floatValue: 1
+      _intValue: 0
+      _boolValue: 0
+      _enumType: 0
+      _stringValue: 
+    - _config: {fileID: 11400000, guid: e840e729028e9ac4ea1095f17dabd802, type: 2}
+      _floatValue: 1
+      _intValue: 1
+      _boolValue: 0
+      _enumType: 0
+      _stringValue: 
+--- !u!114 &9102148296030918467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5020222774981418403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ba1ad127051d57469fa5d279f2b2f50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

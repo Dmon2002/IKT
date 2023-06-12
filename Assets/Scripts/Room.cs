@@ -1,39 +1,30 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 [RequireComponent(typeof(Collider2D))]
 public class Room : MonoBehaviour
 {
-    public UnityEvent FogRevealStart;
-    public UnityEvent FogRevealEnd;
+    private static readonly string _canRevealFogName = "CanReveal";
+
+    [SerializeField] private Animation _fogTile;
+    [SerializeField] private float _fogRevealDuration;
+
+    public event Action FogRevealStart;
+    public event Action FogRevealEnd;
+
     private Vector2Int _coords;
 
-    private RoomSpawner _spawner;
+    private bool _fogRevealed;
 
-    //[SerializeField] private Animation _fogRevealAnimation;
-    [SerializeField] private GameObject _fogTile;
-    [SerializeField] private bool _fogRevealed;
-    [SerializeField] private float _fogDelay;
+    private List<Entity> _inRoom = new();
 
-    private List<AliveObject> _inRoom = new();
-
-    public IEnumerable<AliveObject> InRoom => _inRoom;
+    public IEnumerable<Entity> InRoom => _inRoom;
 
     public Vector2Int Coords => _coords;
 
     public bool FogRevealed => _fogRevealed;
-
-    public void OnFogRevealEnd()
-    {
-        FogRevealEnd.Invoke();
-    }
-
-    private void Awake()
-    {
-        _spawner = GetComponent<RoomSpawner>();
-    }
 
     public void SetCoords(Vector2Int coords)
     {
@@ -45,50 +36,35 @@ public class Room : MonoBehaviour
         if (_fogRevealed)
             return;
         _fogRevealed = true;
-        FogRevealStart.Invoke();
-        _fogTile.GetComponent<FogAnimationEvent>()?.FogAnimationStart(direction);
-        StartCoroutine(FogRevealDelayCoroutine());
-
-    }
-
-    public void OnFogAnimationEnd()
-    {
-        if (GameManager.Instance.scoreManager != null)
-        {
-            FogRevealEnd.Invoke();
-            GameManager.Instance.scoreManager.PlusScore();
-        }
-    }
-
-    public void AddAliveToRoom(AliveObject obj)
-    {
-        _inRoom.Add(obj);
+        FogRevealStart?.Invoke();
+        _fogTile.Play();
+        StartCoroutine(FogRevealDurationCoroutine());
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent<AliveObject>(out var alive))
+        if (collision.TryGetComponent<Entity>(out var entity))
         {
-            if (!alive.CanReveal)
+            if (!entity.StatContainer.GetStatBoolValue(_canRevealFogName))
                 return;
-            RevealFog(transform.position - alive.transform.position);
-            if (_inRoom.Contains(alive))
+            RevealFog(transform.position - entity.transform.position);
+            if (_inRoom.Contains(entity))
                 return;
-            _inRoom.Add(alive);
+            _inRoom.Add(entity);
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.TryGetComponent<AliveObject>(out var alive))
+        if (collision.TryGetComponent<Entity>(out var entity))
         {
-            _inRoom.Remove(alive);
+            _inRoom.Remove(entity);
         }
     }
 
-    private IEnumerator FogRevealDelayCoroutine()
+    private IEnumerator FogRevealDurationCoroutine()
     {
-        yield return new WaitForSeconds(_fogDelay);
-        FogRevealEnd.Invoke();
+        yield return new WaitForSeconds(_fogRevealDuration);
+        FogRevealEnd?.Invoke();
     }
 }

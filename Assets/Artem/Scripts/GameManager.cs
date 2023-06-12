@@ -7,26 +7,10 @@ public class GameManager : Manager<GameManager>
     private GameObject _player;
 
     public ScoreManager scoreManager;
-    public GameObject Player
-    {
-        get
-        {
-            if (_player == null)
-            {
-                _player = FindObjectOfType<Player>().gameObject;
-            }
-            return _player;
-        }
-    }
 
     private void Awake()
     {
         Time.timeScale = 1;
-    }
-
-    private void Start()
-    {
-        Player.transform.position = LevelManager.Instance.ConvertToPosition(_startingPosition);
     }
 
     public void Restart()

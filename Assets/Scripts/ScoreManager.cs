@@ -38,7 +38,7 @@ public class ScoreManager : MonoBehaviour
         otherText.text = score.ToString();
         if (score > savesController.Get("score"))
         {
-            savesController.SetScore(score);
+            //savesController.Set("score", score);
             
         }
         maxText.text = savesController.Get("score").ToString();

@@ -20,19 +20,22 @@ public class RoomSpawner : MonoBehaviour
 
     private bool spawned;
 
+    private void OnEnable()
+    {
+        room.FogRevealStart += Spawn;
+    }
+
+    private void OnDisable()
+    {
+        room.FogRevealStart -= Spawn;
+    }
+
     public void Spawn()
     {
-        var objs = new List<GameObject>();
+        List<GameObject> entities = new ();
         if (spawned)
             return;
         spawned = true;
         spawnables.ForEach(x => x.Spawn());
-        objs.ForEach(x =>
-        {
-            if (TryGetComponent<AliveObject>(out var alive))
-            {
-                room.AddAliveToRoom(alive);
-            }
-        });
     }
 }

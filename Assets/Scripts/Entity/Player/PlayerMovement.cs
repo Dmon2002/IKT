@@ -5,7 +5,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _smoothInputSpeed;
     [SerializeField] private StatContainer _playerStatContainer;
 
-    private PlayerInput _input;
+    public static PlayerInput _input;
 
     private Vector2 _currentInput;
     private Vector2 _smoothVelocity;

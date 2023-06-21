@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class AudioManager : MonoBehaviour
 {
@@ -15,11 +16,58 @@ public class AudioManager : MonoBehaviour
     public AudioSource stepSound;
     public AudioSource playerTakeDamage;
 
+    public AudioSource selection;
+
+    public AudioMixer mixer;
+
     public static AudioManager instance;
 
     public float minTimeBetweenSounds = 0.7f;
 
     private bool isPlayingSound = false;
+
+    public bool MusicON
+    {
+        get
+        {
+            mixer.GetFloat("MusicVolume", out float currenValue);
+            return currenValue == 0;
+        }
+        set
+        {
+            if (value)
+            {
+                mixer.SetFloat("MusicVolume", 0);
+            }
+            else
+            {
+                mixer.SetFloat("MusicVolume", -80);
+            }
+            
+        }
+    }
+
+    public bool SoundsON
+    {
+        get
+        {
+            mixer.GetFloat("SoundsVolume", out float currenValue);
+            return currenValue == 0;
+        }
+        set
+        {
+            if (value)
+            {
+                mixer.SetFloat("SoundsVolume", 0);
+            }
+            else
+            {
+                mixer.SetFloat("SoundsVolume", -80);
+            }
+
+        }
+    }
+
     private void Awake()
     {
         // Ensure only one instance of AudioManager exists
@@ -76,5 +124,34 @@ public class AudioManager : MonoBehaviour
     public void PlayPlayerTakeDamage()
     {
         playerTakeDamage.Play();
+    }
+
+    public void PlaySelection()
+    {
+        selection.PlayOneShot(selection.clip);
+    }
+
+    public void SwitchMusic()
+    {
+        if (MusicON)
+        {
+            MusicON = false;
+        }
+        else
+        {
+            MusicON= true;
+        }
+    }
+
+    public void SwitchSounds()
+    {
+        if (SoundsON)
+        {
+            SoundsON = false;
+        }
+        else
+        {
+            SoundsON = true;
+        }
     }
 }

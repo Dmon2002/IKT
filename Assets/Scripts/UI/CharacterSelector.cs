@@ -10,6 +10,9 @@ public class CharacterSelector : MonoBehaviour
     [SerializeField] private Image _characterImage;
     [SerializeField] private TMP_Text _characterName;
 
+    private Player _playerPrefab;
+    public Player PlayerPrefab { get; private set; }
+
     private int _currentIndex;
 
     [SerializeField] private List<SelectableCharacter> selectableCharacters;
@@ -26,6 +29,8 @@ public class CharacterSelector : MonoBehaviour
         {
             _characterImage.sprite = selectableCharacters[index].sprite;
             _characterName.text = selectableCharacters[index].name;
+            PlayerPrefab = selectableCharacters[index].characterPrefab;
+
             _currentIndex = index;
         }
     }

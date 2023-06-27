@@ -18,7 +18,8 @@ namespace YG
         public int lvlStartHealth = 0;
         public int lvlSpeedExp = 0;
         public int lvlPlusChest = 0;
-
+        public int sound;
+        public int music;
         public SavesYG()
         {
            

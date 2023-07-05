@@ -1,54 +1,22 @@
-using System.Collections;
+using System;
 using UnityEngine;
 
-public class Effect : MonoBehaviour
+[Serializable]
+public class Effect
 {
-    private EffectStat _effectStat;
+    [SerializeField] private EffectImposer _prefab;
+    [SerializeField] private StatChange _statChange;
+    [SerializeField] private bool _isTemporary;
+    [SerializeField] private float _duration;
 
-    private Entity _entity;
+    public StatChange StatChange => _statChange;
 
-    protected Entity Entity => _entity;
+    public bool IsTemporary => _isTemporary;
 
-    protected EffectStat EffectStat => _effectStat;
+    public float Duration => _duration;
 
-    public void SetEntity(Entity entity)
+    public EffectImposer SpawnEffect(Vector3 position)
     {
-        _entity = entity;
-        transform.SetParent(entity.transform);
-    }
-
-    public void SetEffectStat(EffectStat effectStat)
-    {
-        _effectStat = effectStat;
-    }
-
-    protected virtual void Start()
-    {
-        ApplyEffect();
-    }
-
-    protected virtual void ApplyEffect()
-    {
-        //_entity.StatContainer.ApplyStatChange(_effectStat.StatChange, _effectStat.IsTemporary);
-        if (_effectStat.IsTemporary)
-        {
-            StartCoroutine(LifeTimeCoroutine());
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
-
-    protected virtual void RevertEffect()
-    {
-        //_entity.StatContainer.RevertChange(_effectStat.StatChange);
-    }
-
-    private IEnumerator LifeTimeCoroutine()
-    {
-        yield return new WaitForSeconds(_effectStat.Duration);
-        RevertEffect();
-        Destroy(gameObject);
+        return GameObject.Instantiate(_prefab, position, Quaternion.identity);
     }
 }

@@ -3,7 +3,8 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float _smoothInputSpeed;
-    [SerializeField] private StatContainer _playerStatContainer;
+
+    private StatContainer _entityStatContainer;
 
     private PlayerInput _input;
 
@@ -36,10 +37,15 @@ public class PlayerMovement : MonoBehaviour
         Move(_currentInput, Time.fixedDeltaTime);
     }
 
+    public void SetStatContainer(StatContainer statContainer)
+    {
+        _entityStatContainer = statContainer;
+    }
+
     public void Move(Vector2 moveVector2, float time)
     {
         if (!CanMove)
             return;
-        transform.Translate(moveVector2 * _playerStatContainer.GetStatFloatValue(Stat.MovementSpeedStatName) * time);
+        transform.Translate(moveVector2 * _entityStatContainer.GetStatFloatValue(Stat.MovementSpeedStatName) * time);
     }
 }

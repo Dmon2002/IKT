@@ -3,17 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+[RequireComponent(typeof(StatContainer))]
 public abstract class Attack : MonoBehaviour
 {
-    [SerializeField] private StatContainer _statContainer;
     [SerializeField] private float _lifetime;
-    [SerializeField] private List<EffectStat> _effectStats;
+    [SerializeField] private List<Effect> _effectStats;
     [SerializeField] private bool _dealsDamage;
     [SerializeField] private float _damage;
+
+    private StatContainer _statContainer;
 
     public StatContainer StatContainer => _statContainer;
 
     protected Vector2 Direction { get; set; }
+
+    private void Awake()
+    {
+        _statContainer = GetComponent<StatContainer>();
+    }
 
     private void Start()
     {
@@ -45,8 +52,8 @@ public abstract class Attack : MonoBehaviour
             foreach (var effectStat in _effectStats)
             {
                 var effect = effectStat.SpawnEffect(transform.position);
-                effect.SetEntity(entity);
-                effect.SetEffectStat(effectStat);
+                effect.SetStatContainer(entity.StatContainer);
+                effect.SetEffect(effectStat);
             }
         }
     }

@@ -8,7 +8,8 @@ public class ShowIfEnumAttributeDrawer : PropertyDrawer
     {
         var attribute = (ShowIfEnumAttribute)base.attribute;
         var enumProperty = property.serializedObject.FindProperty(attribute.EnumPropertyName);
-        //Debug.Log("Outside");
+        Debug.Log("Outside");
+        Debug.Log(attribute.EnumPropertyName);
         if (enumProperty != null && enumProperty.propertyType == SerializedPropertyType.Enum)
         {
             Debug.Log("Inside1");

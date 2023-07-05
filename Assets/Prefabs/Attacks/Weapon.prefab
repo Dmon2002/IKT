@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 4628209679757359503}
   - component: {fileID: 4628209679757359502}
   - component: {fileID: 4096598606938868458}
+  - component: {fileID: 6491909996424034939}
   m_Layer: 0
   m_Name: Weapon
   m_TagString: Untagged
@@ -199,15 +200,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19abde525d163794ba2f313ec2dc5312, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _statContainer:
-    _stats:
-    - _config: {fileID: 11400000, guid: e840e729028e9ac4ea1095f17dabd802, type: 2}
-      _floatValue: 0
-      _intValue: 0
-      _boolValue: 0
-      _enumType: 0
-      _stringValue: 
   _lifetime: 1
   _effectStats: []
   _dealsDamage: 1
   _damage: 3
+--- !u!114 &6491909996424034939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4628209679757359500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ca56e42aaacff049a4fbfe5d0f0a2ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _startingStats:
+  - _config: {fileID: 11400000, guid: e840e729028e9ac4ea1095f17dabd802, type: 2}
+    _type: 3
+    _floatValue: 0
+    _intValue: 0
+    _boolValue: 0
+    _enumType: 0
+    _stringValue: 

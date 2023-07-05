@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5020222774221923779}
   - component: {fileID: 9078453303412492215}
   - component: {fileID: 7011847501953159626}
+  - component: {fileID: 2978408789644591100}
   m_Layer: 8
   m_Name: RangeEnemy
   m_TagString: Untagged
@@ -160,20 +161,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxhp: 10
-  _statContainer:
-    _stats:
-    - _config: {fileID: 11400000, guid: e840e729028e9ac4ea1095f17dabd802, type: 2}
-      _floatValue: 0
-      _intValue: 1
-      _boolValue: 0
-      _enumType: 0
-      _stringValue: 
-    - _config: {fileID: 11400000, guid: 9e20ac37c64efe040864574655beff2f, type: 2}
-      _floatValue: 0
-      _intValue: 0
-      _boolValue: 0
-      _enumType: 0
-      _stringValue: 
+--- !u!114 &2978408789644591100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5020222774221923781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ca56e42aaacff049a4fbfe5d0f0a2ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _startingStats:
+  - _config: {fileID: 11400000, guid: 9e20ac37c64efe040864574655beff2f, type: 2}
+    _type: 0
+    _floatValue: 0
+    _intValue: 0
+    _boolValue: 0
+    _enumType: 0
+    _stringValue: 
+  - _config: {fileID: 11400000, guid: e840e729028e9ac4ea1095f17dabd802, type: 2}
+    _type: 3
+    _floatValue: 0
+    _intValue: 1
+    _boolValue: 0
+    _enumType: 0
+    _stringValue: 
 --- !u!1 &5020222774981418403
 GameObject:
   m_ObjectHideFlags: 0
@@ -185,6 +199,7 @@ GameObject:
   - component: {fileID: 5020222774981418401}
   - component: {fileID: 5581590278213472521}
   - component: {fileID: 9102148296030918467}
+  - component: {fileID: 2793140021364703090}
   m_Layer: 0
   m_Name: RangeWeapon
   m_TagString: Untagged
@@ -224,20 +239,6 @@ MonoBehaviour:
   _isDirectional: 1
   _directionDecision: {fileID: 9102148296030918467}
   _activateOnStart: 1
-  _statContainer:
-    _stats:
-    - _config: {fileID: 11400000, guid: 4431389b71292c24b842d595f8eb6eae, type: 2}
-      _floatValue: 1
-      _intValue: 0
-      _boolValue: 0
-      _enumType: 0
-      _stringValue: 
-    - _config: {fileID: 11400000, guid: e840e729028e9ac4ea1095f17dabd802, type: 2}
-      _floatValue: 1
-      _intValue: 1
-      _boolValue: 0
-      _enumType: 0
-      _stringValue: 
 --- !u!114 &9102148296030918467
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -250,3 +251,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ba1ad127051d57469fa5d279f2b2f50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2793140021364703090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5020222774981418403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ca56e42aaacff049a4fbfe5d0f0a2ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _startingStats:
+  - _config: {fileID: 11400000, guid: 4431389b71292c24b842d595f8eb6eae, type: 2}
+    _type: 0
+    _floatValue: 5
+    _intValue: 0
+    _boolValue: 0
+    _enumType: 0
+    _stringValue: 

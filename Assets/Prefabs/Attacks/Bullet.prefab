@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8453059893335829011}
   - component: {fileID: 3500774856437385288}
   - component: {fileID: 7301049892378506290}
+  - component: {fileID: 6224278836169595517}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
@@ -136,21 +137,47 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8977bdca99db9db42bb2ecba128e58ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _statContainer:
-    _stats:
-    - _config: {fileID: 11400000, guid: 5b4a99e8524a51744909ffe53cc64848, type: 2}
-      _floatValue: 1
-      _intValue: 0
-      _boolValue: 0
-      _enumType: 0
-      _stringValue: 
-    - _config: {fileID: 11400000, guid: e840e729028e9ac4ea1095f17dabd802, type: 2}
-      _floatValue: 1
-      _intValue: 1
-      _boolValue: 0
-      _enumType: 0
-      _stringValue: 
-  _lifetime: 5
-  _effectStats: []
+  _lifetime: 1
+  _effectStats:
+  - _prefab: {fileID: 7990888699196896294, guid: 497b0a5b6abcb7d45b60d1a09da08730, type: 3}
+    _statChange:
+      _changeType: 0
+      _statSubstract:
+        _config: {fileID: 11400000, guid: 5b4a99e8524a51744909ffe53cc64848, type: 2}
+        _type: 0
+        _floatValue: 0.5
+        _intValue: 0
+        _boolValue: 0
+        _enumType: 0
+        _stringValue: 
+    _isTemporary: 1
+    _duration: 1
   _dealsDamage: 1
   _damage: 1
+--- !u!114 &6224278836169595517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1274412018132008813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ca56e42aaacff049a4fbfe5d0f0a2ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _startingStats:
+  - _config: {fileID: 11400000, guid: e840e729028e9ac4ea1095f17dabd802, type: 2}
+    _type: 3
+    _floatValue: 0
+    _intValue: 1
+    _boolValue: 0
+    _enumType: 0
+    _stringValue: 
+  - _config: {fileID: 11400000, guid: 5b4a99e8524a51744909ffe53cc64848, type: 2}
+    _type: 0
+    _floatValue: 3
+    _intValue: 1
+    _boolValue: 0
+    _enumType: 0
+    _stringValue: 

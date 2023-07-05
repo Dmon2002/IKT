@@ -1,19 +1,22 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 public class Player : Entity
 {
     private List<ActiveAbility> _activeAbilities;
-
     private PlayerMovement _movement;
 
     protected override void Awake()
     {
-        _movement = GetComponentInChildren<PlayerMovement>();
+        base.Awake();
         _activeAbilities = new List<ActiveAbility>(transform.GetComponentsInChildren<ActiveAbility>());
         _activeAbilities.ForEach(ability =>
         {
             ability.SetEntity(this);
         });
+        _movement = GetComponentInChildren<PlayerMovement>();
+        Debug.Log("Awake " + _movement.ToString());
+        _movement.SetStatContainer(StatContainer);
     }
 
     //protected override void OnEnable()

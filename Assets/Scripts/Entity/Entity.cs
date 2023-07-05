@@ -1,11 +1,12 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(StatContainer))]
 public abstract class Entity : MonoBehaviour
 {
     [SerializeField] private float _maxhp;
-    [SerializeField] private StatContainer _statContainer;
+
+    private StatContainer _statContainer;
 
     private float _hp;
 
@@ -20,15 +21,13 @@ public abstract class Entity : MonoBehaviour
 
     protected virtual void Awake()
     {
-        _statContainer.Initialize();
+        _statContainer = GetComponent<StatContainer>();
     }
 
     protected virtual void OnEnable()
     {
         _hp = _maxhp;
     }
-
-    public Stat getStat(string name) => _statContainer.GetStat(name);
 
     public virtual void ApplyDamage(float damage)
     {

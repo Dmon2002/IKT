@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -15,7 +16,9 @@ public class Stat
     public const string AbilityAttackRadiusName = "AbilityAttackRadius";
 
     // Потом через скрипты буду убирать Serialize fields в зависимости от _type
-    [SerializeField] private StatConfig _config; 
+    [SerializeField] private StatConfig _config;
+    [SerializeField] private StatType _type;
+    [ShowIfEnum("Type", 0)]
     [SerializeField] private float _floatValue;
     [SerializeField] private int _intValue;
     [SerializeField] private bool _boolValue;
@@ -27,6 +30,7 @@ public class Stat
 
     public StatType StatType => _config.Type;
 
+    [Obsolete("property depricated, please use GetStat<T>() instead")]
     public float FloatValue
     {
         get
@@ -43,6 +47,7 @@ public class Stat
         }
     }
 
+    [Obsolete("property depricated, please use GetStat<T>() instead")]
     public int IntValue
     {
         get
@@ -59,6 +64,7 @@ public class Stat
         }
     }
 
+    [Obsolete("property depricated, please use GetStat<T>() instead")]
     public bool BoolValue
     {
         get
@@ -75,6 +81,7 @@ public class Stat
         }
     }
 
+    [Obsolete("property depricated, please use GetStat<T>() instead")]
     public int EnumValue
     {
         get
@@ -91,6 +98,7 @@ public class Stat
         }
     }
 
+    [Obsolete("property depricated, please use GetStat<T>() instead")]
     public string StringValue
     {
         get
@@ -121,6 +129,13 @@ public class Stat
         _intValue += change;
     }
 
+    public void ChangeValue<T>(T change)
+    {
+        if (StatType != StatType.Float || StatType != StatType.Int)
+            throw new System.ArgumentException("not int and not float type value to change");
+
+    }
+
     public void ChangeValue(Stat sub)
     {
         if (sub.Name != Name)
@@ -132,7 +147,7 @@ public class Stat
         else if (sub.StatType == StatType.Int)
         {
             _intValue += sub.IntValue;
-        } 
+        }
         else
         {
             throw new System.ArgumentException("Attempt to sub not number type");
@@ -162,9 +177,39 @@ public class Stat
         }
     }
 
+//    public T GetStat<T>()
+//    {
+//        Type tType = typeof(T);
+//#if UNITY_EDITOR
+//        ValidateStatType(tType);
+//#endif
+//        switch ()
+//    }
+
+#if UNITY_EDITOR
+    // for ValidateStatType method
+    private Dictionary<Type, StatType> _typeMapping = new()
+        {
+            { typeof(float), StatType.Float },
+            { typeof(int), StatType.Int },
+            { typeof(Enum), StatType.Enum },
+            { typeof(bool), StatType.Bool },
+            { typeof(string), StatType.String }
+        };
+
+    private void ValidateStatType(Type tType)
+    {
+        if (!_typeMapping.ContainsKey(tType))
+            throw new ArgumentException("Unconsidered StatType");
+        StatType statType = _typeMapping[tType];
+        if (statType != _type)
+            throw new ArgumentException("Type doesn't match:\n\tExpected: " + _type.ToString() + "\n\tActual: " + statType.ToString("g"));
+    }
+#endif
+
     public Stat CloneStat()
     {
-        Stat clonedStat = new ();
+        Stat clonedStat = new();
         clonedStat._config = _config;
         clonedStat._floatValue = _floatValue;
         clonedStat._enumType = _enumType;

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(StatContainer))]
 public class ActiveAbility : MonoBehaviour
 {
 
@@ -10,7 +11,8 @@ public class ActiveAbility : MonoBehaviour
     [SerializeField] private bool _isDirectional;
     [SerializeField] private AbilityDirectionDecision _directionDecision;
     [SerializeField] private bool _activateOnStart;
-    [SerializeField] private StatContainer _statContainer;
+    
+    private StatContainer _statContainer;
 
     private Entity _entity;
     private List<AbilityDecision> _decisions;
@@ -43,7 +45,7 @@ public class ActiveAbility : MonoBehaviour
 
     protected virtual void Awake()
     {
-        _abilityCooldownReload = new CooldownReload(_statContainer.GetStatFloatValue(Stat.AbilityCooldownName), this);
+        _statContainer = GetComponent<StatContainer>();
         _decisions = new List<AbilityDecision>(GetComponentsInChildren<AbilityDecision>());
         foreach (var decision in _decisions)
         {
@@ -53,10 +55,12 @@ public class ActiveAbility : MonoBehaviour
 
     private void Start()
     {
+        _abilityCooldownReload = new CooldownReload(_statContainer.GetStatFloatValue(Stat.AbilityCooldownName), this);
         if (_activateOnStart)
         {
             StartActivating();
         }
+
     }
 
     public void SetEntity(Entity entity)
@@ -70,7 +74,6 @@ public class ActiveAbility : MonoBehaviour
             return;
         if (_spawnsAttack)
         {
-            Debug.Log("spawn");
             var attack = Instantiate(_attackPrefab, transform.position, Quaternion.identity);
             if (_isDirectional)
             {

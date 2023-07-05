@@ -1,44 +1,73 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
-[Serializable]
-public class StatContainer
+public class StatContainer : MonoBehaviour 
 {
-    [SerializeField] private List<Stat> _stats;
+    [SerializeField] private List<Stat> _startingStats;
 
-    private Dictionary<string, Stat> _nameToStat = new();
+    private Dictionary<string, Stat> _baseStats = new();
 
-    private Dictionary<string, StatChange> _effects = new();
-    
-    public void Initialize()
+    private Dictionary<string, Stat> _stats = new();
+
+    private Dictionary<string, List<StatChange>> _changes = new();
+
+    private void Awake()
     {
-        foreach (var stat in _stats)
-        {
-            _nameToStat[stat.Name] = stat;
-        }
+        Initialize();
     }
 
-    public void ApplyStatChange(StatChange change)
+    private void Initialize()
     {
+        foreach (var stat in _startingStats)
+        {
+            _baseStats[stat.Name] = stat;
+            _changes[stat.Name] = new ();
+        }
+        _stats = new Dictionary<string, Stat>(_baseStats.ToDictionary(pair => pair.Key, pair => pair.Value.CloneStat()));
+    }
+
+    public void ApplyStatChange(StatChange change, bool isTemporarely)
+    {
+        if (_baseStats.Count != _startingStats.Count)
+            throw new Exception("Had to initialize statContainer before using(");
+        if (isTemporarely)
+        {
+            _changes[change.StatName].Add(change);
+            change.ApplyStatChange(_stats[change.StatName]);
+        } 
+        else
+        {
+            change.ApplyStatChange(_baseStats[change.StatName]);
+        }
         change.ApplyStatChange(GetStat(change.StatName));
     }
 
-    public Stat GetStat(string name)
+    public void RevertStatChange(StatChange change)
     {
-        if (_nameToStat.Count != _stats.Count)
+        _changes[change.StatName].Remove(change);
+        var stat = _baseStats[change.StatName].CloneStat();
+        _stats[change.StatName] = stat;
+        foreach (var statChange in _changes[change.StatName])
         {
-            Initialize();
+            statChange.ApplyStatChange(stat);
         }
-        if (!_nameToStat.ContainsKey(name))
-            return null;
-        return _nameToStat[name];
     }
 
-    public bool TryGetStat(string name, out Stat stat)
+    private Stat GetStat(string name)
+    {
+        if (_baseStats.Count != _startingStats.Count)
+            throw new Exception("Had to initialize statContainer before using(");
+        if (!_stats.ContainsKey(name))
+            return null;
+        return _stats[name];
+    }
+
+    private bool TryGetStat(string name, out Stat stat)
     {
         stat = GetStat(name);
-        return stat != null;
+        return true;
     }
 
     public float GetStatFloatValue(string name)
@@ -90,4 +119,11 @@ public class StatContainer
             throw new System.ArgumentException("Wrong StatType");
         return stat.StringValue;
     }
+
+    //public T GetStat<T>(string name)
+    //{
+    //    Type genericType = typeof(T);
+    //    string a = _names[T];
+    //    return default(T);
+    //}
 }

@@ -125,6 +125,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5116665976819177813}
+  - component: {fileID: 7708169207482412702}
   - component: {fileID: 7926009996946548863}
   - component: {fileID: 3079045542679481334}
   m_Layer: 0
@@ -149,6 +150,33 @@ Transform:
   m_Father: {fileID: 6273171848395413259}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7708169207482412702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4058409310134941453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ca56e42aaacff049a4fbfe5d0f0a2ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _startingStats:
+  - _config: {fileID: 11400000, guid: 4431389b71292c24b842d595f8eb6eae, type: 2}
+    _type: 0
+    _floatValue: 2
+    _intValue: 0
+    _boolValue: 0
+    _enumType: 0
+    _stringValue: 
+  - _config: {fileID: 11400000, guid: 319e5415182bd6e4db996658304a4f2e, type: 2}
+    _type: 0
+    _floatValue: 3
+    _intValue: 0
+    _boolValue: 0
+    _enumType: 0
+    _stringValue: 
 --- !u!114 &7926009996946548863
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -166,20 +194,6 @@ MonoBehaviour:
   _isDirectional: 1
   _directionDecision: {fileID: 3079045542679481334}
   _activateOnStart: 1
-  _statContainer:
-    _stats:
-    - _config: {fileID: 11400000, guid: 4431389b71292c24b842d595f8eb6eae, type: 2}
-      _floatValue: 1
-      _intValue: 0
-      _boolValue: 0
-      _enumType: 0
-      _stringValue: 
-    - _config: {fileID: 11400000, guid: 319e5415182bd6e4db996658304a4f2e, type: 2}
-      _floatValue: 3
-      _intValue: 0
-      _boolValue: 0
-      _enumType: 0
-      _stringValue: 
 --- !u!114 &3079045542679481334
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -206,6 +220,7 @@ GameObject:
   - component: {fileID: 8261367464240448389}
   - component: {fileID: 8261367464240448398}
   - component: {fileID: 5823575617985369768}
+  - component: {fileID: 2529597043999051505}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -290,20 +305,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxhp: 10
-  _statContainer:
-    _stats:
-    - _config: {fileID: 11400000, guid: 9e20ac37c64efe040864574655beff2f, type: 2}
-      _floatValue: 0
-      _intValue: 0
-      _boolValue: 1
-      _enumType: 0
-      _stringValue: 
-    - _config: {fileID: 11400000, guid: e840e729028e9ac4ea1095f17dabd802, type: 2}
-      _floatValue: 0
-      _intValue: 0
-      _boolValue: 0
-      _enumType: 0
-      _stringValue: 
 --- !u!114 &5823575617985369768
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -317,11 +318,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _smoothInputSpeed: 0.07
-  _playerStatContainer:
-    _stats:
-    - _config: {fileID: 11400000, guid: 5b4a99e8524a51744909ffe53cc64848, type: 2}
-      _floatValue: 1
-      _intValue: 0
-      _boolValue: 0
-      _enumType: 0
-      _stringValue: 
+--- !u!114 &2529597043999051505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8261367464240448396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ca56e42aaacff049a4fbfe5d0f0a2ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _startingStats:
+  - _config: {fileID: 11400000, guid: e840e729028e9ac4ea1095f17dabd802, type: 2}
+    _type: 3
+    _floatValue: 0
+    _intValue: 0
+    _boolValue: 0
+    _enumType: 0
+    _stringValue: 
+  - _config: {fileID: 11400000, guid: 5b4a99e8524a51744909ffe53cc64848, type: 2}
+    _type: 0
+    _floatValue: 2
+    _intValue: 0
+    _boolValue: 0
+    _enumType: 0
+    _stringValue: 
+  - _config: {fileID: 11400000, guid: 9e20ac37c64efe040864574655beff2f, type: 2}
+    _type: 2
+    _floatValue: 5
+    _intValue: 0
+    _boolValue: 1
+    _enumType: 0
+    _stringValue: 

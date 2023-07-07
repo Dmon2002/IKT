@@ -1,55 +1,54 @@
 using System.Collections;
 using UnityEngine;
 
-public class EffectImposer : MonoBehaviour
+namespace StatSystem
 {
-    private Effect _effectStat;
-
-    private StatContainer _statContainer;
-
-    protected StatContainer StatContainer => _statContainer;
-
-    protected Effect EffectStat => _effectStat;
-
-    public void SetStatContainer(StatContainer statContainer)
+    public class EffectImposer : MonoBehaviour
     {
-        _statContainer = statContainer;
-        transform.SetParent(statContainer.transform);
-    }
+        private Effect _effectStat;
 
-    public void SetEffect(Effect effect)
-    {
-        _effectStat = effect;
-    }
+        private StatContainer _statContainer;
 
-    protected virtual void Start()
-    {
-        ApplyEffect();
-    }
+        protected StatContainer StatContainer => _statContainer;
 
-    protected virtual void ApplyEffect()
-    {
-        if (_statContainer == null) return;
-        _statContainer.ApplyStatChange(_effectStat.StatChange, _effectStat.IsTemporary);
-        if (_effectStat.IsTemporary)
+        protected Effect EffectStat => _effectStat;
+
+        public void SetStatContainer(StatContainer statContainer)
         {
-            StartCoroutine(LifeTimeCoroutine());
+            _statContainer = statContainer;
+            transform.SetParent(statContainer.transform);
         }
-        else
+
+        public void SetEffect(Effect effect)
         {
+            _effectStat = effect;
+        }
+
+        protected virtual void Start()
+        {
+            ApplyEffect();
+        }
+
+        protected virtual void ApplyEffect()
+        {
+            if (_statContainer == null) return;
+            _statContainer.ApplyStatChange(_effectStat.StatChange, true);
+            if (_effectStat.Duration != 1)
+            {
+                StartCoroutine(LifeTimeCoroutine());
+            }
+        }
+
+        protected virtual void RevertEffect()
+        {
+            _statContainer.RevertStatChange(_effectStat.StatChange);
+        }
+
+        private IEnumerator LifeTimeCoroutine()
+        {
+            yield return new WaitForSeconds(_effectStat.Duration);
+            RevertEffect();
             Destroy(gameObject);
         }
-    }
-
-    protected virtual void RevertEffect()
-    {
-        _statContainer.RevertStatChange(_effectStat.StatChange);
-    }
-
-    private IEnumerator LifeTimeCoroutine()
-    {
-        yield return new WaitForSeconds(_effectStat.Duration);
-        RevertEffect();
-        Destroy(gameObject);
     }
 }

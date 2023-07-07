@@ -1,3 +1,4 @@
+using StatSystem;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,8 +7,6 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D))]
 public class Room : MonoBehaviour
 {
-    private static readonly string _canRevealFogName = "CanReveal";
-
     [SerializeField] private Animation _fogTile;
     [SerializeField] private float _fogRevealDuration;
 
@@ -45,7 +44,7 @@ public class Room : MonoBehaviour
     {
         if (collision.TryGetComponent<Entity>(out var entity))
         {
-            if (!entity.StatContainer.GetStatBoolValue(_canRevealFogName))
+            if (!entity.StatContainer.GetStat<bool>(StatNames.CanReveal))
                 return;
             RevealFog(transform.position - entity.transform.position);
             if (_inRoom.Contains(entity))

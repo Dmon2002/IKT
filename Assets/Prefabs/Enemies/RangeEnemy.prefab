@@ -175,19 +175,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _startingStats:
   - _config: {fileID: 11400000, guid: 9e20ac37c64efe040864574655beff2f, type: 2}
-    _type: 0
-    _floatValue: 0
-    _intValue: 0
-    _boolValue: 0
-    _enumType: 0
-    _stringValue: 
+    FloatValue: 0
+    IntValue: 0
+    BoolValue: 1
+    EnumType: 0
+    StringValue: 
   - _config: {fileID: 11400000, guid: e840e729028e9ac4ea1095f17dabd802, type: 2}
-    _type: 3
-    _floatValue: 0
-    _intValue: 1
-    _boolValue: 0
-    _enumType: 0
-    _stringValue: 
+    FloatValue: 0
+    IntValue: 1
+    BoolValue: 0
+    EnumType: 0
+    StringValue: 
 --- !u!1 &5020222774981418403
 GameObject:
   m_ObjectHideFlags: 0
@@ -265,9 +263,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _startingStats:
   - _config: {fileID: 11400000, guid: 4431389b71292c24b842d595f8eb6eae, type: 2}
-    _type: 0
-    _floatValue: 5
-    _intValue: 0
-    _boolValue: 0
-    _enumType: 0
-    _stringValue: 
+    FloatValue: 2
+    IntValue: 0
+    BoolValue: 0
+    EnumType: 0
+    StringValue: 

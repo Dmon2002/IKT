@@ -1,3 +1,4 @@
+using StatSystem;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -55,7 +56,7 @@ public class ActiveAbility : MonoBehaviour
 
     private void Start()
     {
-        _abilityCooldownReload = new CooldownReload(_statContainer.GetStatFloatValue(Stat.AbilityCooldownName), this);
+        _abilityCooldownReload = new CooldownReload(_statContainer.GetStat<float>(StatNames.AbilityCooldown), this);
         if (_activateOnStart)
         {
             StartActivating();

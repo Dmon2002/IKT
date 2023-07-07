@@ -1,4 +1,6 @@
+using StatSystem;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(StatContainer))]
@@ -6,6 +8,9 @@ public abstract class Entity : MonoBehaviour
 {
     [SerializeField] private float _maxhp;
 
+
+    private List<ActiveAbility> _activeAbilities;
+    private List<PassiveAbility> _passiveAbilities;
     private StatContainer _statContainer;
 
     private float _hp;
@@ -21,6 +26,16 @@ public abstract class Entity : MonoBehaviour
 
     protected virtual void Awake()
     {
+        _activeAbilities = new List<ActiveAbility>(transform.GetComponentsInChildren<ActiveAbility>());
+        _passiveAbilities = new List<PassiveAbility>(transform.GetComponentsInChildren<PassiveAbility>());
+        foreach (var ability in _activeAbilities)
+        {
+            ability.SetEntity(this);
+        }
+        foreach (var ability in _passiveAbilities)
+        {
+            ability.SetEntity(this);
+        }
         _statContainer = GetComponent<StatContainer>();
     }
 

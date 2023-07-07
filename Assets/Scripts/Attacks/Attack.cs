@@ -1,3 +1,4 @@
+using StatSystem;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,8 +42,8 @@ public abstract class Attack : MonoBehaviour
 
     protected virtual void CollideEntity(Entity entity)
     {
-        var ourTeam = (Team)_statContainer.GetStatEnumValue(Stat.TeamStatName);
-        var enemyTeam = (Team)entity.StatContainer.GetStatEnumValue(Stat.TeamStatName);
+        var ourTeam = _statContainer.GetStat<Team>(StatNames.Team);
+        var enemyTeam = entity.StatContainer.GetStat<Team>(StatNames.Team);
         if (ourTeam.GetAgainstTeams().Contains(enemyTeam))
         {
             if (_dealsDamage)

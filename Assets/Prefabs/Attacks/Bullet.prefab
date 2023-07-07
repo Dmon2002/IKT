@@ -137,21 +137,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8977bdca99db9db42bb2ecba128e58ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _lifetime: 1
+  _lifetime: 2
   _effectStats:
   - _prefab: {fileID: 7990888699196896294, guid: 497b0a5b6abcb7d45b60d1a09da08730, type: 3}
     _statChange:
       _changeType: 0
       _statSubstract:
         _config: {fileID: 11400000, guid: 5b4a99e8524a51744909ffe53cc64848, type: 2}
-        _type: 0
-        _floatValue: 0.5
-        _intValue: 0
-        _boolValue: 0
-        _enumType: 0
-        _stringValue: 
-    _isTemporary: 1
-    _duration: 1
+        FloatValue: 0
+        IntValue: 0
+        BoolValue: 0
+        EnumType: 0
+        StringValue: 
+    _duration: 0.2
   _dealsDamage: 1
   _damage: 1
 --- !u!114 &6224278836169595517
@@ -168,16 +166,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _startingStats:
   - _config: {fileID: 11400000, guid: e840e729028e9ac4ea1095f17dabd802, type: 2}
-    _type: 3
-    _floatValue: 0
-    _intValue: 1
-    _boolValue: 0
-    _enumType: 0
-    _stringValue: 
+    FloatValue: 0
+    IntValue: 1
+    BoolValue: 0
+    EnumType: 0
+    StringValue: 
   - _config: {fileID: 11400000, guid: 5b4a99e8524a51744909ffe53cc64848, type: 2}
-    _type: 0
-    _floatValue: 3
-    _intValue: 1
-    _boolValue: 0
-    _enumType: 0
-    _stringValue: 
+    FloatValue: 2
+    IntValue: 0
+    BoolValue: 0
+    EnumType: 0
+    StringValue: 

@@ -1,3 +1,4 @@
+using StatSystem;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -46,6 +47,6 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!CanMove)
             return;
-        transform.Translate(moveVector2 * _entityStatContainer.GetStatFloatValue(Stat.MovementSpeedStatName) * time);
+        transform.Translate(moveVector2 * _entityStatContainer.GetStat<float>(StatNames.MoveSpeed) * time);
     }
 }

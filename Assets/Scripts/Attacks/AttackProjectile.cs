@@ -1,3 +1,4 @@
+using StatSystem;
 using UnityEngine;
 
 public class AttackProjectile : Attack
@@ -6,7 +7,7 @@ public class AttackProjectile : Attack
 
     protected override void Shoot()
     {
-        _currentSpeed = StatContainer.GetStatFloatValue(Stat.MovementSpeedStatName);
+        _currentSpeed = StatContainer.GetStat<float>(StatNames.MoveSpeed);
     }
 
     private void Update()

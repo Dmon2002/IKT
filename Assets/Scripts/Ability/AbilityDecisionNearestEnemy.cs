@@ -1,3 +1,4 @@
+using StatSystem;
 using UnityEngine;
 
 public class AbilityDecisionNearestEnemy : AbilityDirectionDecision
@@ -16,7 +17,7 @@ public class AbilityDecisionNearestEnemy : AbilityDirectionDecision
     public override Vector2 DecideDirection()
     {
         // Когда LayerMask'и в проекте более менее закрепятся, можно будет оптимизировать
-        var cols = Physics2D.OverlapCircleAll(transform.position, Ability.StatContainer.GetStatFloatValue(Stat.AbilityAttackRadiusName), _detectMask);
+        var cols = Physics2D.OverlapCircleAll(transform.position, Ability.StatContainer.GetStat<float>(StatNames.AbilityAttackRadius), _detectMask);
 
         Entity minEntity = null;
         float minDist = float.PositiveInfinity;
@@ -24,7 +25,7 @@ public class AbilityDecisionNearestEnemy : AbilityDirectionDecision
         {
             if (col.TryGetComponent<Entity>(out var entity))
             {
-                Team team = (Team)entity.StatContainer.GetStatEnumValue(Stat.TeamStatName);
+                Team team = (Team)entity.StatContainer.GetStat<Team>(StatNames.Team);
                 if (team.GetAgainstTeams().Contains(_ourTeam))
                 {
                     float dist = Vector2.Distance(transform.position, entity.transform.position);

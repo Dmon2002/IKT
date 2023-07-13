@@ -12,7 +12,7 @@ namespace StatSystem
 
         public string StatName => _statSubstract.Name;
         
-        internal void ApplyStatChange(Stat stat)
+        public void ApplyStatChange(Stat stat)
         {
             if (stat.Name != _statSubstract.Name)
                 throw new System.ArgumentException("incompatible stat names");

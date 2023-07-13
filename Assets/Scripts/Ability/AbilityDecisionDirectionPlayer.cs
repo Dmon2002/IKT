@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class AbilityDirectionDecisionPlayer : AbilityDirectionDecision
+public class AbilityDecisionDirectionPlayer : AbilityDecisionDirection
 {
     public override Vector2 DecideDirection()
     {

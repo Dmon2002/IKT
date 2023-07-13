@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using StatSystem;
 using System;
 using System.Collections.Generic;
@@ -8,16 +9,19 @@ public abstract class Entity : MonoBehaviour
 {
     [SerializeField] private float _maxhp;
 
-
-    private List<ActiveAbility> _activeAbilities;
+    private List<BaseActiveAbility> _activeAbilities;
     private List<PassiveAbility> _passiveAbilities;
     private StatContainer _statContainer;
+
+    private Rigidbody2D _rb;
 
     private float _hp;
 
     public float MaxHp => _maxhp;
 
     public float Hp => _hp;
+
+    public Rigidbody2D Rb => _rb;
 
     public StatContainer StatContainer => _statContainer;
 
@@ -26,7 +30,8 @@ public abstract class Entity : MonoBehaviour
 
     protected virtual void Awake()
     {
-        _activeAbilities = new List<ActiveAbility>(transform.GetComponentsInChildren<ActiveAbility>());
+        _rb = GetComponent<Rigidbody2D>();
+        _activeAbilities = new List<BaseActiveAbility>(transform.GetComponentsInChildren<BaseActiveAbility>());
         _passiveAbilities = new List<PassiveAbility>(transform.GetComponentsInChildren<PassiveAbility>());
         foreach (var ability in _activeAbilities)
         {
@@ -72,5 +77,12 @@ public abstract class Entity : MonoBehaviour
     {
         Died?.Invoke();
         gameObject.SetActive(false);
+    }
+
+    [Button("Setup Stats")]
+    private void SetupStats()
+    {
+        var statContainer = GetComponent<StatContainer>();
+        statContainer.AddStat(new Stat("MaxHP", StatType.Float));
     }
 }

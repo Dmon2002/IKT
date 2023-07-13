@@ -30,7 +30,7 @@ namespace StatSystem
             }
         }
 
-        internal void ApplyStatChange(StatChange change, bool isTemporarely)
+        public void ApplyStatChange(StatChange change, bool isTemporarely)
         {
             if (_baseStats.Count != _startingStats.Count)
                 throw new Exception("Had to initialize statContainer before using(");
@@ -46,7 +46,7 @@ namespace StatSystem
             change.ApplyStatChange(GetStat(change.StatName));
         }
 
-        internal void RevertStatChange(StatChange change)
+        public void RevertStatChange(StatChange change)
         {
             _changes[change.StatName].Remove(change);
             var stat = _baseStats[change.StatName].CloneStat();
@@ -69,6 +69,12 @@ namespace StatSystem
         public T GetStat<T>(string name)
         {
             return _actualStats[name].GetValue<T>();
+        }
+        
+        public void AddStat(Stat stat)
+        {
+            if (_startingStats.Contains(stat)) return;
+            _startingStats.Add(stat);
         }
     }
 }

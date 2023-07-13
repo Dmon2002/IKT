@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public abstract class AbilityDirectionDecision : AbilityDecision
+public abstract class AbilityDecisionDirection : AbilityDecision
 {
     public override bool Decide()
     {

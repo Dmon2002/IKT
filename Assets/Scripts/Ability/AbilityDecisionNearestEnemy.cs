@@ -1,7 +1,7 @@
 using StatSystem;
 using UnityEngine;
 
-public class AbilityDecisionNearestEnemy : AbilityDirectionDecision
+public class AbilityDecisionNearestEnemy : AbilityDecisionDirection
 {
     [SerializeField] private Team _ourTeam;
 

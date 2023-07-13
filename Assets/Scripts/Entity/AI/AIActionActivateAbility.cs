@@ -6,6 +6,6 @@ public class AIActionActivateAbility : AIAction
 
     public override void Action()
     {
-        _ability.StartActivating();
+        //_ability.StartActivating();
     }
 }

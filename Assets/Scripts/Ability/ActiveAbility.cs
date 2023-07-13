@@ -1,118 +1,96 @@
+using Sirenix.OdinInspector;
 using StatSystem;
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(StatContainer))]
-public class ActiveAbility : MonoBehaviour
+public class ActiveAbility : BaseActiveAbility
 {
-
-    [SerializeField] private bool _spawnsAttack;
-    [SerializeField] private Attack _attackPrefab;
+    [SerializeField] private AbilityAction _action;
     [SerializeField] private bool _isDirectional;
-    [SerializeField] private AbilityDirectionDecision _directionDecision;
-    [SerializeField] private bool _activateOnStart;
+    [ShowIf("_isDirectional")]
+    [SerializeField] private AbilityDecisionDirection _directionDecision;
+    [EnumToggleButtons]
+    [SerializeField] private ActivationMethod _methodActivateOn;
+    [ShowIf("@(_action & AbilityAction.SpawnsAttack) == AbilityAction.SpawnsAttack")]
+    [SerializeField] private List<Attack> _attackPrefabs;
+    [ShowIf("@(_action & AbilityAction.EffectSelf) == AbilityAction.EffectSelf")]
+    [SerializeField] private List<Effect> _effects;
     
-    private StatContainer _statContainer;
+    //private CooldownReload _abilityCooldownReload;
+    private Vector2 _lastDirection;
 
-    private Entity _entity;
-    private List<AbilityDecision> _decisions;
-    private bool _isActive;
-    private CooldownReload _abilityCooldownReload;
-    private Vector2 _direction;
 
-    private IEnumerator _activatingCoroutine;
-
-    public bool IsActive => _isActive;
-
-    public StatContainer StatContainer => _statContainer;
-
-    public bool CanActivate
+    private void Update()
     {
-        get
-        {
-            if (_abilityCooldownReload.OnCooldown)
-                return false;
-            foreach (var decision in _decisions)
-            {
-                if (!decision.Decide())
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
+        if (_methodActivateOn != ActivationMethod.Update)
+            return;
+        Cast();
     }
 
-    protected virtual void Awake()
+    private void FixedUpdate()
     {
-        _statContainer = GetComponent<StatContainer>();
-        _decisions = new List<AbilityDecision>(GetComponentsInChildren<AbilityDecision>());
-        foreach (var decision in _decisions)
-        {
-            decision.SetAbility(this);
-        }
+        if (_methodActivateOn != ActivationMethod.FixedUpdate)
+            return;
+        Cast();
     }
 
-    private void Start()
+    private void LateUpdate()
     {
-        _abilityCooldownReload = new CooldownReload(_statContainer.GetStat<float>(StatNames.AbilityCooldown), this);
-        if (_activateOnStart)
-        {
-            StartActivating();
-        }
-
+        if (_methodActivateOn != ActivationMethod.LateUpdate)
+            return;
+        Cast();
     }
 
-    public void SetEntity(Entity entity)
-    {
-        _entity = entity;
-    }
 
-    public virtual void Activate()
+    protected override void Cast()
     {
+        if (!IsActive)
+            return;
         if (!CanActivate)
             return;
-        if (_spawnsAttack)
+        base.Cast();
+        if (_isDirectional)
         {
-            var attack = Instantiate(_attackPrefab, transform.position, Quaternion.identity);
-            if (_isDirectional)
+            DefineDirection();
+        }
+        if ((_action & AbilityAction.SpawnsAttack) == AbilityAction.SpawnsAttack)
+        {
+            foreach (var attackPrefab in _attackPrefabs)
             {
-                attack.SetDirection(_direction);
+                var attack = Instantiate(attackPrefab, transform.position, Quaternion.identity);
+                if (_isDirectional)
+                {
+                    attack.SetDirection(_lastDirection);
+                }
             }
         }
-        _abilityCooldownReload.StartReloading();
-    }
-
-    public void SetDirection()
-    {
-        if (!_isDirectional)
-            return;
-        _direction = _directionDecision.DecideDirection();
-    }
-
-    public void StartActivating()
-    {
-        _isActive = true;
-        _activatingCoroutine = ActivateCoroutine();
-        StartCoroutine(_activatingCoroutine);
-    }
-
-    public void StopActivating()
-    {
-        _isActive = false;
-    }
-
-    protected virtual IEnumerator ActivateCoroutine()
-    {
-        while (_isActive)
+        if ((_action & AbilityAction.EffectSelf) == AbilityAction.EffectSelf)
         {
-            if (_isDirectional)
+            foreach (var effect in _effects)
             {
-                SetDirection();
+                effect.ApplyEffect(Entity.StatContainer);
             }
-            Activate();
-            yield return null;
         }
+    }
+
+    private void DefineDirection()
+    {
+        _lastDirection = _directionDecision.DecideDirection();
+    }
+
+    private enum ActivationMethod
+    {
+        Update,
+        FixedUpdate,
+        LateUpdate
+    }
+
+    [Flags]
+    private enum AbilityAction
+    {
+        SpawnsAttack = 1 << 0,
+        EffectSelf = 1 << 1,
+        EffectLevel = 1 << 2,
     }
 }

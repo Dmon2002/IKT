@@ -52,9 +52,7 @@ public abstract class Attack : MonoBehaviour
             }
             foreach (var effectStat in _effectStats)
             {
-                var effect = effectStat.SpawnEffect(transform.position);
-                effect.SetStatContainer(entity.StatContainer);
-                effect.SetEffect(effectStat);
+                effectStat.ApplyEffect(entity.StatContainer);
             }
         }
     }

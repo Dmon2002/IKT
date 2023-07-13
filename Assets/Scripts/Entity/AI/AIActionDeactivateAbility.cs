@@ -6,6 +6,6 @@ public class AIActionDeactivateAbility : AIAction
 
     public override void Action()
     {
-        _ability.StopActivating();
+        //_ability.StopActivating();
     }
 }

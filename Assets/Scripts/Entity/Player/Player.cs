@@ -1,16 +1,7 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : Entity
 {
-    private PlayerMovement _movement;
-
-    protected override void Awake()
-    {
-        base.Awake();
-        _movement = GetComponentInChildren<PlayerMovement>();
-        _movement.SetStatContainer(StatContainer);
-    }
 
     //protected override void OnEnable()
     //{

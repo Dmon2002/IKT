@@ -174,13 +174,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _startingStats:
-  - _config: {fileID: 11400000, guid: 9e20ac37c64efe040864574655beff2f, type: 2}
+  - _config: {fileID: 0}
+    _name: CanReveal
+    _type: 2
     FloatValue: 0
     IntValue: 0
     BoolValue: 1
     EnumType: 0
     StringValue: 
-  - _config: {fileID: 11400000, guid: e840e729028e9ac4ea1095f17dabd802, type: 2}
+  - _config: {fileID: 0}
+    _name: Team
+    _type: 3
     FloatValue: 0
     IntValue: 1
     BoolValue: 0
@@ -198,6 +202,7 @@ GameObject:
   - component: {fileID: 5581590278213472521}
   - component: {fileID: 9102148296030918467}
   - component: {fileID: 2793140021364703090}
+  - component: {fileID: 4892001430746454876}
   m_Layer: 0
   m_Name: RangeWeapon
   m_TagString: Untagged
@@ -232,11 +237,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57f8fc342009ae140900ba31a53e368b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawnsAttack: 1
-  _attackPrefab: {fileID: 7301049892378506290, guid: b0135237ff97800448a2ae965373d163, type: 3}
+  _action: 1
   _isDirectional: 1
   _directionDecision: {fileID: 9102148296030918467}
-  _activateOnStart: 1
+  _methodActivateOn: 0
+  _attackPrefabs:
+  - {fileID: 7301049892378506290, guid: b0135237ff97800448a2ae965373d163, type: 3}
+  _effects: []
 --- !u!114 &9102148296030918467
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -262,9 +269,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _startingStats:
-  - _config: {fileID: 11400000, guid: 4431389b71292c24b842d595f8eb6eae, type: 2}
+  - _config: {fileID: 0}
+    _name: AbilityCooldown
+    _type: 0
     FloatValue: 2
     IntValue: 0
     BoolValue: 0
     EnumType: 0
     StringValue: 
+--- !u!114 &4892001430746454876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5020222774981418403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9e8122d806affe40ac4e9a2412df5ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

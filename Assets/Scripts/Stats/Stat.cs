@@ -1,6 +1,7 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
+using Newtonsoft.Json.Linq;
 
 namespace StatSystem
 {
@@ -9,25 +10,59 @@ namespace StatSystem
     /// Зачастую храниться внутри StatContainer
     /// </summary>
     [Serializable]
-    internal sealed class Stat
+    public sealed class Stat
     {
-
+#if UNITY_EDITOR
+        [OnValueChanged("SetStatConfig")]
+        [ShowIf("@_name == \"\"")]
         [SerializeField] private StatConfig _config;
+
+        private void SetStatConfig()
+        {
+            if (_config == null) return;
+            _name = _config.Name;
+            _type = _config.Type;
+            _config = null;
+        }
+#endif
+        [ReadOnly]
+        [ShowIf("@_name != \"\"")]
+        [SerializeField] private string _name;
+        [ReadOnly]
+        [ShowIf("@_name != \"\"")]
+        [SerializeField] private StatType _type;
+        [ShowIf("_type", StatType.Float)]
         public float FloatValue;
+        [ShowIf("@_type == StatSystem.StatType.Int || _type == StatSystem.StatType.Enum")]
         public int IntValue;
+        [ShowIf("_type", StatType.Bool)]
         public bool BoolValue;
+        [ShowIf("_type", StatType.Enum)]
         public EnumType EnumType;
+        [ShowIf("_type", StatType.String)]
         public string StringValue;
 
-        public string Name => _config.Name;
+        [Button("Reset Stat", ButtonSizes.Small)]
+        private void ResetStat()
+        {
+            _name = "";
+            _type = StatType.Float;
+        }
 
-        public StatType StatType => _config.Type;
+        public string Name => _name;
+
+        public StatType StatType => _type;
+
+        public Stat(string name, StatType type)
+        {
+            _name = name;
+            _type = type;
+        }
 
         public void ChangeValue<T>(T change)
         {
             if (StatType != StatType.Float || StatType != StatType.Int)
                 throw new System.ArgumentException("not int and not float type value to change");
-
         }
 
         public void ChangeValue(Stat add)
@@ -105,17 +140,16 @@ namespace StatSystem
             {
                 throw new Exception("No such type - " + tType.Name);
             }
-            if (predictedType != _config.Type)
+            if (predictedType != _type)
             {
-                throw new ArgumentException("Type doesn't match:\n\tExpected: " + _config.Type.ToString() + "\tActual: " + _config.Type.ToString("g"));
+                throw new ArgumentException("Type doesn't match:\n\tExpected: " + _type.ToString() + "\tActual: " + _type.ToString("g"));
             }
             return (T)value;
         }
 
         public Stat CloneStat()
         {
-            Stat clonedStat = new();
-            clonedStat._config = _config;
+            Stat clonedStat = new(_name, _type);
             clonedStat.FloatValue = FloatValue;
             clonedStat.EnumType = EnumType;
             clonedStat.IntValue = IntValue;
@@ -123,6 +157,22 @@ namespace StatSystem
             clonedStat.StringValue = StringValue;
             return clonedStat;
         }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null || GetType() != obj.GetType())
+                return false;
+
+            Stat other = (Stat)obj;
+
+            return _name == other._name;
+        }
+
+        public override int GetHashCode()
+        {
+            return _name.GetHashCode();
+        }
+
     }
 
     public enum EnumType

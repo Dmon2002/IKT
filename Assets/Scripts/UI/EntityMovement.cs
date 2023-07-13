@@ -2,64 +2,33 @@ using StatSystem;
 using System;
 using UnityEngine;
 
-[RequireComponent (typeof(Rigidbody2D))]
-public class EntityMovement : MonoBehaviour
+[RequireComponent(typeof(Rigidbody2D))]
+public class EntityMovement : BaseActiveAbility
 {
-    [SerializeField] private MovementType _movementType;
-
-    protected StatContainer EntityStatContainer;
-
-    private Rigidbody2D _rb;
+    [SerializeField] private AbilityDecisionDirection _directionDecision;
 
     private float _defaultSpeed;
 
     public float Speed => _defaultSpeed;
 
-    private Vector2 _currentSpeedDirection;
+    private Vector2 _lastDirection;
 
-    public event Action<Vector2> MovedPoint;
-
-    public Vector2 LastMoveDirectional => _currentSpeedDirection;
+    public Vector2 LastDirection => _lastDirection;
 
     private void FixedUpdate()
     {
-        Move(_currentSpeedDirection);
+        DefineDirection();
+        Cast();
     }
 
-    public void SetStatConatiner(StatContainer statContainer)
+    protected override void Cast()
     {
-        EntityStatContainer = statContainer;
+        base.Cast();
+        Entity.Rb.velocity = _lastDirection * Entity.StatContainer.GetStat<float>(StatNames.MoveSpeed);
     }
 
-    private void Move(Vector2 speedDirection)
+    private void DefineDirection()
     {
-        _rb.velocity = speedDirection;
-    }
-
-    public void MoveInDirection(Vector2 direction)
-    {
-        if (_movementType == MovementType.Point) return;
-
-        _currentSpeedDirection = Speed * direction;
-    }
-
-    public void MoveToPoint(Vector2 point)
-    {
-        if (_movementType == MovementType.Direction) return;
-
-        transform.position = point;
-        MovedPoint?.Invoke(point);
-    }
-
-    public void StopMovement()
-    {
-        //_currentSpeedDirection = 0f;
+        _lastDirection = _directionDecision.DecideDirection();
     }
 }
-
-public enum MovementType
-{
-    Point,
-    Direction,
-    Both
-} 

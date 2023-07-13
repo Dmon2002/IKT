@@ -2,11 +2,11 @@ using UnityEngine;
 
 public abstract class AbilityDecision : MonoBehaviour
 {
-    private ActiveAbility _ability;
+    private BaseActiveAbility _ability;
 
-    protected ActiveAbility Ability => _ability;
+    protected BaseActiveAbility Ability => _ability;
 
-    public void SetAbility(ActiveAbility ability)
+    public void SetAbility(BaseActiveAbility ability)
     {
         _ability = ability;
     }

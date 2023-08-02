@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace StatSystem
@@ -7,10 +8,14 @@ namespace StatSystem
     {
         [SerializeField] private string _name;
         [SerializeField] private StatType _statType;
+        [ShowIf("_statType", StatType.Float)]
+        [SerializeField] private bool _isAttribute;
 
         public string Name => _name;
 
         public StatType Type => _statType;
+
+        public bool IsAttribute => _isAttribute;
 
         public StatConfig(string name, StatType statType)
         {

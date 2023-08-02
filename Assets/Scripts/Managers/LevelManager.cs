@@ -11,10 +11,13 @@ public class LevelManager : Manager<LevelManager>
     private LevelHolder _levelHolder;
     private Player _player;
 
+    private bool _spawned = false;
+
     public Player Player
     {
         get
         {
+            _player = FindObjectOfType<Player>();
             if (_player == null)
                 _player = SpawnPlayer();
             return _player;
@@ -24,6 +27,7 @@ public class LevelManager : Manager<LevelManager>
     private void Awake()
     {
         _levelHolder = GetComponentInChildren<LevelHolder>();
+        _player = FindObjectOfType<Player>();
         if (_player == null) 
             _player = SpawnPlayer();
     }
@@ -139,6 +143,9 @@ public class LevelManager : Manager<LevelManager>
     {
         if (_levelHolder == null)
             _levelHolder = GetComponentInChildren<LevelHolder>();
+        if (_spawned)
+            return null;
+        _spawned = true;
         return Instantiate(_playerPrefab, _levelHolder.ConvertToWorldPosition(_playerStartingCoord), Quaternion.identity);
     }
 

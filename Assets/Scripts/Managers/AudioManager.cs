@@ -20,6 +20,7 @@ public class AudioManager : MonoBehaviour
     public float minTimeBetweenSounds = 0.7f;
 
     private bool isPlayingSound = false;
+
     private void Awake()
     {
         // Ensure only one instance of AudioManager exists

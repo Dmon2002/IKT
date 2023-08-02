@@ -10,7 +10,7 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField] private GameObject _borderTilePrefab;
     [SerializeField] private int _startingTilesCount;
     [SerializeField] private GameObject _startingTilePrefab;
-    [SerializeField] private List<GameObject> _roomPrefabs;
+    [SerializeField] private LevelConfig _levelConfig;
 
     private Vector2Int _startingTileCoord;
 
@@ -24,7 +24,7 @@ public class LevelGenerator : MonoBehaviour
         var roomPrefab = _startingTilePrefab;
         if (roomPos.y - _startingTileCoord.y >= _startingTilesCount)
         {
-            roomPrefab = getRandomRoomPrefab();
+            roomPrefab = _levelConfig.GetPrefab(roomPos);
         }
         return Instantiate(roomPrefab, _levelHolder.ConvertToWorldPosition(roomPos), Quaternion.identity, _roomContainer);
     }
@@ -34,5 +34,5 @@ public class LevelGenerator : MonoBehaviour
         return Instantiate(_borderTilePrefab, _levelHolder.ConvertToWorldPosition(borderPos), Quaternion.identity, _borderContainer);
     }
 
-    private GameObject getRandomRoomPrefab() => _roomPrefabs[Random.Range(0, _roomPrefabs.Count)];
+    
 }

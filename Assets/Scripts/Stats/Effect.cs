@@ -14,9 +14,6 @@ namespace StatSystem
         [ShowIf("@!_isPermanent")]
         [SerializeField] private float _duration;
         [SerializeField] private StatChange _statChange;
-        [SerializeField] private bool _dealsDamage;
-        [ShowIf("_dealsDamage")]
-        [SerializeField] private float _damage;
 
         public StatChange StatChange => _statChange;
 
@@ -24,9 +21,21 @@ namespace StatSystem
 
         public void ApplyEffect(StatContainer container)
         {
-            var imposer = GameObject.Instantiate(_prefab, container.transform.position, Quaternion.identity);
-            imposer.SetEffect(this);
-            imposer.SetStatContainer(container);
+            if (_isPermanent)
+            {
+                if (_statChange.StatSubstract.StatType == StatType.Float)
+                {
+                    _statChange.ChangeSubValue(container.ProcessFormula(_statChange.StatName, _statChange.StatSubstract.FloatValue));
+                }
+                container.ApplyStatChange(_statChange, false);
+            }
+            else
+            {
+                var imposer = GameObject.Instantiate(_prefab, container.transform.position, Quaternion.identity);
+                imposer.SetEffect(this);
+                imposer.SetStatContainer(container);
+            }
+            
         }
     }
 }

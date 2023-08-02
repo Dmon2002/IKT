@@ -24,10 +24,10 @@ public class AttackProjectile : Attack
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent<Entity>(out var entity))
+        if (collision.TryGetComponent<Player>(out var player))
         {
-            CollideEntity(entity);
-            //Destroy(gameObject);
+            CollideEntity(player);
+            Destroy(gameObject);
         }
     }
 }

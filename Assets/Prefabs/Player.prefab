@@ -30,6 +30,7 @@ Transform:
   m_Children:
   - {fileID: 5116665976819177813}
   - {fileID: 5424900392447720907}
+  - {fileID: 6371579145246191605}
   m_Father: {fileID: 8261367464240448386}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -129,7 +130,7 @@ GameObject:
   - component: {fileID: 7708169207482412702}
   - component: {fileID: 7926009996946548863}
   - component: {fileID: 3079045542679481334}
-  - component: {fileID: 7328496402694988203}
+  - component: {fileID: 4287774918316705056}
   m_Layer: 0
   m_Name: MainWeapon
   m_TagString: Untagged
@@ -168,19 +169,25 @@ MonoBehaviour:
   - _config: {fileID: 0}
     _name: AbilityCooldown
     _type: 0
+    _isAttribute: 0
     FloatValue: 2
     IntValue: 0
     BoolValue: 0
     EnumType: 0
     StringValue: 
+    _minValue: 0
+    _maxValue: 0
   - _config: {fileID: 0}
     _name: AbilityAttackRadius
     _type: 0
+    _isAttribute: 0
     FloatValue: 3
     IntValue: 0
     BoolValue: 0
     EnumType: 0
     StringValue: 
+    _minValue: 0
+    _maxValue: 0
 --- !u!114 &7926009996946548863
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -193,13 +200,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57f8fc342009ae140900ba31a53e368b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _action: 1
+  _usesAbilityDelay: 0
+  _actionType: 1
   _isDirectional: 1
   _directionDecision: {fileID: 3079045542679481334}
   _methodActivateOn: 0
   _attackPrefabs:
   - {fileID: 4096598606938868458, guid: 3e0a92a2737909e4498113b6d819e05b, type: 3}
   _effects: []
+  _entityDecision: {fileID: 0}
+  _actions: {fileID: 0}
 --- !u!114 &3079045542679481334
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -213,7 +223,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ourTeam: 0
---- !u!114 &7328496402694988203
+--- !u!114 &4287774918316705056
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -225,7 +235,104 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9e8122d806affe40ac4e9a2412df5ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _activeAbility: {fileID: 7926009996946548863}
+--- !u!1 &4685100292080842676
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6371579145246191605}
+  - component: {fileID: 3653495000943587890}
+  - component: {fileID: 2309591518060833752}
+  - component: {fileID: 2891004595372713559}
+  m_Layer: 0
+  m_Name: Invincibility
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6371579145246191605
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4685100292080842676}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6273171848395413259}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3653495000943587890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4685100292080842676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ca56e42aaacff049a4fbfe5d0f0a2ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _startingStats: []
+--- !u!114 &2309591518060833752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4685100292080842676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57f8fc342009ae140900ba31a53e368b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _usesAbilityDelay: 0
+  _actionType: 2
+  _isDirectional: 0
+  _directionDecision: {fileID: 0}
+  _methodActivateOn: 0
+  _attackPrefabs: []
+  _effects:
+  - _isPermanent: 0
+    _prefab: {fileID: 7990888699196896294, guid: 497b0a5b6abcb7d45b60d1a09da08730, type: 3}
+    _duration: 2
+    _statChange:
+      _changeType: 0
+      _statSubstract:
+        _config: {fileID: 0}
+        _name: IsInvincible
+        _type: 2
+        _isAttribute: 0
+        FloatValue: 0
+        IntValue: 0
+        BoolValue: 1
+        EnumType: 0
+        StringValue: 
+        _minValue: 0
+        _maxValue: 0
+  _entityDecision: {fileID: 0}
+  _actions: {fileID: 0}
+--- !u!114 &2891004595372713559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4685100292080842676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ff3792240003a44888a18d1cd03f264, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _player: {fileID: 8261367464240448398}
 --- !u!1 &5283402775643605576
 GameObject:
   m_ObjectHideFlags: 0
@@ -274,7 +381,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2904140812126597303
 Transform:
   m_ObjectHideFlags: 0
@@ -308,11 +415,14 @@ MonoBehaviour:
       _config: {fileID: 0}
       _name: MoveSpeed
       _type: 0
+      _isAttribute: 0
       FloatValue: 0.2
       IntValue: 0
       BoolValue: 0
       EnumType: 0
       StringValue: 
+      _minValue: 0
+      _maxValue: 0
 --- !u!1 &8261367464240448396
 GameObject:
   m_ObjectHideFlags: 0
@@ -410,7 +520,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19e48ece7cb677144ac027eca4ab2afc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxhp: 10
+  _activeAbilitiesContainer: {fileID: 6273171848395413259}
+  _passiveAbilitiesContainer: {fileID: 4671159290510887285}
 --- !u!114 &2529597043999051505
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -427,27 +538,69 @@ MonoBehaviour:
   - _config: {fileID: 0}
     _name: Team
     _type: 3
+    _isAttribute: 0
     FloatValue: 0
     IntValue: 0
     BoolValue: 0
     EnumType: 0
     StringValue: 
+    _minValue: 0
+    _maxValue: 0
   - _config: {fileID: 0}
     _name: MoveSpeed
     _type: 0
-    FloatValue: 0.9
+    _isAttribute: 0
+    FloatValue: 4
     IntValue: 0
     BoolValue: 0
     EnumType: 0
     StringValue: 
+    _minValue: 0
+    _maxValue: 0
   - _config: {fileID: 0}
     _name: CanReveal
     _type: 2
+    _isAttribute: 0
     FloatValue: 0
     IntValue: 0
     BoolValue: 1
     EnumType: 0
     StringValue: 
+    _minValue: 0
+    _maxValue: 0
+  - _config: {fileID: 0}
+    _name: HP
+    _type: 0
+    _isAttribute: 1
+    FloatValue: 10
+    IntValue: 0
+    BoolValue: 0
+    EnumType: 0
+    StringValue: 
+    _minValue: 0
+    _maxValue: 10
+  - _config: {fileID: 0}
+    _name: MaxHP
+    _type: 0
+    _isAttribute: 0
+    FloatValue: 0
+    IntValue: 0
+    BoolValue: 0
+    EnumType: 0
+    StringValue: 
+    _minValue: 0
+    _maxValue: 0
+  - _config: {fileID: 0}
+    _name: IsInvincible
+    _type: 2
+    _isAttribute: 0
+    FloatValue: 0
+    IntValue: 0
+    BoolValue: 0
+    EnumType: 0
+    StringValue: 
+    _minValue: 0
+    _maxValue: 0
 --- !u!1 &8265712425338466212
 GameObject:
   m_ObjectHideFlags: 0
@@ -457,7 +610,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5424900392447720907}
-  - component: {fileID: 2310000743820178557}
   - component: {fileID: 2695990752182496374}
   - component: {fileID: 5431358681002156860}
   - component: {fileID: 7313368346299664022}
@@ -483,27 +635,6 @@ Transform:
   m_Father: {fileID: 6273171848395413259}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &2310000743820178557
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8265712425338466212}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!114 &2695990752182496374
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -516,7 +647,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ca56e42aaacff049a4fbfe5d0f0a2ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _startingStats: []
+  _startingStats:
+  - _config: {fileID: 0}
+    _name: MoveSpeed
+    _type: 0
+    _isAttribute: 0
+    FloatValue: 3
+    IntValue: 0
+    BoolValue: 0
+    EnumType: 0
+    StringValue: 
+    _minValue: 0
+    _maxValue: 0
 --- !u!114 &5431358681002156860
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -529,7 +671,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d2a83ca4b651334da3a6bce95a1dfa4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _usesAbilityDelay: 0
   _directionDecision: {fileID: 7313368346299664022}
+  _movementType: 1
 --- !u!114 &7313368346299664022
 MonoBehaviour:
   m_ObjectHideFlags: 0

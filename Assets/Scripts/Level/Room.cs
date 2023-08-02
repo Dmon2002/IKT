@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using StatSystem;
 using System;
 using System.Collections;
@@ -7,11 +8,14 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D))]
 public class Room : MonoBehaviour
 {
+    [SerializeField] private bool _initiallyRevealed;
+    [ShowIf("@!_initiallyRevealed")]
     [SerializeField] private Animation _fogTile;
+    [ShowIf("@!_initiallyRevealed")]
     [SerializeField] private float _fogRevealDuration;
 
-    public event Action FogRevealStart;
-    public event Action FogRevealEnd;
+    public event System.Action FogRevealStart;
+    public event System.Action FogRevealEnd;
 
     private Vector2Int _coords;
 
@@ -24,6 +28,14 @@ public class Room : MonoBehaviour
     public Vector2Int Coords => _coords;
 
     public bool FogRevealed => _fogRevealed;
+
+    private void Awake()
+    {
+        if (_initiallyRevealed)
+        {
+            _fogRevealed = true;
+        }
+    }
 
     public void SetCoords(Vector2Int coords)
     {
@@ -44,12 +56,16 @@ public class Room : MonoBehaviour
     {
         if (collision.TryGetComponent<Entity>(out var entity))
         {
-            if (!entity.StatContainer.GetStat<bool>(StatNames.CanReveal))
-                return;
-            RevealFog(transform.position - entity.transform.position);
-            if (_inRoom.Contains(entity))
-                return;
-            _inRoom.Add(entity);
+            if (!_inRoom.Contains(entity))
+            {
+                _inRoom.Add(entity);
+            }
+            if (entity.StatContainer.GetStat<bool>(StatNames.CanReveal))
+            {
+                RevealFog(transform.position - entity.transform.position);
+            }
+
+
         }
     }
 

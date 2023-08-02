@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,13 @@ namespace StatSystem
 
         private Dictionary<string, List<StatChange>> _changes = new();
 
+        private Dictionary<string, Func<float, float>> _formulas = new();
+
+        public event Action<string, float> StatEffected;
+
+        [ShowInInspector]
+        private List<Stat> ActualStats => _actualStats.Values.ToList();
+
         private void Awake()
         {
             Initialize();
@@ -30,10 +38,27 @@ namespace StatSystem
             }
         }
 
+        public void AddFormula(string name, Func<float, float> formula)
+        {
+            _formulas[name] = formula;
+        }
+
+        public float ProcessFormula(string name, float value)
+        {
+            if (!_formulas.ContainsKey(name))
+            {
+                return value;
+            }
+            return _formulas[name](value);
+        }
+
         public void ApplyStatChange(StatChange change, bool isTemporarely)
         {
             if (_baseStats.Count != _startingStats.Count)
-                throw new Exception("Had to initialize statContainer before using(");
+                throw new Exception("Had to initialize statContainer before using");
+            if (!_changes.ContainsKey(change.StatName))
+                return;
+            StatEffected?.Invoke(change.StatName, change.StatSubstract.FloatValue);
             if (isTemporarely)
             {
                 _changes[change.StatName].Add(change);
@@ -48,6 +73,8 @@ namespace StatSystem
 
         public void RevertStatChange(StatChange change)
         {
+            if (!_changes.ContainsKey(change.StatName))
+                return;
             _changes[change.StatName].Remove(change);
             var stat = _baseStats[change.StatName].CloneStat();
             _actualStats[change.StatName] = stat;
@@ -68,13 +95,34 @@ namespace StatSystem
 
         public T GetStat<T>(string name)
         {
+            if (!_actualStats.ContainsKey(name))
+                throw new ArgumentException($"StatContainer doesn't have {name} stat");
             return _actualStats[name].GetValue<T>();
+        }
+
+        public bool ContainsStat(string name)
+        {
+            return _actualStats.ContainsKey(name);
         }
         
         public void AddStat(Stat stat)
         {
             if (_startingStats.Contains(stat)) return;
             _startingStats.Add(stat);
+        }
+
+        public float GetMinValue(string name)
+        {
+            if (!_actualStats.ContainsKey(name))
+                throw new ArgumentException($"StatContainer doesn't have {name} stat");
+            return _actualStats[name].MinValue;
+        }
+
+        public float GetMaxValue(string name)
+        {
+            if (!_actualStats.ContainsKey(name))
+                throw new ArgumentException($"StatContainer doesn't have {name} stat");
+            return _actualStats[name].MaxValue;
         }
     }
 }

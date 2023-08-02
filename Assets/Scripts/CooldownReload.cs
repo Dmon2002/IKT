@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
@@ -9,7 +8,7 @@ public class CooldownReload
     private float _remainingTime = 0f;
     private IEnumerator _cooldownIEnumerator;
 
-    public event Action Reloaded;
+    public event System.Action Reloaded;
     private MonoBehaviour _mono;
 
     public float CooldownDuration

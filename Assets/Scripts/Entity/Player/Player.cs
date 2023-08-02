@@ -1,7 +1,35 @@
+using StatSystem;
+using System;
 using UnityEngine;
 
 public class Player : Entity
 {
+    public event Action<float> DamageTaken;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        StatContainer.AddFormula(StatNames.HP, hp => {
+            if (StatContainer.GetStat<bool>(StatNames.IsInvincible) && hp > 0)
+            {
+                return 0;
+            }
+            return hp;
+        });
+        StatContainer.StatEffected += (string name, float changeValue) =>
+        {
+            if (name != StatNames.HP)
+                return;
+            if (changeValue <= 0)
+                return;
+            TakeDamage(changeValue);
+        };
+    }
+
+    private void TakeDamage(float damage)
+    {
+        DamageTaken?.Invoke(damage);
+    }
 
     //protected override void OnEnable()
     //{

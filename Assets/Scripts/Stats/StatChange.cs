@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace StatSystem
@@ -11,8 +12,10 @@ namespace StatSystem
         public ChangeType ChangeType => _changeType;
 
         public string StatName => _statSubstract.Name;
+
+        public Stat StatSubstract => _statSubstract;
         
-        public void ApplyStatChange(Stat stat)
+        public void ApplyStatChange(Stat stat, Func<float, float> formula = null)
         {
             if (stat.Name != _statSubstract.Name)
                 throw new System.ArgumentException("incompatible stat names");
@@ -25,6 +28,11 @@ namespace StatSystem
                 stat.ChangeValue(_statSubstract);
             }
         }
+
+        public void ChangeSubValue(float value)
+        {
+            _statSubstract.FloatValue = value;
+        } 
     }
 
     public enum ChangeType

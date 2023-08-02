@@ -22,6 +22,7 @@ namespace StatSystem
             if (_config == null) return;
             _name = _config.Name;
             _type = _config.Type;
+            _isAttribute = _config.IsAttribute;
             _config = null;
         }
 #endif
@@ -32,6 +33,9 @@ namespace StatSystem
         [ShowIf("@_name != \"\"")]
         [SerializeField] private StatType _type;
         [ShowIf("_type", StatType.Float)]
+        [ReadOnly]
+        [SerializeField] private bool _isAttribute;
+        [ShowIf("_type", StatType.Float)]
         public float FloatValue;
         [ShowIf("@_type == StatSystem.StatType.Int || _type == StatSystem.StatType.Enum")]
         public int IntValue;
@@ -41,6 +45,31 @@ namespace StatSystem
         public EnumType EnumType;
         [ShowIf("_type", StatType.String)]
         public string StringValue;
+        
+        [ShowIf("@_type == StatSystem.StatType.Float && _isAttribute == true")]
+        [SerializeField] private float _minValue;
+        [ShowIf("@_type == StatSystem.StatType.Float && _isAttribute == true")]
+        [SerializeField] private float _maxValue;
+
+        public float MaxValue
+        {
+            get
+            {
+                if (_type != StatType.Float || !_isAttribute)
+                    throw new Exception($"Value {_name} is not attribute. So it doesn't have max");
+                return _maxValue;
+            }
+        }
+
+        public float MinValue
+        {
+            get
+            {
+                if (_type != StatType.Float || !_isAttribute)
+                    throw new Exception($"Value {_name} is not attribute. So it doesn't have min");
+                return _minValue;
+            }
+        }
 
         [Button("Reset Stat", ButtonSizes.Small)]
         private void ResetStat()
@@ -53,16 +82,17 @@ namespace StatSystem
 
         public StatType StatType => _type;
 
-        public Stat(string name, StatType type)
+        public Stat(string name, StatType type, bool isAttribute = false)
         {
             _name = name;
             _type = type;
+            _isAttribute = isAttribute;
         }
 
         public void ChangeValue<T>(T change)
         {
-            if (StatType != StatType.Float || StatType != StatType.Int)
-                throw new System.ArgumentException("not int and not float type value to change");
+            //if (StatType != StatType.Float || StatType != StatType.Int)
+            //    throw new System.ArgumentException("not int and not float type value to change");
         }
 
         public void ChangeValue(Stat add)
@@ -71,11 +101,15 @@ namespace StatSystem
                 throw new System.ArgumentException("Incompatible stats by name");
             if (add.StatType == StatType.Float)
             {
-                FloatValue += add.FloatValue;
+                FloatValue -= add.FloatValue;
+                if (_isAttribute)
+                {
+                    FloatValue = Mathf.Clamp(FloatValue, _minValue, _maxValue);
+                }
             }
             else if (add.StatType == StatType.Int)
             {
-                IntValue += add.IntValue;
+                IntValue -= add.IntValue;
             }
             else
             {
@@ -90,7 +124,7 @@ namespace StatSystem
             switch (StatType)
             {
                 case StatType.Float:
-                    FloatValue = set.FloatValue;
+                    FloatValue = Mathf.Clamp(set.FloatValue, _minValue, _maxValue);
                     break;
                 case StatType.Int:
                 case StatType.Enum:
@@ -149,12 +183,14 @@ namespace StatSystem
 
         public Stat CloneStat()
         {
-            Stat clonedStat = new(_name, _type);
+            Stat clonedStat = new(_name, _type, _isAttribute);
             clonedStat.FloatValue = FloatValue;
             clonedStat.EnumType = EnumType;
             clonedStat.IntValue = IntValue;
             clonedStat.BoolValue = BoolValue;
             clonedStat.StringValue = StringValue;
+            clonedStat._maxValue = _maxValue;
+            clonedStat._minValue = _minValue;
             return clonedStat;
         }
 

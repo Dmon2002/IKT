@@ -200,10 +200,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19abde525d163794ba2f313ec2dc5312, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _effectStats:
+  - _isPermanent: 1
+    _prefab: {fileID: 0}
+    _duration: 0
+    _statChange:
+      _changeType: 1
+      _statSubstract:
+        _config: {fileID: 0}
+        _name: HP
+        _type: 0
+        _isAttribute: 1
+        FloatValue: 1
+        IntValue: 0
+        BoolValue: 0
+        EnumType: 0
+        StringValue: 
+        _minValue: 0
+        _maxValue: 0
   _lifetime: 1
-  _effectStats: []
-  _dealsDamage: 1
-  _damage: 3
 --- !u!114 &6491909996424034939
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -220,8 +235,11 @@ MonoBehaviour:
   - _config: {fileID: 0}
     _name: Team
     _type: 3
+    _isAttribute: 0
     FloatValue: 0
     IntValue: 0
     BoolValue: 0
     EnumType: 0
     StringValue: 
+    _minValue: 0
+    _maxValue: 0

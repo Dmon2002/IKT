@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3034382765300094476}
   - component: {fileID: 3034382765300094477}
   - component: {fileID: 7544230231004639923}
-  - component: {fileID: 9129320597454810513}
+  - component: {fileID: 1689587616254014173}
   m_Layer: 0
   m_Name: CleanRoom
   m_TagString: Untagged
@@ -87,7 +87,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &9129320597454810513
+--- !u!114 &1689587616254014173
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -96,18 +96,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 3034382765300094478}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46a7daff69ca7a64dae53407032ded2e, type: 3}
+  m_Script: {fileID: 11500000, guid: 8c4cc5b02d1a48346a55231fc9733fd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerEnter:
-    m_PersistentCalls:
-      m_Calls: []
-  FogRevealEnd:
-    m_PersistentCalls:
-      m_Calls: []
-  _fogRevealAnimation: {fileID: 0}
+  _initiallyRevealed: 1
   _fogTile: {fileID: 0}
-  _fogRevealed: 1
+  _fogRevealDuration: 0
 --- !u!1 &3509070504581977995
 GameObject:
   m_ObjectHideFlags: 0

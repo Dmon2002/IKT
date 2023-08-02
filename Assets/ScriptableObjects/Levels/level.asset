@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eeafb41e4fe6b984a8a18b440fde34a8, type: 3}
+  m_Name: level
+  m_EditorClassIdentifier: 
+  _tileConfigConsts: []
+  _tileConfigFromList: []
+  _defaultTile:
+    _coord: {x: 0, y: 0}
+    _tilePrefabs:
+    - {fileID: 3034382765300094478, guid: 056ffce93b378ab4fa8933f991605558, type: 3}
+    - {fileID: 3034382765300094478, guid: 6a41747c175d8484996f26b85a194188, type: 3}
+    - {fileID: 3034382765300094478, guid: 823ae2b650fcf0e45853b0eeeda9c293, type: 3}
+    - {fileID: 3034382765300094478, guid: c737dba089e78a445a9e3cb989e7a5ec, type: 3}

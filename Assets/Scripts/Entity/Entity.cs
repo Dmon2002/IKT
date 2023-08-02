@@ -2,12 +2,17 @@ using Sirenix.OdinInspector;
 using StatSystem;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(StatContainer))]
 public abstract class Entity : MonoBehaviour
 {
-    [SerializeField] private float _maxhp;
+    [ChildGameObjectsOnly]
+    [SerializeField] private Transform _activeAbilitiesContainer;
+    [ChildGameObjectsOnly]
+    [SerializeField] private Transform _passiveAbilitiesContainer;
 
     private List<BaseActiveAbility> _activeAbilities;
     private List<PassiveAbility> _passiveAbilities;
@@ -15,24 +20,28 @@ public abstract class Entity : MonoBehaviour
 
     private Rigidbody2D _rb;
 
-    private float _hp;
-
-    public float MaxHp => _maxhp;
-
-    public float Hp => _hp;
+    public event Action<Collision2D> Collided;
 
     public Rigidbody2D Rb => _rb;
 
     public StatContainer StatContainer => _statContainer;
-
-    public event Action HealthChanged;
-    public event Action Died;
+    
+    public event System.Action Died;
 
     protected virtual void Awake()
     {
+        _activeAbilities = new List<BaseActiveAbility>();
+        if (_activeAbilitiesContainer != null)
+        {
+            _activeAbilities = _activeAbilitiesContainer?.GetComponentsInChildren<BaseActiveAbility>().ToList();
+        }
+        _passiveAbilities = new List<PassiveAbility>();
+        if (_passiveAbilitiesContainer != null)
+        {
+            _passiveAbilities = _passiveAbilitiesContainer?.GetComponentsInChildren<PassiveAbility>().ToList();
+        }
         _rb = GetComponent<Rigidbody2D>();
-        _activeAbilities = new List<BaseActiveAbility>(transform.GetComponentsInChildren<BaseActiveAbility>());
-        _passiveAbilities = new List<PassiveAbility>(transform.GetComponentsInChildren<PassiveAbility>());
+        _statContainer = GetComponent<StatContainer>();
         foreach (var ability in _activeAbilities)
         {
             ability.SetEntity(this);
@@ -41,35 +50,15 @@ public abstract class Entity : MonoBehaviour
         {
             ability.SetEntity(this);
         }
-        _statContainer = GetComponent<StatContainer>();
     }
 
-    protected virtual void OnEnable()
+    private void Update()
     {
-        _hp = _maxhp;
-    }
-
-    public virtual void ApplyDamage(float damage)
-    {
-        if (damage < 0)
-            throw new ArgumentOutOfRangeException("Damage by negative number");
-        _hp -= damage;
-        HealthChanged?.Invoke();
-        if (_hp < 0)
+        if (!_statContainer.ContainsStat(StatNames.HP))
+            return;
+        if (_statContainer.GetStat<float>(StatNames.HP) <= 0)
         {
             Die();
-        }
-    }
-
-    public virtual void Heal(float healPower)
-    {
-        if (healPower < 0)
-            throw new ArgumentOutOfRangeException("Heal by negative number");
-        _hp += healPower;
-        HealthChanged?.Invoke();
-        if (_hp > _maxhp)
-        {
-            _hp = _maxhp;
         }
     }
 
@@ -79,10 +68,24 @@ public abstract class Entity : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Collided?.Invoke(collision);
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        Collided?.Invoke(collision);
+    }
+
+#if UNITY_EDITOR
     [Button("Setup Stats")]
-    private void SetupStats()
+    protected virtual void SetupStats()
     {
         var statContainer = GetComponent<StatContainer>();
-        statContainer.AddStat(new Stat("MaxHP", StatType.Float));
+        statContainer.AddStat(new Stat(StatNames.CanReveal, StatType.Bool));
+        statContainer.AddStat(new Stat(StatNames.HP, StatType.Float, true));
+        statContainer.AddStat(new Stat(StatNames.Team, StatType.Enum));
     }
+#endif
 }

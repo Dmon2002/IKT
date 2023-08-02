@@ -1,9 +1,13 @@
+using Sirenix.OdinInspector;
 using StatSystem;
 using UnityEngine;
 
 public class AbilityDecisionNearestEnemy : AbilityDecisionDirection
 {
     [SerializeField] private Team _ourTeam;
+
+    [ShowInInspector]
+    public bool Active => this.enabled;
 
     // Чтобы не засорять инспектор, решил вынести константу
     private LayerMask _detectMask;

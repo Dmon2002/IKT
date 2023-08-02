@@ -1,37 +1,18 @@
 using StatSystem;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(StatContainer))]
 public abstract class Attack : MonoBehaviour
 {
-    [SerializeField] private float _lifetime;
     [SerializeField] private List<Effect> _effectStats;
-    [SerializeField] private bool _dealsDamage;
-    [SerializeField] private float _damage;
+    [SerializeField] private float _lifetime;
 
-    private StatContainer _statContainer;
-
-    public StatContainer StatContainer => _statContainer;
-
-    protected Vector2 Direction { get; set; }
-
-    private void Awake()
+    protected virtual void Start()
     {
-        _statContainer = GetComponent<StatContainer>();
-    }
-
-    private void Start()
-    {
-        Shoot();
         StartCoroutine(LifetimeCoroutine());
-    }
-
-    public void SetDirection(Vector2 direction)
-    {
-        Direction = direction;
+        Shoot();
     }
 
     private IEnumerator LifetimeCoroutine()
@@ -40,16 +21,28 @@ public abstract class Attack : MonoBehaviour
         Destroy(gameObject);
     }
 
+    private StatContainer _statContainer;
+
+    public StatContainer StatContainer => _statContainer;
+
+    protected Vector2 Direction { get; set; }
+
+    protected virtual void Awake()
+    {
+        _statContainer = GetComponent<StatContainer>();
+    }
+
+    public void SetDirection(Vector2 direction)
+    {
+        Direction = direction;
+    }
+
     protected virtual void CollideEntity(Entity entity)
     {
         var ourTeam = _statContainer.GetStat<Team>(StatNames.Team);
         var enemyTeam = entity.StatContainer.GetStat<Team>(StatNames.Team);
         if (ourTeam.GetAgainstTeams().Contains(enemyTeam))
         {
-            if (_dealsDamage)
-            {
-                entity.ApplyDamage(_damage);
-            }
             foreach (var effectStat in _effectStats)
             {
                 effectStat.ApplyEffect(entity.StatContainer);

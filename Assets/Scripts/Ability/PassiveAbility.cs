@@ -10,6 +10,8 @@ public class PassiveAbility : MonoBehaviour
 
     private void Start()
     {
+        if (_entity == null)
+            return;
         foreach (var change in _statChanges)
         {
             _entity.StatContainer.ApplyStatChange(change, true);

@@ -1,23 +1,37 @@
 using StatSystem;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(StatContainer))]
 public abstract class BaseActiveAbility : MonoBehaviour
 {
+    [SerializeField] private bool _usesAbilityDelay;
+
     protected List<AbilityDecision> Decisions;
 
     private bool _isActive;
     private Entity _entity;
 
-    public event Action Casted;
+    public event System.Action Casted;
 
     public StatContainer StatContainer { get; protected set; }
 
     public bool IsActive => _isActive;
 
-    public Entity Entity => _entity;
+    public bool Activated { get; protected set; }
+
+    public bool UsesAbilityDelay => _usesAbilityDelay;
+
+    public Entity Entity {
+        get
+        {
+            if (_entity == null)
+                throw new Exception("Accessing ability without setting Entity (SetEntity)");
+            return _entity;
+        }
+    }
 
     public bool CanActivate
     {
@@ -64,8 +78,15 @@ public abstract class BaseActiveAbility : MonoBehaviour
         _isActive = false;
     }
 
-    protected virtual void Cast()
+    protected virtual IEnumerator Cast()
     {
+        Activated = true;
+        if (_usesAbilityDelay)
+        {
+            yield return new WaitForSeconds(StatContainer.GetStat<float>(StatNames.AbilityDelay));
+            Debug.Log("CastDelay");
+        }
         Casted?.Invoke();
+        Activated = false;
     }
 }

@@ -3,21 +3,26 @@ using StatSystem;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using ActionSystem;
+using System.Collections;
 
 public class ActiveAbility : BaseActiveAbility
 {
-    [SerializeField] private AbilityAction _action;
+    [SerializeField] private AbilityActionType _actionType;
     [SerializeField] private bool _isDirectional;
     [ShowIf("_isDirectional")]
     [SerializeField] private AbilityDecisionDirection _directionDecision;
     [EnumToggleButtons]
     [SerializeField] private ActivationMethod _methodActivateOn;
-    [ShowIf("@(_action & AbilityAction.SpawnsAttack) == AbilityAction.SpawnsAttack")]
+    [ShowIf("@(_actionType & AbilityActionType.SpawnsAttack) == AbilityActionType.SpawnsAttack")]
     [SerializeField] private List<Attack> _attackPrefabs;
-    [ShowIf("@(_action & AbilityAction.EffectSelf) == AbilityAction.EffectSelf")]
+    [ShowIf("@(_actionType & AbilityActionType.EffectSelf) == AbilityActionType.EffectSelf || (_actionType & AbilityActionType.EffectOtherEntity) == AbilityActionType.EffectOtherEntity")]
     [SerializeField] private List<Effect> _effects;
-    
-    //private CooldownReload _abilityCooldownReload;
+    [ShowIf("@(_actionType & AbilityActionType.EffectOtherEntity) == AbilityActionType.EffectOtherEntity")]
+    [SerializeField] private AbilityDecisionEntity _entityDecision;
+    [ShowIf("@(_actionType & AbilityActionType.PerformActions) == AbilityActionType.PerformActions")]
+    [SerializeField] private ActionSystem.Actions _actions;
+
     private Vector2 _lastDirection;
 
 
@@ -25,36 +30,38 @@ public class ActiveAbility : BaseActiveAbility
     {
         if (_methodActivateOn != ActivationMethod.Update)
             return;
-        Cast();
+        StartCoroutine(Cast());
     }
 
     private void FixedUpdate()
     {
         if (_methodActivateOn != ActivationMethod.FixedUpdate)
             return;
-        Cast();
+        StartCoroutine(Cast());
     }
 
     private void LateUpdate()
     {
         if (_methodActivateOn != ActivationMethod.LateUpdate)
             return;
-        Cast();
+        StartCoroutine(Cast());
     }
 
 
-    protected override void Cast()
+    protected override IEnumerator Cast()
     {
         if (!IsActive)
-            return;
+            yield break;
+        if (Activated)
+            yield break;
         if (!CanActivate)
-            return;
-        base.Cast();
+            yield break;
+        yield return StartCoroutine(base.Cast());
         if (_isDirectional)
         {
             DefineDirection();
         }
-        if ((_action & AbilityAction.SpawnsAttack) == AbilityAction.SpawnsAttack)
+        if ((_actionType & AbilityActionType.SpawnsAttack) == AbilityActionType.SpawnsAttack)
         {
             foreach (var attackPrefab in _attackPrefabs)
             {
@@ -65,13 +72,28 @@ public class ActiveAbility : BaseActiveAbility
                 }
             }
         }
-        if ((_action & AbilityAction.EffectSelf) == AbilityAction.EffectSelf)
+        if ((_actionType & AbilityActionType.EffectSelf) == AbilityActionType.EffectSelf)
         {
             foreach (var effect in _effects)
             {
                 effect.ApplyEffect(Entity.StatContainer);
             }
         }
+        if ((_actionType & AbilityActionType.EffectOtherEntity) == AbilityActionType.EffectOtherEntity)
+        {
+            var entity = _entityDecision.DecideEntity();
+            if (entity == null)
+                yield break;
+            foreach (var effect in _effects)
+            {
+                effect.ApplyEffect(entity.StatContainer);
+            }
+        }
+        if ((_actionType & AbilityActionType.PerformActions) == AbilityActionType.PerformActions)
+        {
+            _actions.Perform();
+        }
+        Activated = false;
     }
 
     private void DefineDirection()
@@ -87,10 +109,12 @@ public class ActiveAbility : BaseActiveAbility
     }
 
     [Flags]
-    private enum AbilityAction
+    private enum AbilityActionType
     {
         SpawnsAttack = 1 << 0,
         EffectSelf = 1 << 1,
         EffectLevel = 1 << 2,
+        EffectOtherEntity = 1 << 3,
+        PerformActions = 1 << 4
     }
 }

@@ -111,15 +111,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c4cc5b02d1a48346a55231fc9733fd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FogRevealStart:
-    m_PersistentCalls:
-      m_Calls: []
-  FogRevealEnd:
-    m_PersistentCalls:
-      m_Calls: []
-  _fogTile: {fileID: 0}
-  _fogRevealed: 0
-  _fogDelay: 0
+  _fogTile: {fileID: 4580213565744681811}
+  _fogRevealDuration: 1
 --- !u!50 &7544230231004639923
 Rigidbody2D:
   serializedVersion: 4
@@ -285,7 +278,6 @@ GameObject:
   - component: {fileID: 5495441311687515911}
   - component: {fileID: 996097081514252321}
   - component: {fileID: 4580213565744681811}
-  - component: {fileID: 4320712607210582247}
   m_Layer: 0
   m_Name: Fog
   m_TagString: Untagged
@@ -376,18 +368,3 @@ Animation:
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
   m_CullingType: 0
---- !u!114 &4320712607210582247
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6311724035886259282}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3c84b8f6e7f7064ab3dc91f879a730b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  room: {fileID: 8533644980568122836}
-  speed: 1
-  IsDie: 0

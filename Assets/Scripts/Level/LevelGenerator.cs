@@ -26,7 +26,8 @@ public class LevelGenerator : MonoBehaviour
         {
             roomPrefab = _levelConfig.GetPrefab(roomPos);
         }
-        return Instantiate(roomPrefab, _levelHolder.ConvertToWorldPosition(roomPos), Quaternion.identity, _roomContainer);
+        return null;
+        //return Instantiate(roomPrefab, _levelHolder.ConvertToWorldPosition(roomPos), Quaternion.identity, _roomContainer);
     }
 
     public GameObject GenerateBorder(Vector2Int borderPos)

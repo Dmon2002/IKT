@@ -9,9 +9,11 @@ using Random = UnityEngine.Random;
 [CreateAssetMenu(fileName = "New LevelConfig", menuName = "LevelConfig", order = 3)]
 public class LevelConfig : ScriptableObject
 {
+    [SerializeReference] private List<TileConfig> _tileConfigs;
     [SerializeField] private List<TileConfigConst> _tileConfigConsts;
     [SerializeField] private List<TileConfigRandomFromList> _tileConfigFromList;
-    [SerializeField] private TileConfigRandomFromList _defaultTile;
+    [SerializeReference]
+    private TileConfig _defaultTile;
 
     private Dictionary<Vector2Int, TileConfig> _coordToConfig = new Dictionary<Vector2Int, TileConfig>();
 

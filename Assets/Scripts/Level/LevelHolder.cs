@@ -35,6 +35,7 @@ public class LevelHolder : MonoBehaviour
             for (int x = _startingTileCoord.x; x < _startingTileCoord.x + _levelWidth - y % 2; x++)
             {
                 Vector2Int tileIntPos = new (x, y);
+                return;
                 var room = _levelGenerator.GenerateRoom(tileIntPos).GetComponent<Room>();
                 if (room == null) continue;
                 room.SetCoords(tileIntPos);

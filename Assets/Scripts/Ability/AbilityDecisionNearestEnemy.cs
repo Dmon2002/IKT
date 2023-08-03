@@ -1,3 +1,5 @@
+using GameCreator.Runtime.Common;
+using GameCreator.Runtime.Variables;
 using Sirenix.OdinInspector;
 using StatSystem;
 using UnityEngine;
@@ -5,6 +7,7 @@ using UnityEngine;
 public class AbilityDecisionNearestEnemy : AbilityDecisionDirection
 {
     [SerializeField] private Team _ourTeam;
+    [SerializeField] private LocalNameVariables _nameVariables;
 
     [ShowInInspector]
     public bool Active => this.enabled;
@@ -44,5 +47,10 @@ public class AbilityDecisionNearestEnemy : AbilityDecisionDirection
         if (minEntity == null)
             return Vector2.zero;
         return (minEntity.transform.position - transform.position).normalized;
+    }
+
+    public void DecideDirectionVariable()
+    {
+        _nameVariables.Set("DirectionToEnemy", DecideDirection());
     }
 }

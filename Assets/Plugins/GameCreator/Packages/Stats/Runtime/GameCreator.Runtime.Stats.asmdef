@@ -1,0 +1,16 @@
+{
+    "name": "GameCreator.Runtime.Stats",
+    "rootNamespace": "GameCreator.Runtime.Stats",
+    "references": [
+        "GameCreator.Runtime.Core"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

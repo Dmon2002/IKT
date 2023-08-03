@@ -12,11 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eeafb41e4fe6b984a8a18b440fde34a8, type: 3}
   m_Name: TestMeleeEnemySmall
   m_EditorClassIdentifier: 
+  _tileConfigs: []
   _tileConfigConsts:
   - _coord: {x: 1, y: 2}
-    _tilePrefab: {fileID: 3034382765300094478, guid: 823ae2b650fcf0e45853b0eeeda9c293, type: 3}
+    _tilePrefab: {fileID: 3034382765300094478, guid: 6a41747c175d8484996f26b85a194188, type: 3}
   _tileConfigFromList: []
   _defaultTile:
-    _coord: {x: 0, y: 0}
-    _tilePrefabs:
-    - {fileID: 3034382765300094478, guid: 69810fedf75ade2478edfc5300749f8b, type: 3}
+    rid: -2
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }

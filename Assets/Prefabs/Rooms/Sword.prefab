@@ -41,8 +41,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4477079913507770977}
   - component: {fileID: 2106583380286798047}
-  - component: {fileID: 7453017841763258219}
   - component: {fileID: 4575795961926685568}
+  - component: {fileID: 6636317692685893199}
   m_Layer: 0
   m_Name: Sword
   m_TagString: Untagged
@@ -99,39 +99,6 @@ PolygonCollider2D:
       - {x: -0.4978928, y: -0.25057572}
       - {x: 0.0034185648, y: -0.49727857}
       - {x: 0.5048437, y: -0.2537428}
---- !u!114 &7453017841763258219
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2156787556265967539}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46a7daff69ca7a64dae53407032ded2e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  FogRevealStart:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5214121031724638531}
-        m_TargetAssemblyTypeName: RoomSpawner, Assembly-CSharp
-        m_MethodName: Spawn
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  FogRevealEnd:
-    m_PersistentCalls:
-      m_Calls: []
-  _fogTile: {fileID: 2248955704753432598}
-  _fogRevealed: 0
-  _fogDelay: 0
 --- !u!50 &4575795961926685568
 Rigidbody2D:
   serializedVersion: 4
@@ -153,6 +120,21 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &6636317692685893199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2156787556265967539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c4cc5b02d1a48346a55231fc9733fd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _initiallyRevealed: 0
+  _fogTile: {fileID: 0}
+  _fogRevealDuration: 0
 --- !u!1 &2248955704753432598
 GameObject:
   m_ObjectHideFlags: 0
@@ -163,7 +145,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8477980198661949877}
   - component: {fileID: 4189757492140648311}
-  - component: {fileID: 7912651791829174732}
   m_Layer: 0
   m_Name: Fog
   m_TagString: Untagged
@@ -238,21 +219,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7912651791829174732
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2248955704753432598}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3c84b8f6e7f7064ab3dc91f879a730b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  room: {fileID: 7453017841763258219}
-  speed: 2
-  IsDie: 0
 --- !u!1 &2445667289256129191
 GameObject:
   m_ObjectHideFlags: 0
@@ -382,7 +348,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4f6ae9eca8e7e146aa8673072e83460, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  room: {fileID: 7453017841763258219}
+  room: {fileID: 0}
   spawnables:
   - point: {fileID: 2102103151387597938}
     prefab: {fileID: 144414254013418969, guid: ec6643e9a73b62445bdfd2086a11dbeb, type: 3}

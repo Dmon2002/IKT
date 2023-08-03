@@ -131,6 +131,8 @@ GameObject:
   - component: {fileID: 7926009996946548863}
   - component: {fileID: 3079045542679481334}
   - component: {fileID: 4287774918316705056}
+  - component: {fileID: 1630584993413336845}
+  - component: {fileID: 5229599861198801499}
   m_Layer: 0
   m_Name: MainWeapon
   m_TagString: Untagged
@@ -195,7 +197,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4058409310134941453}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 57f8fc342009ae140900ba31a53e368b, type: 3}
   m_Name: 
@@ -223,6 +225,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ourTeam: 0
+  _nameVariables: {fileID: 5229599861198801499}
 --- !u!114 &4287774918316705056
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -235,6 +238,182 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9e8122d806affe40ac4e9a2412df5ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1630584993413336845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4058409310134941453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ecd922218e245e2b85d51f9f08338c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Instructions:
+    m_Instructions:
+    - rid: 3900509869037846550
+    - rid: 3900509869037846563
+    - rid: 3900509869037846598
+  m_TriggerEvent:
+    rid: 3900509869037846613
+  references:
+    version: 2
+    RefIds:
+    - rid: 3900509869037846550
+      type: {class: InstructionGameObjectInstantiate, ns: GameCreator.Runtime.VisualScripting, asm: GameCreator.Runtime.Core}
+      data:
+        m_IsExpanded: 1
+        m_Breakpoint: 0
+        m_IsEnabled: 1
+        m_GameObject:
+          m_Property:
+            rid: 3900509869037846551
+          usePooling: 0
+          size: 5
+          hasDuration: 0
+          duration: 10
+        m_Location:
+          m_Property:
+            rid: 3900509869037846552
+        m_Parent:
+          m_Property:
+            rid: 3900509869037846553
+        m_Save:
+          m_Property:
+            rid: 3900509869037846556
+    - rid: 3900509869037846551
+      type: {class: GetGameObjectInstance, ns: GameCreator.Runtime.Common, asm: GameCreator.Runtime.Core}
+      data:
+        m_GameObject: {fileID: 4628209679757359500, guid: 3e0a92a2737909e4498113b6d819e05b, type: 3}
+    - rid: 3900509869037846552
+      type: {class: GetLocationCharacter, ns: GameCreator.Runtime.Characters, asm: GameCreator.Runtime.Core}
+      data:
+        m_Character:
+          m_Property:
+            rid: 3900509869037846555
+        m_Rotate: 1
+    - rid: 3900509869037846553
+      type: {class: GetGameObjectNone, ns: GameCreator.Runtime.Common, asm: GameCreator.Runtime.Core}
+    - rid: 3900509869037846555
+      type: {class: GetGameObjectPlayer, ns: GameCreator.Runtime.Common, asm: GameCreator.Runtime.Core}
+    - rid: 3900509869037846556
+      type: {class: SetGameObjectLocalName, ns: GameCreator.Runtime.Variables, asm: GameCreator.Runtime.Core}
+      data:
+        m_Variable:
+          m_TypeID:
+            m_String: game-object
+          m_Variable: {fileID: 5229599861198801499}
+          m_Name:
+            m_String: LastAttack
+            m_ID: -415043238
+    - rid: 3900509869037846563
+      type: {class: InstructionTransformLookAt, ns: GameCreator.Runtime.VisualScripting, asm: GameCreator.Runtime.Core}
+      data:
+        m_IsExpanded: 0
+        m_Breakpoint: 0
+        m_IsEnabled: 1
+        m_Transform:
+          m_Property:
+            rid: 3900509869037846566
+        m_Target:
+          m_Property:
+            rid: 3900509869037846575
+    - rid: 3900509869037846566
+      type: {class: GetGameObjectLocalName, ns: GameCreator.Runtime.Variables, asm: GameCreator.Runtime.Core}
+      data:
+        m_Variable:
+          m_TypeID:
+            m_String: game-object
+          m_Variable: {fileID: 5229599861198801499}
+          m_Name:
+            m_String: LastAttack
+            m_ID: -415043238
+    - rid: 3900509869037846575
+      type: {class: GetGameObjectNone, ns: GameCreator.Runtime.Common, asm: GameCreator.Runtime.Core}
+    - rid: 3900509869037846598
+      type: {class: InstructionLogicCallMethod, ns: GameCreator.Runtime.VisualScripting, asm: GameCreator.Runtime.Core}
+      data:
+        m_IsExpanded: 1
+        m_Breakpoint: 0
+        m_IsEnabled: 1
+        m_Method:
+          m_PersistentCalls:
+            m_Calls:
+            - m_Target: {fileID: 3079045542679481334}
+              m_TargetAssemblyTypeName: 
+              m_MethodName: 
+              m_Mode: 1
+              m_Arguments:
+                m_ObjectArgument: {fileID: 0}
+                m_ObjectArgumentAssemblyTypeName: 
+                m_IntArgument: 0
+                m_FloatArgument: 0
+                m_StringArgument: 
+                m_BoolArgument: 0
+              m_CallState: 2
+    - rid: 3900509869037846613
+      type: {class: EventOnUpdate, ns: GameCreator.Runtime.VisualScripting, asm: GameCreator.Runtime.Core}
+--- !u!114 &5229599861198801499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4058409310134941453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fe2b16044a04efba6795e323236dc60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SaveUniqueID:
+    m_Save:
+      m_Save: 0
+    m_UniqueID:
+      m_SerializedID:
+        m_String: 636d186f-87c3-4be3-bb39-bcbf335575a4
+  m_Runtime:
+    m_List:
+      m_Source:
+      - rid: 3900509869037846557
+      - rid: 3900509869037846600
+  references:
+    version: 2
+    RefIds:
+    - rid: 3900509869037846557
+      type: {class: NameVariable, ns: GameCreator.Runtime.Variables, asm: GameCreator.Runtime.Core}
+      data:
+        m_IsExpanded: 0
+        m_Breakpoint: 0
+        m_IsEnabled: 1
+        m_Value:
+          rid: 3900509869037846559
+        m_Name:
+          m_String: LastAttack
+    - rid: 3900509869037846559
+      type: {class: ValueGameObject, ns: GameCreator.Runtime.Variables, asm: GameCreator.Runtime.Core}
+      data:
+        m_IsExpanded: 1
+        m_Breakpoint: 0
+        m_IsEnabled: 1
+        m_Value: {fileID: 0}
+    - rid: 3900509869037846600
+      type: {class: NameVariable, ns: GameCreator.Runtime.Variables, asm: GameCreator.Runtime.Core}
+      data:
+        m_IsExpanded: 0
+        m_Breakpoint: 0
+        m_IsEnabled: 1
+        m_Value:
+          rid: 3900509869037846603
+        m_Name:
+          m_String: DirectionToEnemy
+    - rid: 3900509869037846603
+      type: {class: ValueVector3, ns: GameCreator.Runtime.Variables, asm: GameCreator.Runtime.Core}
+      data:
+        m_IsExpanded: 1
+        m_Breakpoint: 0
+        m_IsEnabled: 1
+        m_Value: {x: 0, y: 0, z: 0}
 --- !u!1 &4685100292080842676
 GameObject:
   m_ObjectHideFlags: 0
@@ -253,7 +432,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6371579145246191605
 Transform:
   m_ObjectHideFlags: 0
@@ -289,7 +468,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4685100292080842676}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 57f8fc342009ae140900ba31a53e368b, type: 3}
   m_Name: 
@@ -332,7 +511,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ff3792240003a44888a18d1cd03f264, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _player: {fileID: 8261367464240448398}
+  _player: {fileID: 0}
 --- !u!1 &5283402775643605576
 GameObject:
   m_ObjectHideFlags: 0
@@ -432,10 +611,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8261367464240448386}
-  - component: {fileID: 8261367464240448384}
-  - component: {fileID: 8261367464240448389}
-  - component: {fileID: 8261367464240448398}
-  - component: {fileID: 2529597043999051505}
+  - component: {fileID: 6206971654413516414}
+  - component: {fileID: 5645823667256640441}
+  - component: {fileID: 7940595623129011435}
+  - component: {fileID: 4292139359003931306}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -461,68 +640,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &8261367464240448384
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8261367464240448396}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 100
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
---- !u!61 &8261367464240448389
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8261367464240448396}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.008464336, y: -0.34985858}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.81563056, y: 1.2833333}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.57298684, y: 0.58361614}
-  m_EdgeRadius: 0
---- !u!114 &8261367464240448398
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8261367464240448396}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19e48ece7cb677144ac027eca4ab2afc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _activeAbilitiesContainer: {fileID: 6273171848395413259}
-  _passiveAbilitiesContainer: {fileID: 4671159290510887285}
---- !u!114 &2529597043999051505
+--- !u!114 &6206971654413516414
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -536,6 +654,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _startingStats:
   - _config: {fileID: 0}
+    _name: CanReveal
+    _type: 2
+    _isAttribute: 0
+    FloatValue: 0
+    IntValue: 0
+    BoolValue: 0
+    EnumType: 0
+    StringValue: 
+    _minValue: 0
+    _maxValue: 0
+  - _config: {fileID: 0}
+    _name: HP
+    _type: 0
+    _isAttribute: 1
+    FloatValue: 5
+    IntValue: 0
+    BoolValue: 0
+    EnumType: 0
+    StringValue: 
+    _minValue: 0
+    _maxValue: 5
+  - _config: {fileID: 0}
     _name: Team
     _type: 3
     _isAttribute: 0
@@ -546,61 +686,216 @@ MonoBehaviour:
     StringValue: 
     _minValue: 0
     _maxValue: 0
-  - _config: {fileID: 0}
-    _name: MoveSpeed
-    _type: 0
-    _isAttribute: 0
-    FloatValue: 4
-    IntValue: 0
-    BoolValue: 0
-    EnumType: 0
-    StringValue: 
-    _minValue: 0
-    _maxValue: 0
-  - _config: {fileID: 0}
-    _name: CanReveal
-    _type: 2
-    _isAttribute: 0
-    FloatValue: 0
-    IntValue: 0
-    BoolValue: 1
-    EnumType: 0
-    StringValue: 
-    _minValue: 0
-    _maxValue: 0
-  - _config: {fileID: 0}
-    _name: HP
-    _type: 0
-    _isAttribute: 1
-    FloatValue: 10
-    IntValue: 0
-    BoolValue: 0
-    EnumType: 0
-    StringValue: 
-    _minValue: 0
-    _maxValue: 10
-  - _config: {fileID: 0}
-    _name: MaxHP
-    _type: 0
-    _isAttribute: 0
-    FloatValue: 0
-    IntValue: 0
-    BoolValue: 0
-    EnumType: 0
-    StringValue: 
-    _minValue: 0
-    _maxValue: 0
-  - _config: {fileID: 0}
-    _name: IsInvincible
-    _type: 2
-    _isAttribute: 0
-    FloatValue: 0
-    IntValue: 0
-    BoolValue: 0
-    EnumType: 0
-    StringValue: 
-    _minValue: 0
-    _maxValue: 0
+--- !u!114 &5645823667256640441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8261367464240448396}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19e48ece7cb677144ac027eca4ab2afc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _activeAbilitiesContainer: {fileID: 6273171848395413259}
+  _passiveAbilitiesContainer: {fileID: 4671159290510887285}
+--- !u!95 &7940595623129011435
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8261367464240448396}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 544c0d20017c8d942a07a7d785ae71aa, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4292139359003931306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8261367464240448396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48e4aa7a58d404413af1c9111cdcd3f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IsPlayer: 1
+  m_Time:
+    m_UpdateTime: 0
+  m_Kernel:
+    m_Player:
+      rid: 3900509882319110146
+    m_Motion:
+      rid: 3900509882319110147
+    m_Driver:
+      rid: 3900509882319110148
+    m_Facing:
+      rid: 3900509882319110149
+    m_Animim:
+      rid: 3900509882319110150
+  m_InverseKinematics:
+    m_RigLayers:
+      m_Rigs:
+      - rid: 3900509882319110151
+      - rid: 3900509882319110152
+      - rid: 3900509882319110153
+  m_Footsteps:
+    m_Feet:
+    - rid: 3900509882319110154
+    - rid: 3900509882319110155
+    m_FootstepSounds:
+      m_SoundsAsset: {fileID: 0}
+  m_Ragdoll:
+    m_TransitionDuration: 0.2
+    m_RecoverFaceDown: {fileID: 0}
+    m_RecoverFaceUp: {fileID: 0}
+  m_UniqueID:
+    m_SerializedID:
+      m_String: ba49842d-4d0d-4fef-b551-03727fbc5634
+  references:
+    version: 2
+    RefIds:
+    - rid: 3900509882319110146
+      type: {class: UnitPlayerDirectional, ns: GameCreator.Runtime.Characters, asm: GameCreator.Runtime.Core}
+      data:
+        m_IsControllable: 1
+        m_InputMove:
+          m_Input:
+            rid: 3900509882319110156
+    - rid: 3900509882319110147
+      type: {class: UnitMotionController, ns: GameCreator.Runtime.Characters, asm: GameCreator.Runtime.Core}
+      data:
+        m_Interaction:
+          m_Radius: 2
+          m_Mode:
+            m_InteractionMode:
+              rid: 3900509882319110157
+        m_Speed: 4
+        m_Rotation: 1800
+        m_Mass: 80
+        m_Height: 2
+        m_Radius: 0.2
+        m_GravityUpwards: -9.81
+        m_GravityDownwards: -9.81
+        m_TerminalVelocity: -53
+        m_Acceleration:
+          m_UseAcceleration: 1
+          m_Acceleration: 10
+          m_Deceleration: 4
+        m_Jump:
+          m_CanJump: 1
+          m_AirJumps: 0
+          m_JumpForce: 5
+          m_JumpCooldown: 0.5
+        m_Dash:
+          m_InSuccession: 0
+          m_DashInAir: 0
+          m_Cooldown: 1
+    - rid: 3900509882319110148
+      type: {class: UnitDriverController, ns: GameCreator.Runtime.Characters, asm: GameCreator.Runtime.Core}
+      data:
+        m_SkinWidth: 0.08
+        m_PushForce: 1
+        m_MaxSlope: 45
+        m_StepHeight: 0.3
+        m_Plane: 0
+    - rid: 3900509882319110149
+      type: {class: UnitFacingPivot, ns: GameCreator.Runtime.Characters, asm: GameCreator.Runtime.Core}
+      data:
+        m_UpdateRotation: 1
+        m_DirectionFrom: 0
+    - rid: 3900509882319110150
+      type: {class: UnitAnimimKinematic, ns: GameCreator.Runtime.Characters, asm: GameCreator.Runtime.Core}
+      data:
+        m_ModelPosition: 0
+        m_SmoothTime: 0.5
+        m_Mannequin: {fileID: 0}
+        m_Animator: {fileID: 7940595623129011435}
+        m_StartState: {fileID: 0}
+        m_BoneRack:
+          m_Skeleton: {fileID: 0}
+        m_Reaction: {fileID: 0}
+        m_Breathing:
+          m_Exertion: 0.1
+          m_Rate: 0.25
+        m_Twitching:
+          m_Weight: 0.5
+    - rid: 3900509882319110151
+      type: {class: RigLookTrack, ns: GameCreator.Runtime.Characters.IK, asm: GameCreator.Runtime.Core}
+      data:
+        m_IsExpanded: 1
+        m_Breakpoint: 0
+        m_IsEnabled: 1
+        m_TrackSpeed: 270
+        m_MaxAngle: 120
+        m_HeadWeight: 1
+        m_NeckWeight: 0.2
+        m_ChestWeight: 0.5
+        m_SpineWeight: 0.2
+    - rid: 3900509882319110152
+      type: {class: RigFeetPlant, ns: GameCreator.Runtime.Characters.IK, asm: GameCreator.Runtime.Core}
+      data:
+        m_IsExpanded: 1
+        m_Breakpoint: 0
+        m_IsEnabled: 1
+        m_FootOffset: 0
+        m_FootMask:
+          serializedVersion: 2
+          m_Bits: 4294967295
+        m_SmoothTime: 0.25
+    - rid: 3900509882319110153
+      type: {class: RigLean, ns: GameCreator.Runtime.Characters.IK, asm: GameCreator.Runtime.Core}
+      data:
+        m_IsExpanded: 1
+        m_Breakpoint: 0
+        m_IsEnabled: 1
+        m_InclineSpine: 5
+        m_InclineLowerChest: 10
+        m_InclineUpperChest: 5
+        m_DeclineSpine: -10
+        m_DeclineLowerChest: -5
+        m_DeclineUpperChest: 5
+        m_RollSpine: 5
+        m_RollLowerChest: 5
+        m_RollUpperChest: 10
+    - rid: 3900509882319110154
+      type: {class: Bone, ns: GameCreator.Runtime.Characters, asm: GameCreator.Runtime.Core}
+      data:
+        m_IsExpanded: 1
+        m_Breakpoint: 0
+        m_IsEnabled: 1
+        m_Type: 1
+        m_Human: 5
+        m_Path: 
+    - rid: 3900509882319110155
+      type: {class: Bone, ns: GameCreator.Runtime.Characters, asm: GameCreator.Runtime.Core}
+      data:
+        m_IsExpanded: 1
+        m_Breakpoint: 0
+        m_IsEnabled: 1
+        m_Type: 1
+        m_Human: 6
+        m_Path: 
+    - rid: 3900509882319110156
+      type: {class: InputValueVector2MotionPrimary, ns: GameCreator.Runtime.Common, asm: GameCreator.Runtime.Core}
+    - rid: 3900509882319110157
+      type: {class: InteractionModeNearCharacter, ns: GameCreator.Runtime.Characters, asm: GameCreator.Runtime.Core}
+      data:
+        m_Offset: {x: 0, y: 0, z: 1}
 --- !u!1 &8265712425338466212
 GameObject:
   m_ObjectHideFlags: 0
@@ -619,7 +914,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5424900392447720907
 Transform:
   m_ObjectHideFlags: 0

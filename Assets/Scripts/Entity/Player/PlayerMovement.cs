@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
 
     private StatContainer _entityStatContainer;
 
-    private PlayerInput _input;
+    public static PlayerInput _input;
 
     private Vector2 _currentInput;
     private Vector2 _smoothVelocity;

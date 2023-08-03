@@ -39,7 +39,7 @@ public class SavesController : MonoBehaviour
             
     }
 
-    private void OnSDKReady()
+    public void OnSDKReady()
     {
         if (IsYandexBuild)
         {
@@ -201,6 +201,14 @@ public class SavesController : MonoBehaviour
             {
                 return YandexGame.savesData.lvlStartHealth;
             }
+            else if (value == "music")
+            {
+                return YandexGame.savesData.music;
+            }
+            else if (value == "sound")
+            {
+                return YandexGame.savesData.sound;
+            }
             else
             {
                 return 0;
@@ -229,6 +237,31 @@ public class SavesController : MonoBehaviour
             }
         }
 
+    }
+
+    public void SetSound(int value)
+    {
+        if (IsYandexBuild)
+        {
+            YandexGame.savesData.sound = value;
+        }
+        else
+        {
+            GameScore.GS_Player.Set("sound", value);
+        }
+        SaveProgress();
+    }
+    public void SetMusic(int value)
+    {
+        if (IsYandexBuild)
+        {
+            YandexGame.savesData.music = value;
+        }
+        else
+        {
+            GameScore.GS_Player.Set("music", value);
+        }
+        SaveProgress();
     }
     public void SetScore(int valueInt)
     {
@@ -328,4 +361,6 @@ public class SavesController : MonoBehaviour
         }
         
     }
+
+
 }

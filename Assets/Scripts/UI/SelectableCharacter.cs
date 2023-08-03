@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class SelectableCharacter: ScriptableObject
 {
     public new string name;
-    public GameObject characterPrefab;
+    public Player characterPrefab;
     public Sprite sprite;
 
 }

@@ -15,6 +15,6 @@ public class GameManager : Manager<GameManager>
 
     public void Restart()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

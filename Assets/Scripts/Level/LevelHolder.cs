@@ -3,10 +3,10 @@ using UnityEngine;
 
 public class LevelHolder : MonoBehaviour
 {
-    [SerializeField] private LevelGenerator _levelGenerator;
-    [SerializeField] private int _levelWidth;
-    [SerializeField] private int _levelHeight;
-    [SerializeField] private Vector2Int _startingTileCoord;
+    [SerializeField] private Transform _roomContainer;
+    [SerializeField] private Transform _borderContainer;
+    [SerializeField] private GameObject _borderTilePrefab;
+    [SerializeField] private LevelConfig _levelConfig;
 
     private readonly Dictionary<Vector2Int, Room> _rooms = new();
 
@@ -30,13 +30,18 @@ public class LevelHolder : MonoBehaviour
 
     public void SetUpRooms()
     {
-        for (int y = _startingTileCoord.y; y < _startingTileCoord.y + _levelHeight; y++)
+        for (int y = 0; y < _levelConfig.Height; y++)
         {
-            for (int x = _startingTileCoord.x; x < _startingTileCoord.x + _levelWidth - y % 2; x++)
+            for (int x = 0; x < _levelConfig.Width - y % 2; x++)
             {
                 Vector2Int tileIntPos = new (x, y);
-                return;
-                var room = _levelGenerator.GenerateRoom(tileIntPos).GetComponent<Room>();
+                var roomPrefab = _levelConfig.GetPrefab(tileIntPos);
+                if (roomPrefab == null)
+                {
+                    Debug.LogWarning("Room prefab is null");
+                    continue;
+                }
+                var room = Instantiate(roomPrefab, ConvertToWorldPosition(tileIntPos), Quaternion.identity, _roomContainer).GetComponent<Room>();
                 if (room == null) continue;
                 room.SetCoords(tileIntPos);
                 _rooms[tileIntPos] = room;
@@ -47,25 +52,31 @@ public class LevelHolder : MonoBehaviour
     // Некоторые бордеры накладываются друг на друга, исправить в будущем
     public void SetUpBorders()
     {
+        Vector2Int _startingTileCoord = Vector2Int.zero;
         int xStart = _startingTileCoord.x - 1;
-        int xEnd = _startingTileCoord.x + _levelWidth;
+        int xEnd = _startingTileCoord.x + _levelConfig.Width;
         int yStart = _startingTileCoord.y - 1;
-        int yEnd = _startingTileCoord.y + _levelHeight;
+        int yEnd = _startingTileCoord.y + _levelConfig.Height;
         for (int x = xStart; x < xEnd; x++)
         {
-            _levelGenerator.GenerateBorder(new Vector2Int(x, yStart));
+            GenerateBorder(new Vector2Int(x, yStart));
         }
         for (int x = xStart; x < xEnd; x++)
         {
-            _levelGenerator.GenerateBorder(new Vector2Int(x, yEnd));
+            GenerateBorder(new Vector2Int(x, yEnd));
         }
         for (int y = yStart; y < yEnd; y++)
         {
-            _levelGenerator.GenerateBorder(new Vector2Int(xStart, y));
+            GenerateBorder(new Vector2Int(xStart, y));
         }
         for (int y = yStart; y < yEnd; y++)
         {
-            _levelGenerator.GenerateBorder(new Vector2Int(xEnd - y % 2, y));
+            GenerateBorder(new Vector2Int(xEnd - y % 2, y));
         }
+    }
+
+    public GameObject GenerateBorder(Vector2Int borderPos)
+    {
+        return Instantiate(_borderTilePrefab, ConvertToWorldPosition(borderPos), Quaternion.identity, _borderContainer);
     }
 }

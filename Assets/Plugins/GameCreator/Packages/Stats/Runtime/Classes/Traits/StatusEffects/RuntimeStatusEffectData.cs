@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace GameCreator.Runtime.Stats
 {
-    internal class RuntimeStatusEffectData
+    internal class RuntimeStatusEffectData : ICancellable
     {
         // MEMBERS: -------------------------------------------------------------------------------
         
@@ -14,13 +14,15 @@ namespace GameCreator.Runtime.Stats
 
         private readonly StatusEffect m_StatusEffect;
 
-        private CopyRunnerInstructionList m_OnStart;
-        private CopyRunnerInstructionList m_OnEnd;
-        private CopyRunnerInstructionList m_WhileActive;
+        [System.NonSerialized] private GameObject m_OnStart;
+        [System.NonSerialized] private GameObject m_OnEnd;
+        [System.NonSerialized] private GameObject m_WhileActive;
 
         // PROPERTIES: ----------------------------------------------------------------------------
         
         private Args Args { get; }
+
+        public bool IsCancelled { get; private set; }
 
         // CONSTRUCTOR: ---------------------------------------------------------------------------
 
@@ -48,48 +50,87 @@ namespace GameCreator.Runtime.Stats
 
         private async Task RunOnStart()
         {
-            this.m_OnStart = this.m_StatusEffect.CreateOnStart(this.Args);
-            CopyRunnerInstructionList reference = this.m_OnStart;
+            StatusEffect.LastAdded = this.m_StatusEffect;
             
-            await reference.GetRunner<InstructionList>().Run(this.Args.Clone);
-            if (reference != null) Object.Destroy(reference.gameObject);
+            if (this.m_OnStart == null)
+            {
+                this.m_OnStart = RunInstructionsList.CreateTemplate(
+                    this.m_StatusEffect.OnStart.List
+                );   
+            }
+            
+            await RunInstructionsList.Run(
+                this.Args.Clone, this.m_OnStart,
+                new RunnerConfig
+                {
+                    Name = $"On Start {TextUtils.Humanize(this.m_StatusEffect.name)}",
+                    Location = new RunnerLocationPosition(
+                        this.Args.Self != null ? this.Args.Self.transform.position : Vector3.zero, 
+                        this.Args.Self != null ? this.Args.Self.transform.rotation : Quaternion.identity
+                    )
+                }
+            );
         }
         
         private async Task RunOnEnd()
         {
-            this.m_OnEnd = this.m_StatusEffect.CreateOnEnd(this.Args);
-            CopyRunnerInstructionList reference = this.m_OnEnd;
+            StatusEffect.LastRemoved = this.m_StatusEffect;
             
-            await reference.GetRunner<InstructionList>().Run(this.Args.Clone);
-            if (reference != null) Object.Destroy(reference.gameObject);
+            if (this.m_OnEnd == null)
+            {
+                this.m_OnEnd = RunInstructionsList.CreateTemplate(
+                    this.m_StatusEffect.OnEnd.List
+                );   
+            }
+            
+            await RunInstructionsList.Run(
+                this.Args.Clone, this.m_OnEnd,
+                new RunnerConfig
+                {
+                    Name = $"On End {TextUtils.Humanize(this.m_StatusEffect.name)}",
+                    Location = new RunnerLocationPosition(
+                        this.Args.Self != null ? this.Args.Self.transform.position : Vector3.zero, 
+                        this.Args.Self != null ? this.Args.Self.transform.rotation : Quaternion.identity
+                    )
+                }
+            );
         }
 
         private async Task RunWhileActive()
         {
-            this.m_WhileActive = this.m_StatusEffect.CreateWhileActive(this.Args);
-            CopyRunnerInstructionList reference = this.m_WhileActive;
+            if (this.m_WhileActive == null)
+            {
+                this.m_WhileActive = RunInstructionsList.CreateTemplate(
+                    this.m_StatusEffect.OnWhileActive.List
+                );   
+            }
 
             while (this.m_WhileActive != null)
             {
                 int frame = Time.frameCount;
-                await this.m_WhileActive.GetRunner<InstructionList>().Run(this.Args.Clone);
+                
+                await RunInstructionsList.Run(
+                    this.Args.Clone, this.m_WhileActive,
+                    new RunnerConfig
+                    {
+                        Name = $"While Active {TextUtils.Humanize(this.m_StatusEffect.name)}",
+                        Location = new RunnerLocationPosition(
+                            this.Args.Self != null ? this.Args.Self.transform.position : Vector3.zero, 
+                            this.Args.Self != null ? this.Args.Self.transform.rotation : Quaternion.identity
+                        ),
+                        Cancellable = this
+                    }
+                );
 
                 if (frame == Time.frameCount) await Task.Yield();
             }
-            
-            if (reference != null) Object.Destroy(reference.gameObject);
         }
 
         // PUBLIC METHODS: ------------------------------------------------------------------------
 
         public void Stop()
         {
-            if (this.m_WhileActive != null)
-            {
-                this.m_WhileActive.GetRunner<InstructionList>()?.Cancel();
-                Object.Destroy(this.m_WhileActive.gameObject);
-            }
-
+            if (this.m_WhileActive != null) this.IsCancelled = true;
             _ = this.RunOnEnd();
         }
 

@@ -84,7 +84,6 @@ public abstract class BaseActiveAbility : MonoBehaviour
         if (_usesAbilityDelay)
         {
             yield return new WaitForSeconds(StatContainer.GetStat<float>(StatNames.AbilityDelay));
-            Debug.Log("CastDelay");
         }
         Casted?.Invoke();
         Activated = false;

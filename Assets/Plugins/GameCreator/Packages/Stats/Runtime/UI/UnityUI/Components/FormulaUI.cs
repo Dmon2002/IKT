@@ -92,7 +92,7 @@ namespace GameCreator.Runtime.Stats.UnityUI
         public static FormulaUI CreateFrom(Text text)
         {
             FormulaUI formulaUI = text.gameObject.AddComponent<FormulaUI>();
-            //formulaUI.m_Value = new TextReference(text);
+            formulaUI.m_Value = new TextReference(text);
 
             return formulaUI;
         }
@@ -121,10 +121,7 @@ namespace GameCreator.Runtime.Stats.UnityUI
             this.UpdateTargetEvents();
             if (this.m_Formula == null) return;
 
-            Traits sourceTraits = this.m_LastSource != null ? this.m_LastSource.Get<Traits>() : null;
-            Traits targetTraits = this.m_LastTarget != null ? this.m_LastTarget.Get<Traits>() : null;
-
-            double value = this.m_Formula.Calculate(sourceTraits, targetTraits);
+            double value = this.m_Formula.Calculate(this.m_LastSource, this.m_LastTarget);
 
             this.m_Value.Text = FromDouble(value, "0");
             if (this.m_RatioFill != null) this.m_RatioFill.fillAmount = (float) value;

@@ -6,12 +6,12 @@ namespace GameCreator.Runtime.Stats
 {
     public class RuntimeStatData
     {
-        private readonly Traits m_Traits;
-        private readonly Stat m_Stat;
-        private readonly Modifiers m_Modifiers;
+        [NonSerialized] private readonly GameObject m_Self;
+        [NonSerialized] private readonly Stat m_Stat;
+        [NonSerialized] private readonly Modifiers m_Modifiers;
 
-        private double m_Base;
-        private readonly Formula m_Formula;
+        [NonSerialized] private double m_Base;
+        [NonSerialized] private readonly Formula m_Formula;
 
         // PROPERTIES: ----------------------------------------------------------------------------
 
@@ -40,7 +40,7 @@ namespace GameCreator.Runtime.Stats
             get
             {
                 double value = this.m_Formula != null && this.m_Formula.Exists
-                    ? this.m_Formula.Calculate(this.m_Traits, this.m_Traits)
+                    ? this.m_Formula.Calculate(this.m_Self, this.m_Self)
                     : this.m_Base;
 
                 return this.m_Modifiers.Calculate(value);
@@ -55,12 +55,14 @@ namespace GameCreator.Runtime.Stats
             get
             {
                 double value = this.m_Formula != null && this.m_Formula.Exists
-                    ? this.m_Formula.Calculate(this.m_Traits, this.m_Traits)
+                    ? this.m_Formula.Calculate(this.m_Self, this.m_Self)
                     : this.m_Base;
 
                 return this.m_Modifiers.Calculate(value) - value;
             }
         }
+
+        public bool HasModifiers => this.m_Modifiers.Count > 0;
 
         // EVENTS: --------------------------------------------------------------------------------
 
@@ -68,9 +70,9 @@ namespace GameCreator.Runtime.Stats
 
         // CONSTRUCTORS: --------------------------------------------------------------------------
 
-        public RuntimeStatData(Traits traits, StatItem stat)
+        public RuntimeStatData(GameObject self, StatItem stat)
         {
-            this.m_Traits = traits;
+            this.m_Self = self;
             this.m_Stat = stat.Stat;
             this.m_Modifiers = new Modifiers(stat.Stat.ID.Hash);
             
@@ -118,6 +120,14 @@ namespace GameCreator.Runtime.Stats
             
             if (success) this.EventChange?.Invoke(this.m_Stat.ID, 0f);
             return success;
+        }
+
+        /// <summary>
+        /// Removes all Stat Modifiers applied to this Stat
+        /// </summary>
+        public void ClearModifiers()
+        {
+            this.m_Modifiers.Clear();
         }
         
         // INTERNAL METHODS: ----------------------------------------------------------------------

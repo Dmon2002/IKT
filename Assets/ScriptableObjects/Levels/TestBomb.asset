@@ -12,10 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eeafb41e4fe6b984a8a18b440fde34a8, type: 3}
   m_Name: TestBomb
   m_EditorClassIdentifier: 
-  _tileConfigConsts:
-  - _coord: {x: 1, y: 2}
-    _tilePrefab: {fileID: 3034382765300094478, guid: c737dba089e78a445a9e3cb989e7a5ec, type: 3}
-  _tileConfigFromList: []
-  _defaultTile:
-    _coord: {x: 0, y: 0}
-    _tilePrefabs: []
+  _main:
+    _levelGridCoords:
+    - _coord: {x: 0, y: 0}
+      _levelGrid:
+        rid: -2
+    _defaultTile:
+      rid: -2
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }

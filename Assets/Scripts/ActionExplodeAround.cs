@@ -20,7 +20,6 @@ public class ActionExplodeAround : ActionSystem.Action
         {
             if (neighbour.FogRevealed)
             {
-                Debug.Log("SpawnExplode");
                 GameObject.Instantiate(_explodePrefab, neighbour.transform.position, Quaternion.identity);
             } 
             else

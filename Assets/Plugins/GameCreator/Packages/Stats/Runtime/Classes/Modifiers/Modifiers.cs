@@ -7,8 +7,8 @@ namespace GameCreator.Runtime.Stats
     [Serializable]
     internal class Modifiers
     {
-        private ModifierList m_Percentages;
-        private ModifierList m_Constants;
+        [NonSerialized] private ModifierList m_Percentages;
+        [NonSerialized] private ModifierList m_Constants;
 
         // CONSTRUCTORS: --------------------------------------------------------------------------
 
@@ -24,6 +24,10 @@ namespace GameCreator.Runtime.Stats
             this.m_Constants = new ModifierList(statID, constants);
         }
         
+        // PROPERTIES: ----------------------------------------------------------------------------
+
+        public int Count => this.m_Percentages.Count + this.m_Constants.Count;
+
         // PUBLIC METHODS: ------------------------------------------------------------------------
         
         public double Calculate(double value)
@@ -54,6 +58,12 @@ namespace GameCreator.Runtime.Stats
         internal bool RemoveConstant(double value)
         {
             return this.m_Constants.Remove(value);
+        }
+
+        internal void Clear()
+        {
+            this.m_Percentages.Clear();
+            this.m_Constants.Clear();
         }
     }
 }

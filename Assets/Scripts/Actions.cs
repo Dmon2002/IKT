@@ -10,7 +10,6 @@ namespace ActionSystem
 
         public void Perform()
         {
-            Debug.Log("Perform");
             StartCoroutine(PerformCoroutine());
         }
 

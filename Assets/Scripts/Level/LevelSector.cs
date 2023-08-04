@@ -2,92 +2,143 @@ using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
-
-
-public class LevelSector : LevelGrid
+[Serializable]
+public class LevelSector : ILevelGrid
 {
-    //TODO Write validation for intersecting grids
-    //[InlineEditor]
-    [SerializeReference] private List<LevelGridCoord> _levelGridCoords;
-    [AssetSelector]
-    [SerializeReference] private TileConfig _defaultTile;
+    [SerializeField] private int _height;
+    [SerializeField] private List<LevelClusterCoord> _clusterCoords;
+    [SerializeField] private List<LevelTileCoord> _tileCoords;
+    [SerializeReference] private LevelTile _defaultTile;
 
-    // TODO test LevelSector(int width, int height)
-    public LevelSector(Vector2Int size) : base(size)
+    public int Height => _height;
+
+    public bool ContainsCoord(Vector2Int coord)
     {
-        
+        return coord.y < _height && coord.y >= 0;
     }
 
-    public override Room GetPrefab(Vector2Int coord)
+    public GameObject GetPrefab(Vector2Int coord)
     {
-        if (coord.x < 0 || coord.y < 0)
+        if (!ContainsCoord(coord))
+            return null;
+        foreach (var tileCoord in _tileCoords)
         {
-            Debug.LogError("Can't be non positive width or height - (" + coord.x + ", " + coord.y + ")");
-        }
-        for (int i = 0; i < _levelGridCoords.Count; i++)
-        {
-            Vector2Int relativeCoord = coord - _levelGridCoords[i].Coord;
-            if (_levelGridCoords[i].LevelGrid.Contains(relativeCoord))
+            if (_tileCoords.Contains(tileCoord))
             {
-                return _levelGridCoords[i].LevelGrid.GetPrefab(relativeCoord);
+                return tileCoord.LevelTile.GetPrefab();
+            }
+        }
+        foreach (var clusterCoord in _clusterCoords)
+        {
+            var relativeCoord = coord - clusterCoord.Coord;
+            if (clusterCoord.LevelCluster.ContainsCoord(relativeCoord))
+            {
+                return clusterCoord.LevelCluster.GetPrefab(relativeCoord);
+            }
+        }
+        return _defaultTile?.GetPrefab();
+    }
+
+}
+
+public interface ILevelGrid
+{
+    bool ContainsCoord(Vector2Int coord);
+
+    GameObject GetPrefab(Vector2Int coord);
+
+    
+}
+
+[Serializable]
+public class LevelCluster : ILevelGrid
+{
+    [SerializeField] private Vector2Int _size;
+    [SerializeReference] private LevelTile _defaultTile;
+    [SerializeField] private List<LevelTileCoord> _tileCoords;
+
+    public Vector2Int Size => _size;
+
+    public GameObject GetPrefab(Vector2Int coord)
+    {
+        if (!ContainsCoord(coord))
+            return null;
+        for (int i = 0; i < _tileCoords.Count; i++)
+        {
+            if (_tileCoords[i].Coord == coord)
+            {
+                return _tileCoords[i].LevelTile.GetPrefab();
             }
         }
         return _defaultTile.GetPrefab();
     }
+
+    public bool ContainsCoord(Vector2Int coord)
+    {
+        return coord.x < _size.x && coord.y < _size.y && coord.x >= 0 && coord.y >= 0;
+    } 
 }
 
 [Serializable]
-public class LevelGridCoord
+public struct LevelTileCoord
 {
     [SerializeField] private Vector2Int _coord;
-    [SerializeField] private LevelGrid _levelGrid;
+    [SerializeReference] public LevelTile _levelTile;
 
     public Vector2Int Coord => _coord;
 
-    public LevelGrid LevelGrid => _levelGrid;
+    public LevelTile LevelTile => _levelTile;
 }
 
 [Serializable]
-public abstract class LevelGrid
+public struct LevelClusterCoord
+{
+    [SerializeField] private Vector2Int _coord;
+    [SerializeField] public LevelCluster _levelCluster;
+
+    public Vector2Int Coord => _coord;
+
+    public LevelCluster LevelCluster => _levelCluster;
+}
+
+[Serializable]
+public abstract class LevelTile : ILevelGrid
 { 
-    private Vector2Int _size;
-
-    public Vector2Int Size => _size;
-
-    public LevelGrid(Vector2Int size)
+    public bool ContainsCoord(Vector2Int coord)
     {
-        if (size.x <= 0 || size.y <= 0)
-        {
-            Debug.LogError("Can't be non positive width or height - (" + size.x + ", " + size.y + ")");
-        }
-        _size = size;
+        return coord == Vector2Int.zero;
     }
 
-    public LevelGrid(int width, int height) : this(new Vector2Int(width, height)) { }
-
-    public bool Contains(Vector2Int coord)
+    public GameObject GetPrefab(Vector2Int coord)
     {
-        return coord.x >= 0 && coord.x < _size.x && coord.y >= 0 && coord.y < _size.y;
+        return coord == Vector2Int.zero ? null : GetPrefab();
     }
 
-    public abstract Room GetPrefab(Vector2Int coord);
-
-    public Room GetPrefab()
-    {
-        return GetPrefab(Vector2Int.zero);
-    }
+    public abstract GameObject GetPrefab();
 }
+
 [Serializable]
-public class TileConfig : LevelGrid
+public class TileConfigConst : LevelTile
 {
     [AssetsOnly]
-    [SerializeField] private Room _roomPrefab;
+    [SerializeField] private GameObject _tilePrefab;
 
-    public TileConfig() : base(Vector2Int.one) { }
-
-    public override Room GetPrefab(Vector2Int coord)
+    public override GameObject GetPrefab()
     {
-        return _roomPrefab;
+        return _tilePrefab;
+    }
+}
+
+[Serializable]
+public class TileConfigRandomFromList : LevelTile
+{
+    [AssetsOnly]
+    [SerializeField] private List<GameObject> _tilePrefabs;
+
+    public override GameObject GetPrefab()
+    {
+        return _tilePrefabs.Count != 0 ? _tilePrefabs[Random.Range(0, _tilePrefabs.Count)] : null;
     }
 }

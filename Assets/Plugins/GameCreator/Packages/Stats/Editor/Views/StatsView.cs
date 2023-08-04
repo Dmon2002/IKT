@@ -1,3 +1,4 @@
+using System;
 using GameCreator.Runtime.Common;
 using GameCreator.Runtime.Stats;
 using UnityEngine.UIElements;
@@ -55,24 +56,24 @@ namespace GameCreator.Editor.Stats
                     name = TOverrideDrawer.NAME_HEAD_ICON
                 };
 
-                int roundValue = (int) statData.Value;
+                double value = Math.Round(statData.Value, 2);
                 
                 Label title = new Label
                 {
-                    text = $"<b>{TextUtils.Humanize(statItem.Stat.ID.String)}:</b> {roundValue}",
+                    text = $"<b>{TextUtils.Humanize(statItem.Stat.ID.String)}:</b> {value}",
                     name = TOverrideDrawer.NAME_HEAD_TEXT
                 };
 
-                int roundModifiersValue = (int) statData.ModifiersValue;
+                double modifiersValue = Math.Round(statData.ModifiersValue, 2);
                 Label modifiers = new Label
                 {
-                    text = roundModifiersValue.ToString("+#;-#;0"),
+                    text = modifiersValue >= 0 ? $"+{modifiersValue}" : $"{modifiersValue}",
                     name = TOverrideDrawer.NAME_HEAD_INFO,
                     tooltip = TOOLTIP_MODIFIERS
                 };
 
-                if (roundModifiersValue > 0) modifiers.style.color = ColorTheme.Get(ColorTheme.Type.Green);
-                if (roundModifiersValue < 0) modifiers.style.color = ColorTheme.Get(ColorTheme.Type.Red);
+                if (modifiersValue > 0) modifiers.style.color = ColorTheme.Get(ColorTheme.Type.Green);
+                if (modifiersValue < 0) modifiers.style.color = ColorTheme.Get(ColorTheme.Type.Red);
                 
                 Button headButton = new Button();
                 

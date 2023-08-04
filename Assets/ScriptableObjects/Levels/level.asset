@@ -12,16 +12,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eeafb41e4fe6b984a8a18b440fde34a8, type: 3}
   m_Name: level
   m_EditorClassIdentifier: 
-  _tileConfigs: []
-  _tileConfigConsts: []
-  _tileConfigFromList: []
-  _defaultTile:
-    rid: 3900509850068320263
+  _width: 4
+  _sectors:
+  - _height: 2
+    _clusterCoords: []
+    _tileCoords: []
+    _defaultTile:
+      rid: 3900509903999467538
+  - _height: 30
+    _clusterCoords: []
+    _tileCoords: []
+    _defaultTile:
+      rid: 3900509903999467539
   references:
     version: 2
     RefIds:
-    - rid: 3900509850068320263
-      type: {class: LevelConfig/TileConfigConst, ns: , asm: Assembly-CSharp}
+    - rid: 3900509903999467538
+      type: {class: TileConfigConst, ns: , asm: Assembly-CSharp}
       data:
-        _coord: {x: 0, y: 0}
-        _tilePrefab: {fileID: 0}
+        _tilePrefab: {fileID: 3034382765300094478, guid: b9af4991455d95a4abc7d24327f57e9e, type: 3}
+    - rid: 3900509903999467539
+      type: {class: TileConfigRandomFromList, ns: , asm: Assembly-CSharp}
+      data:
+        _tilePrefabs:
+        - {fileID: 3034382765300094478, guid: c737dba089e78a445a9e3cb989e7a5ec, type: 3}
+        - {fileID: 3034382765300094478, guid: 6a41747c175d8484996f26b85a194188, type: 3}

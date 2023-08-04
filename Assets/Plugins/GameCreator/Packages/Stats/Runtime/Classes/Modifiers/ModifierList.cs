@@ -5,12 +5,14 @@ namespace GameCreator.Runtime.Stats
 {
     internal class ModifierList
     {
-        private readonly int m_StatID;
-        private readonly List<Modifier> m_List;
+        [NonSerialized] private readonly int m_StatID;
+        [NonSerialized] private readonly List<Modifier> m_List;
 
         // PROPERTIES: ----------------------------------------------------------------------------
         
-        public double Value { get; private set; }
+        [field: NonSerialized] public double Value { get; private set; }
+
+        public int Count => this.m_List.Count;
 
         // CONSTRUCTORS: --------------------------------------------------------------------------
 
@@ -43,16 +45,20 @@ namespace GameCreator.Runtime.Stats
         {
             for (int i = this.m_List.Count - 1; i >= 0; --i)
             {
-                if (Math.Abs(this.m_List[i].Value - value) < float.Epsilon)
-                {
-                    this.Value -= this.m_List[i].Value;
-                    this.m_List.RemoveAt(i);
-                    
-                    return true;
-                }
+                if (Math.Abs(this.m_List[i].Value - value) > float.Epsilon) continue;
+                
+                this.Value -= this.m_List[i].Value;
+                this.m_List.RemoveAt(i);
+                
+                return true;
             }
 
             return false;
+        }
+
+        public void Clear()
+        {
+            this.m_List.Clear();
         }
     }
 }

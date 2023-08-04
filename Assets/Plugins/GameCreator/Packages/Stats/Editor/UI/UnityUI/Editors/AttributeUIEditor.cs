@@ -24,7 +24,7 @@ namespace GameCreator.Editor.Stats.UnityUI
         private SerializedProperty m_StallDuration;
         
         private VisualElement m_TransitionOptions;
-        
+
         // PAINT METHOD: --------------------------------------------------------------------------
         
         public override VisualElement CreateInspectorGUI()
@@ -50,13 +50,19 @@ namespace GameCreator.Editor.Stats.UnityUI
             SerializedProperty attrImageScaleX = this.serializedObject.FindProperty("m_ScaleX");
             SerializedProperty attrImageScaleY = this.serializedObject.FindProperty("m_ScaleY");
             
+            SerializedProperty unitContainer = this.serializedObject.FindProperty("m_UnitContainer");
+            SerializedProperty unitPrefab = this.serializedObject.FindProperty("m_UnitPrefab");
+            SerializedProperty unitMode = this.serializedObject.FindProperty("m_UnitMode");
+            SerializedProperty unitValue = this.serializedObject.FindProperty("m_UnitValue");
+
+
             this.m_WhenIncrement = this.serializedObject.FindProperty("m_WhenIncrement");
             this.m_WhenDecrement = this.serializedObject.FindProperty("m_WhenDecrement");
             this.m_StallDuration = this.serializedObject.FindProperty("m_StallDuration");
             this.m_TransitionDuration = this.serializedObject.FindProperty("m_TransitionDuration");
 
             PropertyField fieldTarget = new PropertyField(attrTarget);
-            PropertyTool fieldAttribute = new PropertyTool(attrAsset);
+            PropertyField fieldAttribute = new PropertyField(attrAsset);
             
             this.m_Head.Add(fieldTarget);
             this.m_Head.Add(fieldAttribute);
@@ -70,36 +76,43 @@ namespace GameCreator.Editor.Stats.UnityUI
             this.m_Body.Add(new PropertyField(attrPercentage));
             this.m_Body.Add(new PropertyField(attrMinValue));
             this.m_Body.Add(new PropertyField(attrMaxValue));
-            
+
             this.m_Body.Add(new SpaceSmall());
             this.m_Body.Add(new LabelTitle("Progress:"));
-            this.m_Body.Add(new PropertyTool(attrImageFill));
-            this.m_Body.Add(new PropertyTool(attrImageScaleX));
-            this.m_Body.Add(new PropertyTool(attrImageScaleY));
+            this.m_Body.Add(new PropertyField(attrImageFill));
+            this.m_Body.Add(new PropertyField(attrImageScaleX));
+            this.m_Body.Add(new PropertyField(attrImageScaleY));
+            
+            this.m_Body.Add(new SpaceSmall());
+            this.m_Body.Add(new LabelTitle("Units:"));
+            this.m_Body.Add(new PropertyField(unitContainer));
+            this.m_Body.Add(new PropertyField(unitPrefab));
+            this.m_Body.Add(new PropertyField(unitMode));
+            this.m_Body.Add(new PropertyField(unitValue));
 
             this.m_Body.Add(new SpaceSmall());
             this.m_Body.Add(new LabelTitle("Transitions:"));
 
-            PropertyTool fieldWhenIncrement = new PropertyTool(this.m_WhenIncrement);
-            PropertyTool fieldWhenDecrement = new PropertyTool(this.m_WhenDecrement);
+            PropertyField fieldWhenIncrement = new PropertyField(this.m_WhenIncrement);
+            PropertyField fieldWhenDecrement = new PropertyField(this.m_WhenDecrement);
             
             this.m_Body.Add(fieldWhenIncrement);
             this.m_Body.Add(fieldWhenDecrement);
             
             this.m_TransitionOptions = new VisualElement();
             this.m_Body.Add(this.m_TransitionOptions);
-            
-            fieldWhenIncrement.EventChange += _ => this.UpdateTransitionOptions();
-            fieldWhenDecrement.EventChange += _ => this.UpdateTransitionOptions();
+
+            fieldWhenIncrement.RegisterValueChangeCallback(_ => this.UpdateTransitionOptions());
+            fieldWhenDecrement.RegisterValueChangeCallback(_ => this.UpdateTransitionOptions());
 
             this.UpdateTransitionOptions();
 
             this.m_Body.SetEnabled(attrAsset.objectReferenceValue != null);
-            fieldAttribute.EventChange += changeEvent =>
+            fieldAttribute.RegisterValueChangeCallback(changeEvent =>
             {
                 bool exists = changeEvent.changedProperty.objectReferenceValue != null;
                 this.m_Body.SetEnabled(exists);
-            };
+            });
             
             return this.m_Root;
         }
@@ -111,8 +124,8 @@ namespace GameCreator.Editor.Stats.UnityUI
                 
             if (!this.m_WhenIncrement.boolValue && !this.m_WhenDecrement.boolValue) return;
 
-            PropertyTool fieldStallDuration = new PropertyTool(this.m_StallDuration);
-            PropertyTool fieldTransitionDuration = new PropertyTool(this.m_TransitionDuration);
+            PropertyField fieldStallDuration = new PropertyField(this.m_StallDuration);
+            PropertyField fieldTransitionDuration = new PropertyField(this.m_TransitionDuration);
 
             this.m_TransitionOptions.Add(fieldStallDuration);
             this.m_TransitionOptions.Add(fieldTransitionDuration);

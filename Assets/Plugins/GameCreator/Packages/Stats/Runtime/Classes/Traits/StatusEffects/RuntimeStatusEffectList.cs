@@ -117,7 +117,7 @@ namespace GameCreator.Runtime.Stats
         {
             return index < this.m_List.Count 
                 ? this.m_List[index].GetValue()
-                : default(RuntimeStatusEffectValue);
+                : default;
         }
     }
 }

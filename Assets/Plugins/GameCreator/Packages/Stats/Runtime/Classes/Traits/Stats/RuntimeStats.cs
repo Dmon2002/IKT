@@ -54,7 +54,7 @@ namespace GameCreator.Runtime.Stats
                     throw new Exception(error);
                 }
 
-                RuntimeStatData data = new RuntimeStatData(this.m_Traits, stat);
+                RuntimeStatData data = new RuntimeStatData(this.m_Traits.gameObject, stat);
                 if (!stat.IsHidden && 
                     overrideStats.TryGetValue(statID, out OverrideStatData overrideData))
                 {
@@ -103,6 +103,17 @@ namespace GameCreator.Runtime.Stats
         public RuntimeStatData Get(string statID)
         {
             return this.Get(new IdString(statID));
+        }
+
+        /// <summary>
+        /// Clears all Stat Modifiers applied to any Stat of the Traits component.
+        /// </summary>
+        public void ClearModifiers()
+        {
+            foreach (KeyValuePair<int, RuntimeStatData> entry in this.m_Stats)
+            {
+                entry.Value.ClearModifiers();
+            }
         }
         
         // INTERNAL METHODS: ----------------------------------------------------------------------

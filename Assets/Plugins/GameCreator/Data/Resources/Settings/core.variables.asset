@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: core.variables
   m_EditorClassIdentifier: 
   m_Repository:
-    rid: 3900509882943013061
+    rid: 3900509892766334976
   references:
     version: 2
     RefIds:
-    - rid: 3900509882943013061
+    - rid: 3900509892766334976
       type: {class: VariablesRepository, ns: GameCreator.Runtime.Variables, asm: GameCreator.Runtime.Core}
       data:
         m_Variables:

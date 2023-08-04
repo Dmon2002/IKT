@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Globalization;
 using GameCreator.Runtime.Common;
@@ -11,6 +12,12 @@ namespace GameCreator.Runtime.Stats.UnityUI
     [Icon(EditorPaths.PACKAGES + "Stats/Editor/Gizmos/GizmoAttribute.png")]
     public class AttributeUI : MonoBehaviour
     {
+        private enum UnitMode
+        {
+            KeepEmptyUnits,
+            HideEmptyUnits
+        }
+        
         // EXPOSED MEMBERS: -----------------------------------------------------------------------
 
         [SerializeField] private PropertyGetGameObject m_Target = GetGameObjectPlayer.Create();
@@ -28,18 +35,23 @@ namespace GameCreator.Runtime.Stats.UnityUI
         [SerializeField] private RectTransform m_ScaleX;
         [SerializeField] private RectTransform m_ScaleY;
 
+        [SerializeField] private RectTransform m_UnitContainer;
+        [SerializeField] private GameObject m_UnitPrefab;
+        [SerializeField] private UnitMode m_UnitMode = UnitMode.KeepEmptyUnits;
+        [SerializeField] private float m_UnitValue = 10f;
+
         [SerializeField] private bool m_WhenIncrement;
         [SerializeField] private bool m_WhenDecrement;
         [SerializeField] private float m_StallDuration;
         [SerializeField] private float m_TransitionDuration;
-        
+
         // MEMBERS: -------------------------------------------------------------------------------
 
-        private GameObject m_LastTarget;
-        private Args m_Args;
+        [NonSerialized] private GameObject m_LastTarget;
+        [NonSerialized] private Args m_Args;
 
-        private AnimFloat m_ProgressAnimation;
-        private float m_LastChangeTime = -999f;
+        [NonSerialized] private AnimFloat m_ProgressAnimation;
+        [NonSerialized] private float m_LastChangeTime = -999f;
 
         // PROPERTIES: ----------------------------------------------------------------------------
 
@@ -228,7 +240,7 @@ namespace GameCreator.Runtime.Stats.UnityUI
             Traits traits = this.m_LastTarget.Get<Traits>();
             if (traits == null) return;
 
-            if (this.m_Common.Icon != null) this.m_Common.Icon.overrideSprite = this.m_Attribute.Icon;
+            if (this.m_Common.Icon != null) this.m_Common.Icon.overrideSprite = this.m_Attribute.GetIcon(this.m_Args);
             if (this.m_Common.Color != null) this.m_Common.Color.color = this.m_Attribute.Color;
 
             this.m_Common.Name.Text = this.m_Attribute.GetName(this.m_Args);
@@ -242,6 +254,27 @@ namespace GameCreator.Runtime.Stats.UnityUI
             this.m_Percentage.Text = (attribute.Ratio * 100).ToString("0");
             this.m_MaxValue.Text = FromDouble(attribute.MaxValue, "0");
             this.m_MinValue.Text = FromDouble(attribute.MinValue, "0");
+
+            if (this.m_UnitContainer != null && this.m_UnitPrefab != null)
+            {
+                int numUnits = this.m_UnitMode switch
+                {
+                    UnitMode.KeepEmptyUnits => Mathf.CeilToInt((float) attribute.MaxValue / this.m_UnitValue),
+                    UnitMode.HideEmptyUnits => Mathf.CeilToInt((float) attribute.Value / this.m_UnitValue),
+                    _ => throw new ArgumentOutOfRangeException()
+                };
+                
+                RectTransformUtils.RebuildChildren(this.m_UnitContainer, this.m_UnitPrefab, numUnits);
+
+                for (int i = 0; i < numUnits; ++i)
+                {
+                    AttributeUnitUI unit = this.m_UnitContainer.GetChild(i).Get<AttributeUnitUI>();
+                    
+                    float maxValue = Mathf.Clamp01((float) attribute.MaxValue / this.m_UnitValue - i);
+                    float currentValue = Mathf.Clamp01((float) attribute.Value / this.m_UnitValue - i);
+                    if (unit != null) unit.Refresh(this.m_Attribute, maxValue, currentValue, this.m_Args);
+                }
+            }
         }
 
         private void UpdateTargetEvents()

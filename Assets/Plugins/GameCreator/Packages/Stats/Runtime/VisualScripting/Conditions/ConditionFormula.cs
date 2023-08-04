@@ -49,10 +49,7 @@ namespace GameCreator.Runtime.Stats
             GameObject source = this.m_Source.Get(args);
             GameObject target = this.m_Target.Get(args);
 
-            Traits traitsSource = source != null ? source.Get<Traits>() : null;
-            Traits traitsTarget = target != null ? target.Get<Traits>() : null;
-
-            double result = this.m_Formula.Calculate(traitsSource, traitsTarget);
+            double result = this.m_Formula.Calculate(source, target);
             return this.m_CompareTo.Match(result, args);
         }
     }

@@ -6,18 +6,17 @@ public class LevelManager : Manager<LevelManager>
 {
     [SerializeField] private float _roomDetectionRadius;
     [SerializeField] private Vector2Int _playerStartingCoord;
-    [SerializeField] private Player _playerPrefab;
+    [SerializeField] private GameObject _playerPrefab;
 
     private LevelHolder _levelHolder;
-    private Player _player;
+    private GameObject _player;
 
     private bool _spawned = false;
 
-    public Player Player
+    public GameObject Player
     {
         get
         {
-            _player = FindObjectOfType<Player>();
             if (_player == null)
                 _player = SpawnPlayer();
             return _player;
@@ -27,7 +26,6 @@ public class LevelManager : Manager<LevelManager>
     private void Awake()
     {
         _levelHolder = GetComponentInChildren<LevelHolder>();
-        _player = FindObjectOfType<Player>();
         if (_player == null) 
             _player = SpawnPlayer();
     }
@@ -139,7 +137,7 @@ public class LevelManager : Manager<LevelManager>
 
     private float GetRoomDistance(Room room, Vector3 position) => Vector2.Distance(room.transform.position, position);
 
-    private Player SpawnPlayer()
+    private GameObject SpawnPlayer()
     {
         if (_levelHolder == null)
             _levelHolder = GetComponentInChildren<LevelHolder>();

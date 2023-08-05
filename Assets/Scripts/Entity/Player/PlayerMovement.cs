@@ -7,33 +7,34 @@ public class PlayerMovement : MonoBehaviour
 
     private StatContainer _entityStatContainer;
 
-    public static PlayerInput _input;
+    //public static PlayerInput _input;
 
     private Vector2 _currentInput;
     private Vector2 _smoothVelocity;
 
     public bool CanMove { get; set; } = true;
 
-    private void Awake()
-    {
-        _input = new PlayerInput();
-    }
+    //private void Awake()
+    //{
+    //    _input = new PlayerInput();
+    //}
 
-    private void OnEnable()
-    {
-        _input.Enable();
-    }
+    //private void OnEnable()
+    //{
+    //    _input.Enable();
+    //}
 
-    private void OnDisable()
-    {
-        if (_input == null)
-            _input = new PlayerInput();
-        _input.Disable();
-    }
+    //private void OnDisable()
+    //{
+    //    if (_input == null)
+    //        _input = new PlayerInput();
+    //    _input.Disable();
+    //}
 
     private void FixedUpdate()
     {
-        Vector2 input = _input.Player.Walk.ReadValue<Vector2>();
+        //Vector2 input = _input.Player.Walk.ReadValue<Vector2>();
+        var input = Vector2.zero;
         _currentInput = Vector2.SmoothDamp(_currentInput, input, ref _smoothVelocity, _smoothInputSpeed);
         Move(_currentInput, Time.fixedDeltaTime);
     }

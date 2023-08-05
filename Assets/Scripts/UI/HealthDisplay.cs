@@ -13,7 +13,7 @@ public class HealthDisplay : MonoBehaviour
     
     private List<GameObject> _hearts = new List<GameObject>();
 
-    private Player _player;
+    private GameObject _player;
 
     private int _currentMaxHP = 0;
     private int _currentHP = 0;
@@ -31,7 +31,8 @@ public class HealthDisplay : MonoBehaviour
 
     private void DisplayHealth()
     {
-        int hp = (int)Mathf.Round(_player.StatContainer.GetStat<float>(StatNames.HP));
+        //int hp = (int)Mathf.Round(_player.StatContainer.GetStat<float>(StatNames.HP));
+        int hp = 0;
         if (hp == _currentHP)
             return;
         _currentHP = hp;
@@ -47,7 +48,8 @@ public class HealthDisplay : MonoBehaviour
 
     private void SpawnMaxHealth()
     {
-        int maxHP = (int)Mathf.Round(_player.StatContainer.GetMaxValue(StatNames.HP));
+        //int maxHP = (int)Mathf.Round(_player.StatContainer.GetMaxValue(StatNames.HP));
+        int maxHP = 0;
         if (maxHP <= _currentMaxHP)
             return;
         int diff = maxHP - _currentMaxHP;

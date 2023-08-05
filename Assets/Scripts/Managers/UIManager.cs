@@ -14,7 +14,7 @@ public class UIManager : MonoBehaviour
     //private PlayerInput _input;
     private void Start()
     {
-        PlayerMovement._input.UI.Pause.performed += context => OnPause();
+        //PlayerMovement._input.UI.Pause.performed += context => OnPause();
     }
 
 

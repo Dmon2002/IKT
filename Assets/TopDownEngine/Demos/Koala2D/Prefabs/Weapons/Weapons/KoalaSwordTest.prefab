@@ -9,13 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4565189611861034}
-  - component: {fileID: 114140059323251502}
   - component: {fileID: 114594623923584052}
-  - component: {fileID: 114290391021249986}
-  - component: {fileID: 114096976402940132}
-  - component: {fileID: 114049947547974234}
+  - component: {fileID: -217664846896854954}
+  - component: {fileID: 9199695065994504663}
+  - component: {fileID: 2342287414562298643}
   m_Layer: 10
-  m_Name: KoalaSword
+  m_Name: KoalaSwordTest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40,38 +39,6 @@ Transform:
   - {fileID: 1882808507077358398}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114140059323251502
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1831551693771866}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba85f5b87cb8cf84f9e09dcca90cd372, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AimControl: 3
-  AimControlActive: 1
-  RotationMode: 0
-  WeaponRotationSpeed: 0
-  MinimumAngle: -180
-  MaximumAngle: 180
-  MinimumMagnitude: 0.2
-  ReticleType: 2
-  Reticle: {fileID: 1373789777524232, guid: f31b518c2b50cc2479370c46d4485485, type: 3}
-  ReticleDistance: 5
-  ReticleHeight: 0
-  ReticleAtMousePosition: 1
-  RotateReticle: 0
-  ReplaceMousePointer: 1
-  MouseDeadZoneRadius: 0.5
-  DisplayReticle: 1
-  MoveCameraTargetTowardsReticle: 1
-  CameraTargetOffset: 0.3
-  CameraTargetMaxDistance: 2
-  CameraTargetSpeed: 5
 --- !u!114 &114594623923584052
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -84,9 +51,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a557e2b93323f4831a62221b200348c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WeaponName: KoalaSword
+  WeaponName: KoalaSwordTest
   WeaponCurrentlyActive: 1
-  InputAuthorized: 1
+  InputAuthorized: 0
   TriggerMode: 0
   DelayBeforeUse: 0.4
   DelayBeforeUseReleaseInterruption: 0
@@ -166,212 +133,90 @@ MonoBehaviour:
   KnockbackDirection: 0
   InvincibilityDuration: 0.5
   CanDamageOwner: 0
---- !u!114 &114290391021249986
+--- !u!114 &-217664846896854954
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1831551693771866}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a557e2b93323f4831a62221b200348c4, type: 3}
+  m_Script: {fileID: 11500000, guid: ba85f5b87cb8cf84f9e09dcca90cd372, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WeaponName: KoalaSword
-  WeaponCurrentlyActive: 1
-  InputAuthorized: 1
-  TriggerMode: 0
-  DelayBeforeUse: 0.4
-  DelayBeforeUseReleaseInterruption: 0
-  TimeBetweenUses: 0.4
-  TimeBetweenUsesReleaseInterruption: 0
-  UseBurstMode: 0
-  BurstLength: 3
-  BurstTimeBetweenShots: 0.1
-  MagazineBased: 0
-  MagazineSize: 30
-  AutoReload: 0
-  NoInputReload: 0
-  ReloadTime: 2
-  AmmoConsumedPerShot: 1
-  AutoDestroyWhenEmpty: 0
-  AutoDestroyWhenEmptyDelay: 1
-  PreventReloadIfAmmoEmpty: 0
-  CurrentAmmoLoaded: 30
-  WeaponAttachmentOffset: {x: 0.185, y: 0.31, z: 0}
-  FlipWeaponOnCharacterFlip: 1
-  RightFacingFlipValue: {x: 1, y: 1, z: 1}
-  LeftFacingFlipValue: {x: -1, y: 1, z: 1}
-  WeaponUseTransform: {fileID: 0}
-  WeaponShouldFlip: 1
-  LeftHandHandle: {fileID: 0}
-  RightHandHandle: {fileID: 0}
-  ModifyMovementWhileAttacking: 0
-  MovementMultiplier: 0
-  PreventAllMovementWhileInUse: 1
-  PreventAllAimWhileInUse: 0
-  RecoilForce: -100
-  Animators:
-  - {fileID: 95971963482004484}
-  PerformAnimatorSanityChecks: 0
-  MirrorCharacterAnimatorParameters: 0
-  WeaponAnimationID: 0
-  IdleAnimationParameter: 
-  StartAnimationParameter: Slash2
-  DelayBeforeUseAnimationParameter: 
-  SingleUseAnimationParameter: 
-  UseAnimationParameter: 
-  DelayBetweenUsesAnimationParameter: 
-  StopAnimationParameter: 
-  ReloadStartAnimationParameter: 
-  ReloadAnimationParameter: 
-  ReloadStopAnimationParameter: 
-  WeaponAngleAnimationParameter: 
-  WeaponAngleRelativeAnimationParameter: 
-  EquippedAnimationParameter: 
-  WeaponStartMMFeedback: {fileID: 0}
-  WeaponUsedMMFeedback: {fileID: 5792086717607066305}
-  WeaponUsedMMFeedbackAlt: {fileID: 0}
-  WeaponStopMMFeedback: {fileID: 0}
-  WeaponReloadMMFeedback: {fileID: 0}
-  WeaponReloadNeededMMFeedback: {fileID: 0}
-  WeaponReloadImpossibleMMFeedback: {fileID: 0}
-  InitializeOnStart: 0
-  Interruptable: 0
-  Flipped: 0
-  MeleeDamageAreaMode: 0
-  DamageAreaShape: 0
-  AreaOffset: {x: 0.57, y: 0.2, z: 0}
-  AreaSize: {x: 3, y: 3, z: 0}
-  TriggerFilter: 195
-  HitDamageableFeedback: {fileID: 0}
-  HitNonDamageableFeedback: {fileID: 0}
-  ExistingDamageArea: {fileID: 0}
-  InitialDelay: 0
-  ActiveDuration: 0.2
-  TargetLayerMask:
+  AimControl: 1
+  AimControlActive: 1
+  RotationMode: 0
+  WeaponRotationSpeed: 1
+  MinimumAngle: -180
+  MaximumAngle: 180
+  MinimumMagnitude: 0.2
+  ReticleType: 0
+  Reticle: {fileID: 1373789777524232, guid: f31b518c2b50cc2479370c46d4485485, type: 3}
+  ReticleDistance: 0
+  ReticleHeight: 0
+  ReticleAtMousePosition: 0
+  RotateReticle: 0
+  ReplaceMousePointer: 1
+  MouseDeadZoneRadius: 0.5
+  DisplayReticle: 1
+  MoveCameraTargetTowardsReticle: 0
+  CameraTargetOffset: 0.3
+  CameraTargetMaxDistance: 10
+  CameraTargetSpeed: 5
+--- !u!114 &9199695065994504663
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1831551693771866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 787adbe3232ded84a9544869399298f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TargetsMask:
     serializedVersion: 2
-    m_Bits: 8448
-  MinDamageCaused: 10
-  MaxDamageCaused: 10
-  Knockback: 1
-  KnockbackForce: {x: 500, y: 0, z: 0}
-  KnockbackDirection: 0
-  InvincibilityDuration: 0.5
-  CanDamageOwner: 0
---- !u!114 &114096976402940132
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1831551693771866}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a557e2b93323f4831a62221b200348c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  WeaponName: KoalaSword
-  WeaponCurrentlyActive: 1
-  InputAuthorized: 1
-  TriggerMode: 0
-  DelayBeforeUse: 0.4
-  DelayBeforeUseReleaseInterruption: 0
-  TimeBetweenUses: 0.1
-  TimeBetweenUsesReleaseInterruption: 0
-  UseBurstMode: 0
-  BurstLength: 3
-  BurstTimeBetweenShots: 0.1
-  MagazineBased: 0
-  MagazineSize: 30
-  AutoReload: 0
-  NoInputReload: 0
-  ReloadTime: 2
-  AmmoConsumedPerShot: 1
-  AutoDestroyWhenEmpty: 0
-  AutoDestroyWhenEmptyDelay: 1
-  PreventReloadIfAmmoEmpty: 0
-  CurrentAmmoLoaded: 30
-  WeaponAttachmentOffset: {x: 0.185, y: 0.31, z: 0}
-  FlipWeaponOnCharacterFlip: 1
-  RightFacingFlipValue: {x: 1, y: 1, z: 1}
-  LeftFacingFlipValue: {x: -1, y: 1, z: 1}
-  WeaponUseTransform: {fileID: 0}
-  WeaponShouldFlip: 1
-  LeftHandHandle: {fileID: 0}
-  RightHandHandle: {fileID: 0}
-  ModifyMovementWhileAttacking: 0
-  MovementMultiplier: 0
-  PreventAllMovementWhileInUse: 1
-  PreventAllAimWhileInUse: 0
-  RecoilForce: 0
-  Animators:
-  - {fileID: 95971963482004484}
-  PerformAnimatorSanityChecks: 0
-  MirrorCharacterAnimatorParameters: 0
-  WeaponAnimationID: 0
-  IdleAnimationParameter: 
-  StartAnimationParameter: Slash3
-  DelayBeforeUseAnimationParameter: 
-  SingleUseAnimationParameter: 
-  UseAnimationParameter: 
-  DelayBetweenUsesAnimationParameter: 
-  StopAnimationParameter: 
-  ReloadStartAnimationParameter: 
-  ReloadAnimationParameter: 
-  ReloadStopAnimationParameter: 
-  WeaponAngleAnimationParameter: 
-  WeaponAngleRelativeAnimationParameter: 
-  EquippedAnimationParameter: 
-  WeaponStartMMFeedback: {fileID: 0}
-  WeaponUsedMMFeedback: {fileID: 9077831138300214378}
-  WeaponUsedMMFeedbackAlt: {fileID: 0}
-  WeaponStopMMFeedback: {fileID: 0}
-  WeaponReloadMMFeedback: {fileID: 0}
-  WeaponReloadNeededMMFeedback: {fileID: 0}
-  WeaponReloadImpossibleMMFeedback: {fileID: 0}
-  InitializeOnStart: 0
-  Interruptable: 0
-  Flipped: 0
-  MeleeDamageAreaMode: 0
-  DamageAreaShape: 0
-  AreaOffset: {x: 1.5, y: 0.5, z: 0}
-  AreaSize: {x: 4, y: 3, z: 0}
-  TriggerFilter: 195
-  HitDamageableFeedback: {fileID: 0}
-  HitNonDamageableFeedback: {fileID: 0}
-  ExistingDamageArea: {fileID: 0}
-  InitialDelay: 0
-  ActiveDuration: 0.2
-  TargetLayerMask:
+    m_Bits: 8192
+  ObstacleMask:
     serializedVersion: 2
-    m_Bits: 8448
-  MinDamageCaused: 10
-  MaxDamageCaused: 10
-  Knockback: 1
-  KnockbackForce: {x: 500, y: 0, z: 0}
-  KnockbackDirection: 0
-  InvincibilityDuration: 0.5
-  CanDamageOwner: 0
---- !u!114 &114049947547974234
+    m_Bits: 256
+  ScanRadius: 15
+  LineOfFireBoxcastSize: {x: 0.1, y: 0.1}
+  DurationBetweenScans: 1
+  DetectionOriginOffset: {x: 0, y: 0, z: 0}
+  OnlyAcquireTargetsIfOwnerIsIdle: 0
+  RotationMode: 0
+  ApplyAutoAimAsLastDirection: 1
+  MoveCameraTarget: 1
+  CameraTargetDistance: 0.5
+  CameraTargetMaxDistance: 10
+  CameraTargetSpeed: 5
+  MoveCameraToCharacterIfNoTarget: 0
+  AimMarkerPrefab: {fileID: 0}
+  DestroyAimMarkerOnWeaponDestroy: 1
+  FirstTargetFoundFeedback: {fileID: 0}
+  NewTargetFoundFeedback: {fileID: 0}
+  NoMoreTargetsFeedback: {fileID: 0}
+  Target: {fileID: 0}
+  DrawDebugRadius: 1
+  OverlapMaximum: 10
+--- !u!114 &2342287414562298643
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1831551693771866}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72343fc0e13ec114196ab09ea808900e, type: 3}
+  m_Script: {fileID: 11500000, guid: b8b1174ff4d3dcb4da6a6d4e0ae5bb77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DroppableCombo: 1
-  DropComboDelay: 0.5
-  ComboInProgressAnimationParameter: ComboInProgress
-  Weapons: []
-  OwnerCharacterHandleWeapon: {fileID: 0}
-  TimeSinceLastWeaponStopped: 0
+  DelayBeforeShootAfterAcquiringTarget: 0.1
+  OnlyAutoShootIfOwnerIsIdle: 0
 --- !u!1 &1881930734851166
 GameObject:
   m_ObjectHideFlags: 0
